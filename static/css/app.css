@@ -1,0 +1,199 @@
+@charset "UTF-8";
+
+body {
+background-color: #393E46;
+color: #EEEEEE;
+font-family:'Lucida Grande',
+ 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3',
+ Meiryo, メイリオ, sans-serif;
+}
+
+a, a:hover, a:visited {
+color: #DE703C;
+}
+
+h1, h2, h3 ,h4 {
+text-align: center;
+}
+
+th{
+text-align:center;
+padding: 2px 4px 1px 4px;
+background-color: #222831;
+border: 1px #808080 solid;
+color: #FBB040;
+white-space: nowrap;
+font-weight: normal;
+}
+td{
+border: 1px #808080 solid;
+padding: 2px 4px 1px 4px;
+text-align:right;
+}
+
+.tdata_l{
+text-align:left;
+}
+
+.wrapper {
+margin: 0 auto;
+}
+
+.hint {
+font-size: 20pt;
+}
+
+.teamown {
+float: left;
+width: 50%;
+}
+
+.teamown li {
+float: left;
+}
+
+.teamene {
+float: left;
+width: 50%;
+}
+
+.teamene li {
+float: left;
+}
+.player:hover {
+box-shadow: 0px 0px 5px 0px #222831;
+}
+
+.player {
+padding: 2px 4px 1px 4px;
+margin: 0px;
+height: 15px;
+}
+
+.player .ship_st_def {
+	margin: 1px 0p;
+}
+.player .AirCarrier_bg {
+background-color: #107050;
+}
+.player .Battleship_bg {
+background-color: #602130;
+}
+.player .Cruiser_bg {
+background-color: #606010;
+}
+.player .Destroyer_bg {
+background-color: #104080;
+}
+
+.player .class1 {
+color: #FE0E00;
+}
+.player .class2 {
+color: #FE7903;
+}
+.player .class3 {
+color: #F8F400;
+}
+.player .class4 {
+color: #60FF00;
+}
+.player .class5 {
+color: #02C9B3;
+}
+.player .class6 {
+color: #E042E8;
+}
+.player .cp_class6 {
+color: #E042E8;
+font-weight: bold;
+}
+
+.highlight_normal {
+background-color: #102010;
+}
+.highlight_danger {
+background-color: #503090;
+}
+
+.player .shipclass {
+color: #FBB040;
+font-size: 11pt;
+white-space: nowrap;
+font-weight:normal;
+}
+
+.player .ship_font_6 {
+letter-spacing: 0.2em; 
+font-size: 11pt;
+color:#eeeeee;
+font-weight:normal;
+}
+
+.player .ship_font_9 {
+font-size: 11pt;
+color:#eeeeee;
+font-weight:normal;
+}
+
+.player .ship_font_14 {
+font-size: 10pt;
+color:#eeeeee;
+white-space: nowrap;
+font-weight:normal;
+}
+
+.player .ship_font_20 {
+font-size: 8pt;
+color:#eeeeee;
+white-space: nowrap;
+font-weight:normal;
+}
+
+.player .key {
+color: #FBB040;
+white-space: nowrap;
+}
+
+.player .small {
+font-size: 9pt;
+}
+
+.buttonset {
+Sclear:both;
+text-align: center;
+width: 100%;
+border:1px
+padding:10px
+
+}
+.buttonpro1{
+margin : 10px;
+}
+.buttonitem1_on{
+color:#000000;
+border:inset 3px;
+}
+.buttonitem1_off{
+color:#000000;
+border:outset 3px;
+}
+.disp_off{
+display:none;
+}
+
+.buttonpro2{
+margin-left : 20px;
+margin-right : 20px;
+padding : 5px;
+}
+.buttonitem2{
+color: #EEEEEE
+}
+
+.footer {
+clear: both;
+padding: 10px ;
+text-align: center;
+width: 100%;
+}
