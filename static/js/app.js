@@ -80,6 +80,48 @@ function idhide(val1,val2){
 		document .getElementsByName( "battle_asu" )[i]. style . display = asu;
 	}
 }
+
+function InitViewMode() {
+	$("input[name='idhi']:eq(0)").prop("checked", true);
+	$("input:radio[name='idhi']:checked").change();
+
+	$("input[name='knp']:eq(1)").prop("checked", true);
+	$("input:radio[name='knp']:checked").change();
+}
+
+function UpdateViewMode() {
+	var viewmode1 = $("input[name='knp']:checked").val();
+	console.log( "**" + viewmode1 + "**" );
+
+	var viewmode2 = $("input[name='idhi']:checked").val();
+	console.log( "**" + viewmode2 + "**" );
+
+	switch (viewmode1) {
+		case "nm_sw0":
+          	shipname_ex(0);
+			break;
+		case "nm_sw1":
+          	shipname_ex(1);
+			break;
+		default:
+			break;
+	}
+
+	switch (viewmode2) {
+		case "id_pr00":
+          	idhide(0,0);
+			break;
+		case "id_pr10":
+          	idhide(1,0);
+			break;
+		case "id_pr11":
+          	idhide(1,1);
+			break;
+		default:
+			break;
+	}
+}
+
 function  shipname_ex(val){
 	if ( val ){
 		dispeng ="none";
@@ -97,7 +139,6 @@ function  shipname_ex(val){
 		document .getElementsByName( "shipname_eng" )[i]. style . display = dispeng;
 	}
 }
-
 
 function myFormatNumber(x) { 
 	var s = "" + x; 
@@ -565,8 +606,6 @@ api.ship = function(player) {
 				"highlightClass": api.highlight("combatPower", combatPower),
 				"killkoo":killkoo,
 				"svrate":svrate
-//				,
-//				"imosisu":imosisu
 			}
 			if (data.noRecord)
 				player.ship.err = "記録無し";
@@ -589,6 +628,8 @@ app.controller('TeamStatsCtrl', function ($scope, $http, api) {
   	$scope.gamemapnamejp  = "";
   	$scope.gameLogicjp  = "";
 	var updateArena = function() {
+		UpdateViewMode();
+
 	var kariload = [[]];
 		$http({
 			method: 'GET',
@@ -626,8 +667,10 @@ app.controller('TeamStatsCtrl', function ($scope, $http, api) {
 			$scope.inGame = false;
 		});
 	}
+
 	var timer = setInterval(function() {
 		$scope.$apply(updateArena);
-	}, 1000);
+	}, 1500);
+
 	updateArena();
 });
