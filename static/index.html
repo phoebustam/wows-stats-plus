@@ -8,9 +8,10 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous"> 
 	<link rel="stylesheet" href="css/app.css">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script> 
+	<script src="http://code.jquery.com/jquery-1.12.3.min.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
 </head>
-<body ng-app="wows-stats">
+<body ng-app="wows-stats" onload="InitViewMode()">
 <div class="wrapper">
 	<div class="content" ng-controller="TeamStatsCtrl">
 		<h3 ng-hide="inGame">現在戦闘中ではありません</h3>
@@ -161,9 +162,9 @@
 				<div class="buttonset buttonpro2" >
 				<span >艦名表示</span>
 					<input type="radio" class="buttonitem2" style="margin-left:10px;" name="knp"  value="nm_sw0" onclick="shipname_ex(0)" >ゲーム内表記
-					<input type="radio" class="buttonitem2" style="margin-left:10px;" name="knp" value="nm_sw1" onclick="shipname_ex(1)" checked>日本語等
+					<input type="radio" class="buttonitem2" style="margin-left:10px;" name="knp" value="nm_sw1" onclick="shipname_ex(1)">日本語等
 				<span style=" margin-left:30px;">表示制限</span>
-					<input type="radio" class="buttonitem2" style="margin-left:10px;" name="idhi" value="id_pr00" onclick="idhide(0,0)" checked> 全表示
+					<input type="radio" class="buttonitem2" style="margin-left:10px;" name="idhi" value="id_pr00" onclick="idhide(0,0)"> 全表示
 					<input type="radio" class="buttonitem2" style="margin-left:10px;" name="idhi" value="id_pr10" onclick="idhide(1,0)"> 名前非表示
 					<input type="radio" class="buttonitem2" style="margin-left:10px;" name="idhi" value="id_pr11" onclick="idhide(1,1)"> 名前・戦闘数 非表示
 				</div>
