@@ -495,7 +495,7 @@ api.ship = function(player) {
 					if (data.info.type == 'Battleship') {
 						var type_param = 0.7;
 					} else if (data.info.type == 'AirCarrier') {
-						var type_param = 0.6;
+						var type_param = 0.5;
 					} else {
 						var type_param = 1.0;
 					}
