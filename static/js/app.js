@@ -335,22 +335,25 @@ api.b_beautify = function(type, value) {
 	switch(type) {
 		case "combatPower":
 			if	(value < 10000) {
-				return 'class1';
+				return 'cp_class1';
 			}
 			else if(value < 20000) {
-				return 'class2';
+				return 'cp_class2';
 			}
 			else if(value < 30000) {
-				return 'class3';
+				return 'cp_class3';
 			}
 			else if(value < 80000) {
-				return 'class4';
+				return 'cp_class4';
 			}
 			else if(value < 150000) {
-				return 'class5';
+				return 'cp_class5';
 			}
 			else if(value < 1000000) {
 				return 'cp_class6';
+			}
+			else if(value < 1000000) {
+				return 'cp_class7';
 			}
 			break;
 		default:
