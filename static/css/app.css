@@ -104,8 +104,28 @@ color: #02C9B3;
 .player .class6 {
 color: #E042E8;
 }
+
+.player .cp_class1 {
+color: #FE0E00;
+}
+.player .cp_class2 {
+color: #FE7903;
+}
+.player .cp_class3 {
+color: #F8F400;
+}
+.player .cp_class4 {
+color: #60FF00;
+}
+.player .cp_class5 {
+color: #02C9B3;
+}
 .player .cp_class6 {
 color: #E042E8;
+font-weight: bold;
+}
+.player .cp_class7 {
+color: #FFD0FF;
 font-weight: bold;
 }
 
