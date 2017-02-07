@@ -10,6 +10,7 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script> 
 	<script src="http://code.jquery.com/jquery-1.12.3.min.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/html2canvas.js"></script>
 </head>
 <body ng-app="wows-stats" onload="InitViewMode()">
 <div class="wrapper">
@@ -25,6 +26,8 @@
 					<input type="button" class="buttonitem1_off" Id="sw3" onclick="shiptypr(1,0,1,1,'sw3')" value="戦艦" >
 					<input type="button" class="buttonitem1_off" Id="sw4" onclick="shiptypr(1,1,0,1,'sw4')" value="巡洋艦" >
 					<input type="button" class="buttonitem1_off" Id="sw5" onclick="shiptypr(1,1,1,0,'sw5')" value="駆逐艦" >
+					<input type="button" class="ss_button" Id="ss" onclick="save_ss('#prtype_tbl')" value="画面保存" >
+					<a id="download" href="#" download="wows-stats-plus_ss.png"></a>
 				</div>
 			</div>
 			<div class="teams">

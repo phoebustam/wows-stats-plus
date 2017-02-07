@@ -209,6 +209,12 @@ border:outset 3px;
 display:none;
 }
 
+.ss_button{
+color:#000000;
+border:outset 3px;
+margin-left: 8px;
+}
+
 .buttonpro2{
 margin-left : 20px;
 margin-right : 20px;

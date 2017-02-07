@@ -119,6 +119,15 @@ function UpdateViewMode() {
 	}
 }
 
+function save_ss(el) {
+	var element = $(el)[0];
+    html2canvas(element, { onrendered: function(canvas) {
+		var imgData = canvas.toDataURL();
+		$('#download')[0].href = imgData;
+		$('#download')[0].innerHTML = "Download";
+    }});
+}
+
 function  shipname_ex(val){
 	if ( val ){
 		dispeng ="none";
