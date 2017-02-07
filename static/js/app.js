@@ -419,6 +419,22 @@ api.highlight = function(type, value) {
 	}
 }
 
+api.owner = function(type, value) {
+	switch(type) {
+		case "owner":
+			if(value == ownerName) {
+				return 'highlight_owner';
+			}
+			else {
+				return 'highlight_others';
+			}
+			break;
+		default:
+			return null;
+			break;
+	}
+}
+
 api.mapname_ex_jp = function(type, value) {
 
 var mapname =[
@@ -502,7 +518,7 @@ api.player = function(player) {
 			player.api.status = status;
 			reject(player);
 		});
-			player.name_s = short_id(player.name);
+		player.name_s = short_id(player.name);
 	});
 }
 api.ship = function(player) {
@@ -604,6 +620,7 @@ api.ship = function(player) {
 				"combatPower": myFormatNumber(combatPower),
 				"combatPowerClass": api.b_beautify("combatPower", combatPower),
 				"highlightClass": api.highlight("combatPower", combatPower),
+				"ownerClass": api.owner("owner", player.name),
 				"killkoo":killkoo,
 				"svrate":svrate
 			}
@@ -620,6 +637,7 @@ api.ship = function(player) {
 return api;
 });
 
+var ownerName = "";
 app.controller('TeamStatsCtrl', function ($scope, $http, api) {
 	$scope.inGame = false;
 	$scope.dateTime = "";
@@ -642,6 +660,7 @@ app.controller('TeamStatsCtrl', function ($scope, $http, api) {
 				$scope.dateTime = data.dateTime;
 				$scope.gamemapnamejp = api.mapname_ex_jp("mapname_eng",data.mapDisplayName);
 				$scope.gameLogicjp = api.sinarioname_ex_jp("sinarioname_eng",data.scenario);
+				ownerName = data.playerName;
 				var kariload = [[]];
 				for (var i=0; i<data.vehicles.length; i++) {
 						kariload[i] =data.vehicles[i];

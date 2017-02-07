@@ -59,7 +59,7 @@
 						</Tr>
 						</thead>
 						<tbody>
-						<tr ng-repeat="(key, value) in players" ng-if="value.relation!=2" name="{{value.ship.shipty}}" class="player {{value.ship.highlightClass}}">
+						<tr ng-repeat="(key, value) in players" ng-if="value.relation!=2" name="{{value.ship.shipty}}" class="player {{value.ship.highlightClass}} {{value.ship.ownerClass}}">
 							<Td class="tdata_l" style="height:24px;">
 								<a href="http://worldofwarships.asia/ja/community/accounts/{{ value.uri }}/" name="user_own" style=" Color:#38c38c;" target="_blank" title="{{value.name}}">{{value.name_s}}</a>
 								<span name="user_buta"style ="color: #38c38c; display:none;">&nbsp;(´・ω・`)&nbsp;</span>

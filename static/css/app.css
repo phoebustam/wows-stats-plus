@@ -136,6 +136,13 @@ background-color: #102010;
 background-color: #503090;
 }
 
+.highlight_owner {
+border: 3px #FFFFFF double;
+}
+.highlight_others {
+border: 2px #808080 solid;
+}
+
 .player .shipclass {
 color: #FBB040;
 font-size: 11pt;
