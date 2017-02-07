@@ -91,10 +91,7 @@ function InitViewMode() {
 
 function UpdateViewMode() {
 	var viewmode1 = $("input[name='knp']:checked").val();
-	console.log( "**" + viewmode1 + "**" );
-
 	var viewmode2 = $("input[name='idhi']:checked").val();
-	console.log( "**" + viewmode2 + "**" );
 
 	switch (viewmode1) {
 		case "nm_sw0":
