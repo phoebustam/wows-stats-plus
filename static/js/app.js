@@ -390,7 +390,7 @@ api.b_beautify = function(type, value) {
 			else if(value < 1000000) {
 				return 'cp_class6';
 			}
-			else if(value < 1000000) {
+			else {
 				return 'cp_class7';
 			}
 			break;
