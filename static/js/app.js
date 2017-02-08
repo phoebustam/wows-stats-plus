@@ -42,7 +42,10 @@ function  shiptypr(val1,val2,val3,val4,val_sw){
 	for (var i=0; i<elements.length ; i++) {
 		document .getElementsByName( "Destroyer" )[i]. style . display = dd;
 	}
+
+	prepare_ss("#prtype_tbl");
 }
+
 function idhide(val1,val2){
 	if ( val1 ){
 		idp ="none";
@@ -79,6 +82,8 @@ function idhide(val1,val2){
 	for (var i=0; i<el.length ; i++) {
 		document .getElementsByName( "battle_asu" )[i]. style . display = asu;
 	}
+
+	prepare_ss("#prtype_tbl");
 }
 
 function InitViewMode() {
@@ -119,12 +124,14 @@ function UpdateViewMode() {
 	}
 }
 
-function save_ss(el) {
-	var element = $(el)[0];
+function prepare_ss(target) {
+	var element = $(target)[0];
+
     html2canvas(element, { onrendered: function(canvas) {
 		var imgData = canvas.toDataURL();
 		$('#download')[0].href = imgData;
-		$('#download')[0].innerHTML = "Download";
+		$('#download')[0].target = "_blank";
+		$('#download')[0].click;
     }});
 }
 
@@ -146,7 +153,7 @@ function  shipname_ex(val){
 	}
 }
 
-function myFormatNumber(x) { 
+function myFormatNumber(x) {
 	var s = "" + x; 
 	var p = s.indexOf("."); 
 	if (p < 0) { 
@@ -166,13 +173,28 @@ function myFormatNumber(x) {
 	}
 	return r;
 }
+
+function myFormatDate(str) {
+	var dd = str.substr(0,2);
+	var mm = str.substr(3,2);
+	var yyyy = str.substr(6,4);
+	var HH = str.substr(11,2);
+	var MM = str.substr(14,2);
+	var SS = str.substr(17,2);
+
+	var format_str = yyyy + mm + dd + "_" + HH + "-" + MM + "-" + SS;
+
+	return format_str;
+}
+
 function short_id(str){
-	if (str.length < 12)	{
-		return(str);
-	}
+//	if (str.length < 12) {
+//		return(str);
+//	}
 //	return (str.substring(0,10)+"...");
 	return (str.substring(0,24));
 }
+
 function countLength(str) { 
 	var r = 0; 
 	for (var i = 0; i < str.length; i++) { 
@@ -651,6 +673,8 @@ app.controller('TeamStatsCtrl', function ($scope, $http, api) {
   	$scope.players = [];
   	$scope.gamemapnamejp  = "";
   	$scope.gameLogicjp  = "";
+	$scope.downloadFile = "";
+
 	var updateArena = function() {
 		UpdateViewMode();
 
@@ -667,6 +691,7 @@ app.controller('TeamStatsCtrl', function ($scope, $http, api) {
 				$scope.gamemapnamejp = api.mapname_ex_jp("mapname_eng",data.mapDisplayName);
 				$scope.gameLogicjp = api.sinarioname_ex_jp("sinarioname_eng",data.scenario);
 				ownerName = data.playerName;
+				$scope.downloadFile = "wows_" + myFormatDate(data.dateTime) + "_" + $scope.gamemapnamejp + "_" + $scope.gameLogicjp +"_" + data.playerVehicle + ".png";
 				var kariload = [[]];
 				for (var i=0; i<data.vehicles.length; i++) {
 						kariload[i] =data.vehicles[i];
@@ -691,6 +716,8 @@ app.controller('TeamStatsCtrl', function ($scope, $http, api) {
 			$scope.dateTime = "";
 			$scope.inGame = false;
 		});
+
+		prepare_ss("#prtype_tbl");
 	}
 
 	var timer = setInterval(function() {
