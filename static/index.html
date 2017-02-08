@@ -26,8 +26,7 @@
 					<input type="button" class="buttonitem1_off" Id="sw3" onclick="shiptypr(1,0,1,1,'sw3')" value="戦艦" >
 					<input type="button" class="buttonitem1_off" Id="sw4" onclick="shiptypr(1,1,0,1,'sw4')" value="巡洋艦" >
 					<input type="button" class="buttonitem1_off" Id="sw5" onclick="shiptypr(1,1,1,0,'sw5')" value="駆逐艦" >
-					<input type="button" class="ss_button" Id="ss" onclick="save_ss('#prtype_tbl')" value="画面保存" >
-					<a id="download" href="#" download="wows-stats-plus_ss.png"></a>
+					<a id="download" href="#" download="{{ downloadFile }}"><input type="button" class="ss_button" Id="ss" value="画面保存"></a>
 				</div>
 			</div>
 			<div class="teams">
@@ -43,7 +42,7 @@
 							<Th colspan="5">総合戦績</Th>
 						</Tr>
 						<Tr>
-							<Th title="平均ダメージ*K/D比率*平均経験値*Tier&amp;艦種係数" style="width:80px;">戦闘力</Th>
+							<Th title="平均ダメージ*K/D比率*平均経験値*Tier&amp;艦種係数" style="width:90px;">戦闘力</Th>
 							<Th title="一戦平均ダメージ" style="width:70px;">Dmg</Th>
 							<Th title="艦別撃沈数÷艦別被撃沈数" style="width:40px;">K/D</Th>
 							<Th title="艦別勝率" style="width:78px;">勝率</Th>
@@ -58,7 +57,7 @@
 							<Th title="総合平均ダメージ" style="width:70px;">Dmg</Th>
 							<Th title="総撃沈数÷総被撃沈数" style="width:40px;">K/D</Th>
 							<Th title="総合平均経験値" style="width:50px;">経験値</Th>
-							<Th title="総戦闘数" style="width:50px;">戦闘数</Th>
+							<Th title="総戦闘数" style="width:60px;">戦闘数</Th>
 						</Tr>
 						</thead>
 						<tbody>
@@ -107,7 +106,7 @@
 							<Th colspan="5">総合戦績</Th>
 						</Tr>
 						<Tr>
-							<Th title="平均ダメージ*K/D比率*平均経験値*Tier&amp;艦種係数" style="width:80px;">戦闘力</Th>
+							<Th title="平均ダメージ*K/D比率*平均経験値*Tier&amp;艦種係数" style="width:90px;">戦闘力</Th>
 							<Th title="一戦平均ダメージ" style="width:70px;">Dmg</Th>
 							<Th title="艦別撃沈数÷艦別被撃沈数" style="width:40px;">K/D</Th>
 							<Th title="艦別勝率" style="width:78px;">勝率</Th>
@@ -122,7 +121,7 @@
 							<Th title="総合平均ダメージ" style="width:70px;">Dmg</Th>
 							<Th title="総撃沈数÷総被撃沈数" style="width:40px;">K/D</Th>
 							<Th title="総合平均経験値" style="width:50px;">経験値</Th>
-							<Th title="総戦闘数" style="width:50px;">戦闘数</Th>
+							<Th title="総戦闘数" style="width:60px;">戦闘数</Th>
 						</Tr>
 						</thead>
 						<tbody>
@@ -175,7 +174,7 @@
 		</div>
 	</div>
 	<div class="footer" name="footname" >
-		Powered by <a href="https://github.com/tianweiliu/wows-stats" id="footerurl">wows-stats</a>（改造元）　改変．negi 20161118　＋改変 v0.1.2 AnMoreNight：20170207
+		Powered by <a href="https://github.com/tianweiliu/wows-stats" id="footerurl">wows-stats</a>（改造元）　改変．negi 20161118　＋改変 v0.2.0 AnMoreNight：20170209
 	<!-- 再改造・再配布なにしてもOK、でも改造したら名前と作成日は書き換えてね（タイトルとここの２箇所）-->
 	</div>
 </div>
