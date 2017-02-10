@@ -26,11 +26,14 @@
 					<input type="button" class="buttonitem1_off" Id="sw3" onclick="shiptypr(1,0,1,1,'sw3')" value="戦艦" >
 					<input type="button" class="buttonitem1_off" Id="sw4" onclick="shiptypr(1,1,0,1,'sw4')" value="巡洋艦" >
 					<input type="button" class="buttonitem1_off" Id="sw5" onclick="shiptypr(1,1,1,0,'sw5')" value="駆逐艦" >
-					<a id="download" href="#" download="{{ downloadFile }}"><input type="button" class="ss_button" Id="ss" value="画面保存"></a>
+					<a id="download" href="#" download="{{ downloadFile }}"><input type="button" class="ss_button" Id="ss" value="画面保存"></a><br />
 				</div>
 			</div>
 			<div class="teams">
-				<div id="prtype_tbl" >
+				<div id="prtype_tbl" align="center">
+					<div style="width: auto;">
+						<p style="display: inline-block; padding: 16px 0px 10px 0px; border: 1px #0060ff double;"><span class="label">{{ battleTime }}〔No. {{ data.mapId }}〕{{ gamemapnamejp }}（{{ gameLogicjp }}）</span></p>
+					</div>
 					<Table Border style ="margin: 4px auto;border-width: 3px 1px 1px 3px; border-style: solid; border-color: #38c38c; " >
 						<thead> 
 						<Tr>
@@ -42,7 +45,7 @@
 							<Th colspan="5">総合戦績</Th>
 						</Tr>
 						<Tr>
-							<Th title="平均ダメージ*K/D比率*平均経験値*Tier&amp;艦種係数" style="width:90px;">戦闘力</Th>
+							<Th title="平均ダメージ*K/D比率*平均経験値*Tier&amp;艦種係数" style="width:96px;">戦闘力</Th>
 							<Th title="一戦平均ダメージ" style="width:70px;">Dmg</Th>
 							<Th title="艦別撃沈数÷艦別被撃沈数" style="width:40px;">K/D</Th>
 							<Th title="艦別勝率" style="width:78px;">勝率</Th>
@@ -52,7 +55,7 @@
 <!--							<Th title="主砲命中率,発射無しの場合は-(％)" style="width:40px;">主砲</Th> -->
 <!--							<Th title="魚雷命中率,発射無しの場合は-(％)" style="width:40px;">魚雷</Th> -->
 							<Th title="艦別平均経験値" style="width:50px;">経験値</Th>
-							<Th title="艦別戦闘数"style="width:50px;">戦闘数</Th>
+							<Th title="艦別戦闘数"style="width:60px;">戦闘数</Th>
 							<Th title="総合勝率" style="width:78px;">勝率</Th>
 							<Th title="総合平均ダメージ" style="width:70px;">Dmg</Th>
 							<Th title="総撃沈数÷総被撃沈数" style="width:40px;">K/D</Th>
@@ -106,7 +109,7 @@
 							<Th colspan="5">総合戦績</Th>
 						</Tr>
 						<Tr>
-							<Th title="平均ダメージ*K/D比率*平均経験値*Tier&amp;艦種係数" style="width:90px;">戦闘力</Th>
+							<Th title="平均ダメージ*K/D比率*平均経験値*Tier&amp;艦種係数" style="width:96px;">戦闘力</Th>
 							<Th title="一戦平均ダメージ" style="width:70px;">Dmg</Th>
 							<Th title="艦別撃沈数÷艦別被撃沈数" style="width:40px;">K/D</Th>
 							<Th title="艦別勝率" style="width:78px;">勝率</Th>
@@ -116,7 +119,7 @@
 <!--							<Th title="主砲命中率,発射無しの場合は-(％)" style="width:40px;">主砲</Th> -->
 <!--							<Th title="魚雷命中率,発射無しの場合は-(％)" style="width:40px;">魚雷</Th> -->
 							<Th title="艦別平均経験値" style="width:50px;">経験値</Th>
-							<Th title="艦別戦闘数"style="width:50px;">戦闘数</Th>
+							<Th title="艦別戦闘数"style="width:60px;">戦闘数</Th>
 							<Th title="総合勝率" style="width:78px;">勝率</Th>
 							<Th title="総合平均ダメージ" style="width:70px;">Dmg</Th>
 							<Th title="総撃沈数÷総被撃沈数" style="width:40px;">K/D</Th>
@@ -174,7 +177,7 @@
 		</div>
 	</div>
 	<div class="footer" name="footname" >
-		Powered by <a href="https://github.com/tianweiliu/wows-stats" id="footerurl">wows-stats</a>（改造元）　改変．negi 20161118　＋改変 v0.2.0 AnMoreNight：20170209
+		Powered by <a href="https://github.com/tianweiliu/wows-stats" id="footerurl">wows-stats</a>（改造元）　改変．negi 20161118　＋改変 v0.2.1 AnMoreNight：20170209
 	<!-- 再改造・再配布なにしてもOK、でも改造したら名前と作成日は書き換えてね（タイトルとここの２箇所）-->
 	</div>
 </div>
