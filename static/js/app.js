@@ -187,6 +187,19 @@ function myFormatDate(str) {
 	return format_str;
 }
 
+function myFormatDate2(str) {
+	var dd = str.substr(0,2);
+	var mm = str.substr(3,2);
+	var yyyy = str.substr(6,4);
+	var HH = str.substr(11,2);
+	var MM = str.substr(14,2);
+	var SS = str.substr(17,2);
+
+	var format_str = yyyy + "/" + mm + "/" + dd + " " + HH + ":" + MM + ":" + SS;
+
+	return format_str;
+}
+
 function short_id(str){
 //	if (str.length < 12) {
 //		return(str);
@@ -692,6 +705,8 @@ app.controller('TeamStatsCtrl', function ($scope, $http, api) {
 				$scope.gameLogicjp = api.sinarioname_ex_jp("sinarioname_eng",data.scenario);
 				ownerName = data.playerName;
 				$scope.downloadFile = "wows_" + myFormatDate(data.dateTime) + "_" + $scope.gamemapnamejp + "_" + $scope.gameLogicjp +"_" + data.playerVehicle + ".png";
+				$scope.battleTime = myFormatDate2(data.dateTime);
+
 				var kariload = [[]];
 				for (var i=0; i<data.vehicles.length; i++) {
 						kariload[i] =data.vehicles[i];
