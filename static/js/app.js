@@ -521,15 +521,16 @@ return value;
 api.sinarioname_ex_jp = function(type, value) {
 var snname =[
 ["Default_test","チュートリアル"] ,
-["Skirmish_Domination_2_BASES","通常-Coop戦"] ,
-["Domination_2_BASES","通常戦"],
-["Skirmish_MegaBase","ゾーン-Coop戦"] ,
-["MegaBase","ゾーン戦"],
-["Skirmish_Domination","制圧-Coop戦"] ,
-["Domination","制圧戦"],
-["Skirmish_Epicenter","中央攻略-Coop戦"] ,
-["Epicenter","中央攻略戦"],
-["Ranked_Domination","ランク戦"]
+["Skirmish_Domination_2_BASES","Co-op : 通常"] ,
+["Domination_2_BASES","ランダム戦 : 通常"],
+["Skirmish_MegaBase","Co-op戦 : ゾーン"] ,
+["MegaBase","ランダム戦 : ゾーン"],
+["Skirmish_Domination","Co-op戦 : 制圧"] ,
+["Domination","ランダム戦 : 制圧"],
+["Skirmish_Epicenter","Co-op戦 : 中央攻略"] ,
+["Epicenter","ランダム戦 : 中央攻略"],
+["Ranked_Domination","ランク戦 : 制圧"],
+["Ranked_Epicenter","ランク戦 : 中央攻略"]
 ]
 	for (var i=0; i<snname.length ; i++) {
 		if (value == snname[i][0]) {
