@@ -1,5 +1,62 @@
 const MAX_RETRY = 5;
 
+//var api_url = window.sessionStorage.getItem("API_URL");
+//var api_key = window.sessionStorage.getItem("API_KEY");
+
+//var ship_info = {};
+var ownerName = "";
+
+// get ship info
+//function get_shipinfo () {
+//	console.log("Enter get_shipinfo");
+
+//	var sync_request = new Promise (
+//		function (resolve, reject) {
+//			if (ship_info != null) {
+//				$http({
+//					method:'GET',
+//					url: 'api_url + '/wows/encyclopedia/ships/?application_id=' + api_key + '&fields=name%2Ctier'
+//				}).success(function(data, status) {
+//					var info = JSON.parse(data);
+//					if (info.status == "ok") {
+//						if (info.meta.count > 0) {
+//							ship_info = info.data;
+//							console.log("Exit get_shipinfo with success");
+//							resolve();
+//					    } else {
+//							console.log('Exit get_shipinfo with meta.count <= 0');
+//							reject();
+//						}
+//				    } else {
+//						console.log("Exit get_shipinfo with json parse error");
+//						reject();
+//					}
+//				} else {
+//					console.log("Exit get_shipinfo with API request fail");
+//					reject();
+//				}
+//			});
+//			} else {
+//					console.log("Exit already set array");
+//					reject();
+//			}
+//		}
+//	);
+
+//	sync_request.then ( function () {
+//		var json_data = data.vehicles;
+//		var keys = Object.keys(json_data);
+
+//		for(var i=0, num=keys.length; i<num; i+=1) {
+//			var tier = ship_info[ keys[i] ].tier;
+//			json_data[ keys[i] ].tier = tier;
+//			console.log(ship_info);
+//		}
+//    });
+//}
+
+//get_shipinfo();
+
 function  shiptypr(val1,val2,val3,val4,val_sw){
 	document .getElementById("sw1").style .border="outset 3px";
 	document .getElementById("sw2").style .border="outset 3px";
@@ -92,6 +149,8 @@ function InitViewMode() {
 
 	$("input[name='knp']:eq(1)").prop("checked", true);
 	$("input:radio[name='knp']:checked").change();
+
+	prepare_ss("#prtype_tbl");
 }
 
 function UpdateViewMode() {
@@ -124,14 +183,16 @@ function UpdateViewMode() {
 	}
 }
 
+var imgData = {};
 function prepare_ss(target) {
 	var element = $(target)[0];
+	delete imgData;
 
     html2canvas(element, { onrendered: function(canvas) {
 		var imgData = canvas.toDataURL();
 		$('#download')[0].href = imgData;
 		$('#download')[0].target = "_blank";
-		$('#download')[0].click;
+//		$('#download')[0].click;
     }});
 }
 
@@ -252,6 +313,7 @@ app.factory('api', function($http, $q) {
 			}
 		});
 	}
+
 	api.fetchPlayer = function(player) {
 		player.api.player = api.player(player);
 		player.api.player.then(function(player) {
@@ -302,14 +364,14 @@ var sneng =[
 "Mutsuki","Hatsuharu","Fubuki","Kagero","Shimakaze",
 "Kawachi","Myogi","Kongo","Fuso","Nagato","Amagi","Izumo","Yamato",
 "Hosho","Zuiho","Ryujo","Hiryu","Shokaku","Taiho","Hakuryu",
-"Mikasa","Yūbari","Ishizuchi","Fujin","Kamikaze","Atago",
+"Mikasa","Yūbari","Ishizuchi","Fujin","Kamikaze","Atago","Mutsu",
 "Tachibana","Iwaki Alpha","Kamikaze R","Fūjin",
 "ARP Kongō","ARP Hiei","ARP Haruna","ARP Kirishima",
 "ARP Myoko","ARP Haguro","ARP Ashigara","ARP Nachi",
 "ARP Takao","ARP Atago","ARP Maya","ARP Chokai","ARP Chōkai",
 "Tone","Akatsuki","Shiratsuyu","Akizuki","Yugumo","Yūgumo","Shinonome",
 "Anshan","Lo Yang",
-"Arkansas Beta","Tachibana Lima","Marblehead Lima","Imperator Nikolai I"
+"Arkansas Beta","Tachibana Lima","Marblehead Lima","Imperator Nikolai I","Leberecht Maass"
 ];
 var snjp = [
 "橋立","筑摩","天龍","球磨","古鷹",
@@ -318,16 +380,16 @@ var snjp = [
 "睦月","初春","吹雪","陽炎","島風",
 "河内","妙義","金剛","扶桑","長門","天城","出雲","大和",
 "鳳翔","瑞鳳","龍驤","飛龍","翔鶴","大鳳","白龍",
-"三笠","夕張","石鎚","風神","神風","愛宕",
+"三笠","夕張","石鎚","風神","神風","愛宕","陸奥",
 "橘","岩木.α","神風.Ｒ","風神",
 "ARPコンゴウ(金剛)","ARPヒエイ（金剛）","ARPハルナ（金剛）","ARPキリシマ(金剛)",
 "ARPミョウコウ(妙高)","ARPハグロ(妙高)","ARPアシガラ(妙高)","ARPナチ(妙高)",
 "ARPタカオ(愛宕)","ARPアタゴ(愛宕)","ARPマヤ(愛宕)","ARPチョウカイ(愛宕)","ARPチョウカイ(愛宕)",
 "利根","暁","白露","秋月","夕雲","夕雲","東雲",
 "鞍山","洛陽",
-"Arkansas.β","橘.Ｌ","Marblehead.Ｌ","Nikolai I"
+"Arkansas.β","橘.Ｌ","Marblehead.Ｌ","Nikolai I","Maass"
 ];
-// 複数回書いてあるものは表記揺れ対策、おいら運営じゃないんで未実装艦は予想でしか書けません
+// 複数回書いてあるものは表記揺れ対策
 
 	for (var i=0; i<sneng.length ; i++) {
 		if (value == sneng[i]) {
@@ -483,6 +545,7 @@ var mapname =[
 ["00_CO_ocean",			"大海原"],
 ["01_solomon_islands",	"ソロモン諸島"],
 ["04_Archipelago",		"列島"],
+["05_Ring",		"リング"],
 ["08_NE_passage",		"海峡"],
 ["10_NE_big_race",		"ビッグレース"],
 ["13_OC_new_dawn",		"新たなる夜明け"],
@@ -507,7 +570,8 @@ var mapname =[
 ["42_Neighbors",		"隣接勢力"],
 ["44_Path_warrior",		"戦士の道"],
 ["45_Zigzag",			"ループ"],
-["46_Estuary",			"河口"]
+["46_Estuary",			"河口"],
+["50_Gold_harbor",			"安息の地"]
 ]
 for (var i=0; i<mapname.length ; i++) {
 	if (value == mapname[i][0]) {
@@ -521,13 +585,15 @@ return value;
 api.sinarioname_ex_jp = function(type, value) {
 var snname =[
 ["Default_test","チュートリアル"] ,
-["Skirmish_Domination_2_BASES","Co-op : 通常"] ,
-["Domination_2_BASES","ランダム戦 : 通常"],
-["Skirmish_MegaBase","Co-op戦 : ゾーン"] ,
-["MegaBase","ランダム戦 : ゾーン"],
+["Skirmish_Domination_2_BASES","Co-op戦 : 通常"] ,
+["Skirmish_Domination_rhombus","Co-op戦 : 制圧"] ,
 ["Skirmish_Domination","Co-op戦 : 制圧"] ,
-["Domination","ランダム戦 : 制圧"],
+["Skirmish_MegaBase","Co-op戦 : ゾーン"] ,
 ["Skirmish_Epicenter","Co-op戦 : 中央攻略"] ,
+["Domination_2_BASES","ランダム戦 : 通常"],
+["MegaBase","ランダム戦 : ゾーン"],
+["Domination","ランダム戦 : 制圧"],
+["Domination_rhombus","ランダム戦 : 制圧"],
 ["Epicenter","ランダム戦 : 中央攻略"],
 ["Ranked_Domination","ランク戦 : 制圧"],
 ["Ranked_Epicenter","ランク戦 : 中央攻略"]
@@ -563,6 +629,7 @@ api.player = function(player) {
 		player.name_s = short_id(player.name);
 	});
 }
+
 api.ship = function(player) {
 	return $q(function(resolve, reject) {
 		$http({
@@ -679,7 +746,6 @@ api.ship = function(player) {
 return api;
 });
 
-var ownerName = "";
 app.controller('TeamStatsCtrl', function ($scope, $http, api) {
 	$scope.inGame = false;
 	$scope.dateTime = "";
@@ -688,11 +754,11 @@ app.controller('TeamStatsCtrl', function ($scope, $http, api) {
   	$scope.gamemapnamejp  = "";
   	$scope.gameLogicjp  = "";
 	$scope.downloadFile = "";
+	var kariload = [[]];
 
 	var updateArena = function() {
 		UpdateViewMode();
 
-	var kariload = [[]];
 		$http({
 			method: 'GET',
 			url: 'http://localhost:8080/api/arena'
@@ -708,7 +774,7 @@ app.controller('TeamStatsCtrl', function ($scope, $http, api) {
 				$scope.downloadFile = "wows_" + myFormatDate(data.dateTime) + "_" + $scope.gamemapnamejp + "_" + $scope.gameLogicjp +"_" + data.playerVehicle + ".png";
 				$scope.battleTime = myFormatDate2(data.dateTime);
 
-				var kariload = [[]];
+				delete kariload;
 				for (var i=0; i<data.vehicles.length; i++) {
 						kariload[i] =data.vehicles[i];
 				}
@@ -732,13 +798,11 @@ app.controller('TeamStatsCtrl', function ($scope, $http, api) {
 			$scope.dateTime = "";
 			$scope.inGame = false;
 		});
-
-		prepare_ss("#prtype_tbl");
 	}
 
 	var timer = setInterval(function() {
 		$scope.$apply(updateArena);
-	}, 1500);
+	}, 2000);
 
 	updateArena();
 });
