@@ -189,7 +189,7 @@ function prepare_ss(target) {
 	delete imgData;
 
     html2canvas(element, { onrendered: function(canvas) {
-		var imgData = canvas.toDataURL();
+		imgData = canvas.toDataURL();
 		$('#download')[0].href = imgData;
 		$('#download')[0].target = "_blank";
 //		$('#download')[0].click;
