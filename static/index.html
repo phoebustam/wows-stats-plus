@@ -12,15 +12,14 @@
 	<script type="text/javascript" src="js/app.js"></script>
 	<script type="text/javascript" src="js/html2canvas.js"></script>
 </head>
-<body ng-app="wows-stats" onload="InitViewMode()">
+<body ng-app="wows-stats">
 <div class="wrapper">
 	<div class="content" ng-controller="TeamStatsCtrl">
 		<h3 ng-hide="inGame">現在戦闘中ではありません</h3>
 		<h4 ng-hide="inGame">自動更新をお待ちください</h4>
 		<div class="stats" ng-show="players.length>0">
-			<h3>〔No. {{ data.mapId }}〕{{ gamemapnamejp }}（{{ gameLogicjp }}）<span class="hint" ng-hide="inGame">: 戦闘終了</span></h3> 
-			<div class="buttonset" >
-				<div class="buttonpro1"  > 
+			<div class="buttonset">
+				<div class="buttonpro1"> 
 					<input type="button" class="buttonitem1_on" Id="sw1" onclick="shiptypr(0,0,0,0,'sw1')"  value="選択解除" >
 					<input type="button" class="buttonitem1_off" Id="sw2" onclick="shiptypr(0,1,1,1,'sw2')" value="空母" >
 					<input type="button" class="buttonitem1_off" Id="sw3" onclick="shiptypr(1,0,1,1,'sw3')" value="戦艦" >
@@ -32,7 +31,7 @@
 			<div class="teams">
 				<div id="prtype_tbl" align="center">
 					<div style="width: auto;">
-						<p style="display: inline-block; padding: 16px 0px 10px 0px; border: 1px #0060ff double;"><span class="label">{{ battleTime }}〔No. {{ data.mapId }}〕{{ gamemapnamejp }}（{{ gameLogicjp }}）</span></p>
+						<p style="margin: 4px auto; padding: 3px;"><div class="label">{{ battleTime }}〔No. {{ data.mapId }}〕{{ gamemapnamejp }}（{{ gameLogicjp }}）<span class="hint" ng-hide="inGame">: 戦闘終了</span></div></p>
 					</div>
 					<Table Border style ="margin: 4px auto;border-width: 3px 1px 1px 3px; border-style: solid; border-color: #38c38c; " >
 						<thead> 
@@ -47,7 +46,7 @@
 						<Tr>
 							<Th title="平均ダメージ*K/D比率*平均経験値*Tier&amp;艦種係数" style="width:96px;">戦闘力</Th>
 							<Th title="一戦平均ダメージ" style="width:70px;">Dmg</Th>
-							<Th title="艦別撃沈数÷艦別被撃沈数" style="width:40px;">K/D</Th>
+							<Th title="艦別撃沈数÷艦別被撃沈数" style="width:46px;">K/D</Th>
 							<Th title="艦別勝率" style="width:78px;">勝率</Th>
 <!--							<Th title="勝利時生存率(％)-敗北時生存率(％)" style="width:55px;">生存率</Th> -->
 							<Th title="一戦平均撃沈数" style="width:35px;">撃沈</Th>
@@ -111,7 +110,7 @@
 						<Tr>
 							<Th title="平均ダメージ*K/D比率*平均経験値*Tier&amp;艦種係数" style="width:96px;">戦闘力</Th>
 							<Th title="一戦平均ダメージ" style="width:70px;">Dmg</Th>
-							<Th title="艦別撃沈数÷艦別被撃沈数" style="width:40px;">K/D</Th>
+							<Th title="艦別撃沈数÷艦別被撃沈数" style="width:46px;">K/D</Th>
 							<Th title="艦別勝率" style="width:78px;">勝率</Th>
 <!--							<Th title="勝利時生存率(％)-敗北時生存率(％)" style="width:55px;">生存率</Th> -->
 							<Th title="一戦平均撃沈数" style="width:35px;">撃沈</Th>
@@ -177,9 +176,12 @@
 		</div>
 	</div>
 	<div class="footer" name="footname" >
-		Powered by <a href="https://github.com/tianweiliu/wows-stats" id="footerurl">wows-stats</a>（改造元）　改変．negi 20161118　＋改変 v0.2.2 AnMoreNight：20170213
+		Powered by <a href="https://github.com/tianweiliu/wows-stats" id="footerurl">wows-stats</a>（改造元）　改変．negi 20161118　＋改変 v0.2.3 AnMoreNight：20170326
 	<!-- 再改造・再配布なにしてもOK、でも改造したら名前と作成日は書き換えてね（タイトルとここの２箇所）-->
 	</div>
 </div>
+<script type="text/javascript">
+	InitViewMode();
+</script>
 </body>
 </html>
