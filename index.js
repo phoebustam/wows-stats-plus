@@ -118,8 +118,6 @@ router.get('/player', jsonParser, function(req, res) {
 													else
 														res.status(500);
 												});
-
-//												res.json(player);
 											}
 											else
 												res.status(401).send(player);
