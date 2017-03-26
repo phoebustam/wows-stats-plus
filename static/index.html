@@ -41,7 +41,7 @@
 							<Th rowspan="2" style="width:44px;">種別</Th>
 							<Th rowspan="2" style="width:130px;">艦名</Th>
 							<Th colspan="8">艦別戦績</Th>
-							<Th colspan="5">総合戦績</Th>
+							<Th colspan="6">総合戦績</Th>
 						</Tr>
 						<Tr>
 							<Th title="平均ダメージ*K/D比率*平均経験値*Tier&amp;艦種係数" style="width:96px;">戦闘力</Th>
@@ -55,6 +55,7 @@
 <!--							<Th title="魚雷命中率,発射無しの場合は-(％)" style="width:40px;">魚雷</Th> -->
 							<Th title="艦別平均経験値" style="width:50px;">経験値</Th>
 							<Th title="艦別戦闘数"style="width:60px;">戦闘数</Th>
+							<Th title="直近最高到達ランク" style="width:35px;">Rank</Th>
 							<Th title="総合勝率" style="width:78px;">勝率</Th>
 							<Th title="総合平均ダメージ" style="width:70px;">Dmg</Th>
 							<Th title="総撃沈数÷総被撃沈数" style="width:40px;">K/D</Th>
@@ -87,6 +88,7 @@
 							<Td><span ng-hide="value.ship.err">{{value.ship.avgExp}}</span></Td>
 							<Td><span name="battle_suu" ng-hide="value.ship.err">{{value.ship.battles}}</span>
 								<span name="battle_asu" style ="display:none;"  ng-hide="value.err">***</span></Td>
+							<Td><span ng-hide="value.err">{{value.rank}}</span></Td>
 							<Td><span class="{{value.winRateClass}}" ng-hide="value.err">{{value.winRate}}</span></Td>
 							<Td><span ng-hide="value.err">{{value.formatdmg}}</span></Td>
 							<Td><span ng-hide="value.err">{{value.kdRatio}}</span></Td>
@@ -105,7 +107,7 @@
 							<Th rowspan="2" style="width:44px;">種別</Th>
 							<Th rowspan="2" style="width:130px;">艦名</Th>
 							<Th colspan="8">艦別戦績</Th>
-							<Th colspan="5">総合戦績</Th>
+							<Th colspan="6">総合戦績</Th>
 						</Tr>
 						<Tr>
 							<Th title="平均ダメージ*K/D比率*平均経験値*Tier&amp;艦種係数" style="width:96px;">戦闘力</Th>
@@ -119,6 +121,7 @@
 <!--							<Th title="魚雷命中率,発射無しの場合は-(％)" style="width:40px;">魚雷</Th> -->
 							<Th title="艦別平均経験値" style="width:50px;">経験値</Th>
 							<Th title="艦別戦闘数"style="width:60px;">戦闘数</Th>
+							<Th title="直近最高到達ランク" style="width:35px;">Rank</Th>
 							<Th title="総合勝率" style="width:78px;">勝率</Th>
 							<Th title="総合平均ダメージ" style="width:70px;">Dmg</Th>
 							<Th title="総撃沈数÷総被撃沈数" style="width:40px;">K/D</Th>
@@ -151,6 +154,7 @@
 							<Td><span ng-hide="value.ship.err">{{value.ship.avgExp}}</span></Td>
 							<Td><span name="battle_suu" ng-hide="value.ship.err">{{value.ship.battles}}</span>
 								<span name="battle_asu" style ="display:none;"  ng-hide="value.err">***</span></Td>
+							<Td><span ng-hide="value.err">{{value.rank}}</span></Td>
 							<Td><span class=" {{value.winRateClass}}" ng-hide="value.err">{{value.winRate}}</span></Td>
 							<Td><span ng-hide="value.err">{{value.formatdmg}}</span></Td>
 							<Td><span ng-hide="value.err">{{value.kdRatio}}</span></Td>
@@ -176,7 +180,7 @@
 		</div>
 	</div>
 	<div class="footer" name="footname" >
-		Powered by <a href="https://github.com/tianweiliu/wows-stats" id="footerurl">wows-stats</a>（改造元）　改変．negi 20161118　＋改変 v0.2.3 AnMoreNight：20170326
+		Powered by <a href="https://github.com/tianweiliu/wows-stats" id="footerurl">wows-stats</a>（改造元）　改変．negi 20161118　＋改変 v0.3.0 AnMoreNight：20170327
 	<!-- 再改造・再配布なにしてもOK、でも改造したら名前と作成日は書き換えてね（タイトルとここの２箇所）-->
 	</div>
 </div>
