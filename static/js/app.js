@@ -1,9 +1,9 @@
-const MAX_RETRY = 7;
+const MAX_RETRY = 5;
 
 //var api_url = window.sessionStorage.getItem("API_URL");
 //var api_key = window.sessionStorage.getItem("API_KEY");
 
-var ship_info = {};
+//var ship_info = {};
 var ownerName = "";
 
 // get ship info
