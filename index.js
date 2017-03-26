@@ -9,15 +9,37 @@ var app = express();
 var port = process.env.PORT || 8080;
 var api_key = process.env.WOWS_API_KEY || "demo";
 
+//sessionStorage.setItem("API_URL", process.env.WOWS_API_URL);
+//sessionStorage.setItem("API_KEY", api_key);
+
+// create application/json parser
+var jsonParser = bodyParser.json();
+
+// Get latest seasons(rank battle) number
+var latest_season_num = 0;
+
+function get_season_num() {
+	request(process.env.WOWS_API_URL + '/wows/seasons/info/?application_id=' + api_key, function (error, response, body) {
+		if (!error && response.statusCode == 200) {
+			var json = JSON.parse(body);
+			if (json.status == "ok") {
+				if (json.meta.count >= 0) {
+					latest_season_num = json.meta.count;
+					console.log('latest season number = ' + latest_season_num);
+				}
+			}
+		}
+	});
+}
+
+get_season_num();
+
 // static endpoint
 app.use(express.static(__dirname + '/static'));
 
 // api endpoint
 var router = express.Router();
 app.use('/api', router);
-
-// create application/json parser
-var jsonParser = bodyParser.json();
 
 router.get('/', function(req, res) {
 	res.json({
@@ -30,7 +52,9 @@ router.get('/', function(req, res) {
 // player api
 router.get('/player', jsonParser, function(req, res) {
 	if (req.query.name) {
-		console.log(req.query.name);
+//		console.log(req.query.name);
+
+		// search and get account_id
 		request(process.env.WOWS_API_URL + '/wows/account/list/?application_id=' + api_key + '&search=' + encodeURIComponent(req.query.name), function (error, response, body) {
 			if (!error && response.statusCode == 200) {
 				var json = JSON.parse(body);
@@ -47,6 +71,9 @@ router.get('/player', jsonParser, function(req, res) {
 						if (playerJson) {
 							player.id = playerJson.account_id.toString();
 							player.name = playerJson.nickname;
+							player.rank = 0;
+
+							// get player info
 							request(process.env.WOWS_API_URL + '/wows/account/info/?application_id=' + api_key + '&account_id=' + player.id, function (err, rep, statsBody) {
 								if (!err && rep.statusCode == 200) {
 									var stats = JSON.parse(statsBody);
@@ -60,7 +87,39 @@ router.get('/player', jsonParser, function(req, res) {
 												player.avgDmg	= (stats.statistics.pvp.damage_dealt / stats.statistics.pvp.battles).toFixed();
 												player.kdRatio	= (stats.statistics.pvp.frags / (stats.statistics.pvp.battles - stats.statistics.pvp.survived_battles)).toFixed(2);
 												player.raw 		= stats;
-												res.json(player);
+
+												// get player rank battle info
+												request(process.env.WOWS_API_URL + '/wows/seasons/accountinfo/?application_id=' + api_key + '&account_id=' + player.id + '&season_id=' + latest_season_num, function (rk_error, rk_response, rankBody) {
+													if (!rk_error && rk_response.statusCode == 200) {
+														var seasons = JSON.parse(rankBody);
+														if (seasons.status == "ok") {
+															if (seasons.data[player.id] != null) {
+																stats = seasons.data[player.id];
+																var season = stats.seasons[latest_season_num];
+																player.rank = season.rank_info.max_rank;
+//																console.log(player.rank);
+																res.json(player);
+															}
+															else
+															{
+																player.rank = '**';
+//																console.log('null rank info data');
+																res.json(player);
+															}
+														}
+														else
+														{
+//															console.log('getting rank info status failed');
+															res.status(400).send(json.error);
+														}
+													}
+													else if(rk_response)
+														res.status(rk_response.statusCode);
+													else
+														res.status(500);
+												});
+
+//												res.json(player);
 											}
 											else
 												res.status(401).send(player);
@@ -128,7 +187,7 @@ router.get('/ship', jsonParser, function(req, res) {
 										res.json(ship);
 									}
 									else {
-										ship.id = 			req.query.shipId;
+										ship.id = req.query.shipId;
 										ship.noRecord =	true;
 										res.json(ship);
 									}

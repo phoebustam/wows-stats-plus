@@ -1,9 +1,9 @@
-const MAX_RETRY = 5;
+const MAX_RETRY = 7;
 
 //var api_url = window.sessionStorage.getItem("API_URL");
 //var api_key = window.sessionStorage.getItem("API_KEY");
 
-//var ship_info = {};
+var ship_info = {};
 var ownerName = "";
 
 // get ship info
@@ -261,7 +261,7 @@ function myFormatDate2(str) {
 	return format_str;
 }
 
-function short_id(str){
+function short_id(str) {
 //	if (str.length < 12) {
 //		return(str);
 //	}
@@ -323,6 +323,7 @@ app.factory('api', function($http, $q) {
 			// retry if rejected
 			if (!player.hasOwnProperty('retry'))
 				player.retry = MAX_RETRY;
+
 			if (player.retry <= 0 || player.api.status == 401) {
 				// report error if max retry reached or player profile is private
 				player.ship = {};
@@ -338,6 +339,7 @@ app.factory('api', function($http, $q) {
 				else {
 					player.err = player.api.response;
 				}
+
 				if (player.api.response.hasOwnProperty("id")){
 					// playerId is available
 					angular.extend(player, player.api.response);
@@ -364,7 +366,7 @@ var sneng =[
 "Mutsuki","Hatsuharu","Fubuki","Kagero","Shimakaze",
 "Kawachi","Myogi","Kongo","Fuso","Nagato","Amagi","Izumo","Yamato",
 "Hosho","Zuiho","Ryujo","Hiryu","Shokaku","Taiho","Hakuryu",
-"Mikasa","Yūbari","Ishizuchi","Fujin","Kamikaze","Atago","Mutsu",
+"Mikasa","Yūbari","Ishizuchi","Fujin","Kamikaze","Atago","Mutsu","Katori",
 "Tachibana","Iwaki Alpha","Kamikaze R","Fūjin",
 "ARP Kongō","ARP Hiei","ARP Haruna","ARP Kirishima",
 "ARP Myoko","ARP Haguro","ARP Ashigara","ARP Nachi",
@@ -380,7 +382,7 @@ var snjp = [
 "睦月","初春","吹雪","陽炎","島風",
 "河内","妙義","金剛","扶桑","長門","天城","出雲","大和",
 "鳳翔","瑞鳳","龍驤","飛龍","翔鶴","大鳳","白龍",
-"三笠","夕張","石鎚","風神","神風","愛宕","陸奥",
+"三笠","夕張","石鎚","風神","神風","愛宕","陸奥","香取",
 "橘","岩木.α","神風.Ｒ","風神",
 "ARPコンゴウ(金剛)","ARPヒエイ（金剛）","ARPハルナ（金剛）","ARPキリシマ(金剛)",
 "ARPミョウコウ(妙高)","ARPハグロ(妙高)","ARPアシガラ(妙高)","ARPナチ(妙高)",
@@ -643,7 +645,7 @@ api.ship = function(player) {
 			var kill = parseInt(data.destroyed);
 			var death = battles - survived;
 			var kakin = "";
-			var killkoo= "";
+//			var killkoo= "";
 			var svrate= "";
 			var svgeta="";
 			if (death == 0 && kill > 0){
@@ -684,11 +686,11 @@ api.ship = function(player) {
 				else{
 					var hitt ="－";
 				}
-				if (data.destroyed >4 ){
-					killkoo =(parseInt(data.raw.pvp.damage_dealt)/parseInt(data.destroyed)/10000).toFixed(1);
-				}else{
-					killkoo ="－";
-				}
+//				if (data.destroyed >4 ){
+//					killkoo =(parseInt(data.raw.pvp.damage_dealt)/parseInt(data.destroyed)/10000).toFixed(1);
+//				}else{
+//					killkoo ="－";
+//				}
 				if ( parseInt(data.victories) >10 && (parseInt(data.battles) - parseInt(data.victories)) >10 ){
 					var svwin=((parseInt(data.raw.pvp.survived_wins)/parseInt(data.victories))*100).toFixed(0);
 					var svlose=(((parseInt(data.raw.pvp.survived_battles)-parseInt(data.raw.pvp.survived_wins))/(parseInt(data.battles) - parseInt(data.victories)))*100).toFixed(0);
@@ -730,7 +732,7 @@ api.ship = function(player) {
 				"combatPowerClass": api.b_beautify("combatPower", combatPower),
 				"highlightClass": api.highlight("combatPower", combatPower),
 				"ownerClass": api.owner("owner", player.name),
-				"killkoo":killkoo,
+//				"killkoo":killkoo,
 				"svrate":svrate
 			}
 			if (data.noRecord)
