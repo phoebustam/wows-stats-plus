@@ -140,6 +140,16 @@ color: #FFD0FF;
 font-weight: bold;
 }
 
+.player .rank_normal {
+color: #EEEEEE;
+font-weight: normal;
+}
+
+.player .rank_premiere {
+color: #E042E8;
+font-weight: bold;
+}
+
 .highlight_normal {
 background-color: #102010;
 }
