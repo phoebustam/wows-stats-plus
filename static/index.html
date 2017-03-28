@@ -88,7 +88,7 @@
 							<Td><span ng-hide="value.ship.err">{{value.ship.avgExp}}</span></Td>
 							<Td><span name="battle_suu" ng-hide="value.ship.err">{{value.ship.battles}}</span>
 								<span name="battle_asu" style ="display:none;"  ng-hide="value.err">***</span></Td>
-							<Td><span ng-hide="value.err">{{value.rank}}</span></Td>
+							<Td><span class="{{value.RankClass}}" ng-hide="value.err">{{value.rank}}</span></Td>
 							<Td><span class="{{value.winRateClass}}" ng-hide="value.err">{{value.winRate}}</span></Td>
 							<Td><span ng-hide="value.err">{{value.formatdmg}}</span></Td>
 							<Td><span ng-hide="value.err">{{value.kdRatio}}</span></Td>
@@ -154,7 +154,7 @@
 							<Td><span ng-hide="value.ship.err">{{value.ship.avgExp}}</span></Td>
 							<Td><span name="battle_suu" ng-hide="value.ship.err">{{value.ship.battles}}</span>
 								<span name="battle_asu" style ="display:none;"  ng-hide="value.err">***</span></Td>
-							<Td><span ng-hide="value.err">{{value.rank}}</span></Td>
+							<Td><span class="{{value.RankClass}}" ng-hide="value.err">{{value.rank}}</span></Td>
 							<Td><span class=" {{value.winRateClass}}" ng-hide="value.err">{{value.winRate}}</span></Td>
 							<Td><span ng-hide="value.err">{{value.formatdmg}}</span></Td>
 							<Td><span ng-hide="value.err">{{value.kdRatio}}</span></Td>
@@ -180,7 +180,7 @@
 		</div>
 	</div>
 	<div class="footer" name="footname" >
-		Powered by <a href="https://github.com/tianweiliu/wows-stats" id="footerurl">wows-stats</a>（改造元）　改変．negi 20161118　＋改変 v0.3.0 AnMoreNight：20170327
+		Powered by <a href="https://github.com/tianweiliu/wows-stats" id="footerurl">wows-stats</a>（改造元）　改変．negi 20161118　＋改変 v0.3.1 AnMoreNight：20170328
 	<!-- 再改造・再配布なにしてもOK、でも改造したら名前と作成日は書き換えてね（タイトルとここの２箇所）-->
 	</div>
 </div>
