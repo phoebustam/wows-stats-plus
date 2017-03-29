@@ -9,9 +9,6 @@ var app = express();
 var port = process.env.PORT || 8080;
 var api_key = process.env.WOWS_API_KEY || "demo";
 
-//sessionStorage.setItem("API_URL", process.env.WOWS_API_URL);
-//sessionStorage.setItem("API_KEY", api_key);
-
 // create application/json parser
 var jsonParser = bodyParser.json();
 
@@ -47,6 +44,15 @@ router.get('/', function(req, res) {
 		name: "wows-stats api",
 		version: "v2"
 	});
+});
+
+router.get('/env', function(req, res) {
+	var env = {};
+	env.API_URL = process.env.WOWS_API_URL;
+	env.API_KEY = api_key;
+	env.status = "ok";
+
+	res.json(env);
 });
 
 // player api
@@ -134,8 +140,9 @@ router.get('/player', jsonParser, function(req, res) {
 									res.status(500).send(player);
 							});
 						}
-						else
+						else {
 							res.sendStatus(404);
+						}
 					}
 					else
 						res.sendStatus(404);
@@ -143,10 +150,11 @@ router.get('/player', jsonParser, function(req, res) {
 				else
 					res.status(400).send(json.error);
 			}
-			else if(response)
+			else if(response) {
 				res.sendStatus(response.statusCode);
-			else
+			} else {
 				res.sendStatus(500);
+			}
 		});
 	}
 	else
@@ -193,10 +201,11 @@ router.get('/ship', jsonParser, function(req, res) {
 								else
 									res.status(400).send(json.error);
 							}
-							else if(response)
+							else if(response) {
 								res.sendStatus(response.statusCode);
-							else
+							} else {
 								res.sendStatus(500);
+							}
 						});
 					}
 					else
@@ -240,4 +249,4 @@ router.get('/arena', jsonParser, function(req, res) {
 });
 
 app.listen(port);
-console.log('wows-stats is running on port: ' + port);
+console.log('wows-stats-plus is running on port: ' + port);
