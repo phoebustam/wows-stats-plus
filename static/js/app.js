@@ -1,63 +1,66 @@
 const MAX_RETRY = 5;
 
-//var api_url = window.sessionStorage.getItem("API_URL");
-//var api_key = window.sessionStorage.getItem("API_KEY");
-
-//var ship_info = {};
+var ship_info = {};
 var ownerName = "";
+var ready = false;
 
-// get ship info
-//function get_shipinfo () {
-//	console.log("Enter get_shipinfo");
+function get_shipinfo() {
+	if (ship_info != null) {
+//		console.log('Enter get_shipinfo');
 
-//	var sync_request = new Promise (
-//		function (resolve, reject) {
-//			if (ship_info != null) {
-//				$http({
-//					method:'GET',
-//					url: 'api_url + '/wows/encyclopedia/ships/?application_id=' + api_key + '&fields=name%2Ctier'
-//				}).success(function(data, status) {
-//					var info = JSON.parse(data);
-//					if (info.status == "ok") {
-//						if (info.meta.count > 0) {
-//							ship_info = info.data;
-//							console.log("Exit get_shipinfo with success");
-//							resolve();
-//					    } else {
-//							console.log('Exit get_shipinfo with meta.count <= 0');
-//							reject();
-//						}
-//				    } else {
-//						console.log("Exit get_shipinfo with json parse error");
-//						reject();
-//					}
-//				} else {
-//					console.log("Exit get_shipinfo with API request fail");
-//					reject();
-//				}
-//			});
-//			} else {
-//					console.log("Exit already set array");
-//					reject();
-//			}
-//		}
-//	);
+		var api_url = '';
+		var api_key = '';
 
-//	sync_request.then ( function () {
-//		var json_data = data.vehicles;
-//		var keys = Object.keys(json_data);
+		var sync_getenv = new Promise (function (resolve, reject) {
+			$.getJSON('http://localhost:8080/api/env', function(data) {
+				if (data.status = 'ok') {
+//					console.log(data);
+					api_url = data.API_URL;
+					api_key = data.API_KEY;
+					resolve();
+//					console.log('Success get .env');
+				} else {
+					reject();
+				}
+			});
+		});
 
-//		for(var i=0, num=keys.length; i<num; i+=1) {
-//			var tier = ship_info[ keys[i] ].tier;
-//			json_data[ keys[i] ].tier = tier;
-//			console.log(ship_info);
-//		}
-//    });
-//}
+		sync_getenv.then ( function () {
+			var sync_getinfo = new Promise (function (resolve, reject) {
+					var api_call = api_url + '/wows/encyclopedia/ships/?application_id=' + api_key;
+					jQuery.ajax({
+						type: 'GET',
+						url: api_call,
+//						dataType: 'jsonp',
+						jsonpCallback: 'callback',
+						success : function(info) {
+							if (info.meta.count > 0) {
+								ship_info = info;
+//								console.log('Exit get_shipinfo with success');
+								resolve();
+						    } else {
+//								console.log('Exit get_shipinfo with meta.count <= 0');
+								reject();
+							}
+						},
+						error : function(res) {
+//							console.log("Exit error of get json");
+							reject();
+						}
+					});
+			});
 
-//get_shipinfo();
+			sync_getinfo.then ( function () {
+				ready = true;
+//				console.log(ship_info);
+			});
+		});
+	} else {
+//		console.log("Exit already set array");
+	}
+}
 
-function  shiptypr(val1,val2,val3,val4,val_sw){
+function  shiptypr(val1,val2,val3,val4,val_sw) {
 	document .getElementById("sw1").style .border="outset 3px";
 	document .getElementById("sw2").style .border="outset 3px";
 	document .getElementById("sw3").style .border="outset 3px";
@@ -103,7 +106,7 @@ function  shiptypr(val1,val2,val3,val4,val_sw){
 	prepare_ss("#prtype_tbl");
 }
 
-function idhide(val1,val2){
+function idhide(val1,val2) {
 	if ( val1 ){
 		idp ="none";
 		buta ="";
@@ -196,7 +199,7 @@ function prepare_ss(target) {
     }});
 }
 
-function  shipname_ex(val){
+function  shipname_ex(val) {
 	if ( val ){
 		dispeng ="none";
 		dispjp="";
@@ -282,7 +285,9 @@ function countLength(str) {
 	return r; 
 } 
 
-var app = angular.module('wows-stats', []);
+get_shipinfo();
+
+var app = angular.module('wows-stats-plus', []);
 
 app.factory('api', function($http, $q) {
 	var api = {};
@@ -348,7 +353,10 @@ app.factory('api', function($http, $q) {
 				}
 				else {
 					// report the same error to ship since we can't fetch ship without playerId
+					// but fetch ship information for Co-op battle bot
+					angular.extend(player, player.api.response);
 					player.ship.err = player.err;
+					api.fetchShip(player);
 				}
 			}
 			else {
@@ -373,7 +381,7 @@ var sneng =[
 "ARP Takao","ARP Atago","ARP Maya","ARP Chokai","ARP Chōkai",
 "Tone","Akatsuki","Shiratsuyu","Akizuki","Yugumo","Yūgumo","Shinonome",
 "Anshan","Lo Yang",
-"Arkansas Beta","Tachibana Lima","Marblehead Lima","Imperator Nikolai I","Leberecht Maass"
+"Arkansas Beta","Tachibana Lima","Marblehead Lima","Imperator Nikolai I","Leberecht Maass","Friedrich der Große"
 ];
 var snjp = [
 "橋立","筑摩","天龍","球磨","古鷹",
@@ -383,13 +391,13 @@ var snjp = [
 "河内","妙義","金剛","扶桑","長門","天城","出雲","大和",
 "鳳翔","瑞鳳","龍驤","飛龍","翔鶴","大鳳","白龍",
 "三笠","夕張","石鎚","風神","神風","愛宕","陸奥","香取",
-"橘","岩木.α","神風.Ｒ","風神",
+"橘","岩木 α","神風 R","風神",
 "ARPコンゴウ(金剛)","ARPヒエイ（金剛）","ARPハルナ（金剛）","ARPキリシマ(金剛)",
 "ARPミョウコウ(妙高)","ARPハグロ(妙高)","ARPアシガラ(妙高)","ARPナチ(妙高)",
 "ARPタカオ(愛宕)","ARPアタゴ(愛宕)","ARPマヤ(愛宕)","ARPチョウカイ(愛宕)","ARPチョウカイ(愛宕)",
 "利根","暁","白露","秋月","夕雲","夕雲","東雲",
 "鞍山","洛陽",
-"Arkansas.β","橘.Ｌ","Marblehead.Ｌ","Nikolai I","Maass"
+"Arkansas β","橘 Lima","Marblehead L","Nikolai I","Maass","F der Große"
 ];
 // 複数回書いてあるものは表記揺れ対策
 
@@ -508,6 +516,22 @@ api.b_beautify = function(type, value) {
 	}
 }
 
+api.rank_beautify = function(type, value) {
+	switch(type) {
+		case "rank":
+			if	(value <= 5) {
+				return 'rank_premiere';
+			}
+			else {
+				return 'rank_normal';
+			}
+			break;
+		default:
+			return null;
+			break;
+	}
+}
+
 api.highlight = function(type, value) {
 	switch(type) {
 		case "combatPower":
@@ -618,6 +642,7 @@ api.player = function(player) {
 			angular.extend(player, data);
 			player.uri = player.id + '-' + encodeURIComponent(player.name);
 			var winRate = parseFloat(player.winRate.replace('%', ''));
+			player.RankClass = api.rank_beautify("rank", player.rank);
 			player.winRateClass = api.beautify("winRate", winRate);
 			player.formatbattle = myFormatNumber(parseInt(player.battles));
 			player.formatdmg = myFormatNumber(parseInt(player.avgDmg));
@@ -645,15 +670,14 @@ api.ship = function(player) {
 			var kill = parseInt(data.destroyed);
 			var death = battles - survived;
 			var kakin = "";
-//			var killkoo= "";
 			var svrate= "";
-			var svgeta="";
+			var svgeta= "";
 			if (death == 0 && kill > 0){
 				kdRatio ="∞";
-				combatPower ="∞";
+				combatPower = "∞";
 			}else if(death == 0 && kill == 0){
-				kdRatio ="－";
-				combatPower ="－";
+				kdRatio = "－";
+				combatPower = "－";
 			}
 			else{
 				var kdRatio = (kill / death).toFixed(2);
@@ -671,6 +695,7 @@ api.ship = function(player) {
 					var combatPower = (data.avgDmg*kdRatio*data.avgExp/800*(1-(0.03*data.info.tier))*type_param).toFixed(0);
 				}
 			}
+
 			if (data.noRecord !=  true ){
 				var atkavg = (parseInt(data.destroyed)/ battles).toFixed(1);
 				var sdkavg =  (parseInt(data.raw.pvp.planes_killed)/ battles).toFixed(1);
@@ -678,35 +703,32 @@ api.ship = function(player) {
 					var hitm = (parseInt(data.raw.pvp.main_battery.hits) / parseInt(data.raw.pvp.main_battery.shots)*100).toFixed(1);
 				}
 				else{
-					var hitm ="－";
+					var hitm = "－";
 				}
 				if (parseInt(data.raw.pvp.torpedoes.shots) != 0){
 					var hitt = (parseInt("0"+data.raw.pvp.torpedoes.hits) / parseInt("0"+data.raw.pvp.torpedoes.shots)*100).toFixed(1);
 				}
 				else{
-					var hitt ="－";
+					var hitt = "－";
 				}
-//				if (data.destroyed >4 ){
-//					killkoo =(parseInt(data.raw.pvp.damage_dealt)/parseInt(data.destroyed)/10000).toFixed(1);
-//				}else{
-//					killkoo ="－";
-//				}
 				if ( parseInt(data.victories) >10 && (parseInt(data.battles) - parseInt(data.victories)) >10 ){
 					var svwin=((parseInt(data.raw.pvp.survived_wins)/parseInt(data.victories))*100).toFixed(0);
 					var svlose=(((parseInt(data.raw.pvp.survived_battles)-parseInt(data.raw.pvp.survived_wins))/(parseInt(data.battles) - parseInt(data.victories)))*100).toFixed(0);
 					if (parseInt(svlose)<10){
-						svgeta=" ";
+						svgeta = " ";
 					}else{
-						svgeta="";
+						svgeta = "";
 					}
-					svrate=svwin+"-"+svgeta+svlose;
+					svrate = svwin + "-" + svgeta + svlose;
 				}else{
-					svrate="－";
+					svrate = "－";
 				}
 			}
+
 			if (data.info.is_premium != false){
 				kakin ="℗";
 			}
+
 			player.ship = {
 				"shiptia_s": data.info.tier,
 				"shipty": data.info.type,
@@ -717,7 +739,7 @@ api.ship = function(player) {
 				"namejp" :api.shipnamejp("jpname",  data.name),
 				"namefont" : api.shipnamefont(countLength(data.name)),
 				"namefontjp" : api.shipnamefont(countLength(api.shipnamejp("jpname",data.name))),
-				"bgcolor" :data.info.type+"_bg",  
+				"bgcolor" :data.info.type+"_bg",
 				"winRate": winRate + "%",
 				"winRateClass": api.beautify("winRate", winRate),
 				"shfl" : atkavg,
@@ -732,13 +754,47 @@ api.ship = function(player) {
 				"combatPowerClass": api.b_beautify("combatPower", combatPower),
 				"highlightClass": api.highlight("combatPower", combatPower),
 				"ownerClass": api.owner("owner", player.name),
-//				"killkoo":killkoo,
-				"svrate":svrate
+				"svrate": svrate
 			}
+
 			if (data.noRecord)
 				player.ship.err = "記録無し";
+
 			resolve(player);
+
 		}).error(function(data, status) {
+			var kakin = '';
+			if (ship_info[shipId].is_premium != false){
+				kakin ="℗";
+			}
+			player.ship = {
+				"shiptia_s": ship_info[shipId].name,
+				"shipty": ship_info[shipId].type,
+				"shiptype_s": api.shiptypejp_s("shiptype",ship_info[shipId].type),
+				"shipnation_s": api.nationjp_s(ship_info[shipId].nation),
+				"shipkakin": kakin,
+				"name": ship_info[shipId].name,
+				"namejp" :api.shipnamejp("jpname",  ship_info[shipId].name),
+				"namefont" : api.shipnamefont(countLength(ship_info[shipId].name)),
+				"namefontjp" : api.shipnamefont(countLength(api.shipnamejp("jpname",ship_info[shipId].name))),
+				"bgcolor" :ship_info[shipId].type+"_bg",  
+				"winRate": '',
+				"winRateClass": '',
+				"shfl" : '',
+				"ftfl" : '',
+				"hitratem" : '',
+				"hitratet" : '',
+				"kdRatio": '',
+				"battles": '',
+				"avgExp": '',
+				"avgDmg": '',
+				"combatPower": '',
+				"combatPowerClass": '',
+				"highlightClass": '',
+				"ownerClass": '',
+				"svrate": ''
+			}
+
 			player.api.ship.response = data;
 			player.api.ship.status = status;
 			reject(player);
@@ -750,6 +806,7 @@ return api;
 
 app.controller('TeamStatsCtrl', function ($scope, $http, api) {
 	$scope.inGame = false;
+	$scope.ready = ready;
 	$scope.dateTime = "";
   	$scope.data = {};
   	$scope.players = [];
@@ -761,6 +818,7 @@ app.controller('TeamStatsCtrl', function ($scope, $http, api) {
 	var updateArena = function() {
 		UpdateViewMode();
 
+		if (ready) {
 		$http({
 			method: 'GET',
 			url: 'http://localhost:8080/api/arena'
@@ -780,15 +838,51 @@ app.controller('TeamStatsCtrl', function ($scope, $http, api) {
 				for (var i=0; i<data.vehicles.length; i++) {
 						kariload[i] =data.vehicles[i];
 				}
+
+//				console.log(kariload);
+
+				// sort data as ship_type > tier > shipID > playername
 				kariload.sort(function(val1,val2){
-					var val1 = ((val1.shipId % 1048576)-(val1.shipId / 1048576));//the magic namber
-					var val2 = ((val2.shipId % 1048576)-(val2.shipId / 1048576));
-					if( val1 < val2 ) {
-						return 1;
-					} else {
-						return -1;
-					}
+
+					var shipID1 = val1.shipId;
+					var shipID2 = val2.shipId;
+					var sinfo1 = ship_info.data[shipID1];
+					var sinfo2 = ship_info.data[shipID2];
+
+//					console.log("1 %s %s %d", val1.name, sinfo1.type, sinfo1.tier);
+//					console.log("2 %s %s %d", val2.name, sinfo2.type, sinfo2.tier);
+
+try {
+					// ship type
+					var type1 = ship_info.data[shipID1].type;
+					var type2 = ship_info.data[shipID2].type;
+					if( type1 > type2 ) return 1;
+					if( type1 < type2 ) return -1;
+
+					// Tier
+					var tier1 = ship_info["data"][shipID1].tier;
+					var tier2 = ship_info["data"][shipID2].tier;
+					if( tier1 < tier2 ) return 1;
+					if( tier1 > tier2 ) return -1;
+} catch(e) {
+//					console.log('Ileagal shipId. seems old data-type json file');
+}
+
+					// shipID
+					if( val1.shipId < val2.shipId ) return 1;
+					if( val1.shipId > val2.shipId ) return -1;
+
+					// player name
+					var name1 =  val1.name.toString();
+					var name2 =  val2.name.toString();
+//					console.log("name1: %s", name1);
+//					console.log("name2: %s", name2);
+					if( name1 > name2 ) return 1;
+					if( name1 < name2 ) return -1;
+
+					return 0;
 				});
+
 				for (var i=0; i<kariload.length; i++) {
 					var player =kariload[i];
 					$scope.players.push(player);
@@ -801,10 +895,11 @@ app.controller('TeamStatsCtrl', function ($scope, $http, api) {
 			$scope.inGame = false;
 		});
 	}
+	}
 
 	var timer = setInterval(function() {
 		$scope.$apply(updateArena);
-	}, 2000);
+	}, 3000);
 
 	updateArena();
 });
