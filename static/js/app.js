@@ -114,33 +114,14 @@ function idhide(val1,val2) {
 		idp = "";
 		buta ="none";
 	}
+
 	var el = document.getElementsByName("user_own");
 	for (var i=0; i<el.length ; i++) {
 		document .getElementsByName( "user_own" )[i]. style . display = idp;
 	}
-	var el = document.getElementsByName("user_ene");
-	for (var i=0; i<el.length ; i++) {
-		document .getElementsByName( "user_ene" )[i]. style . display = idp;
-	}
 	var el = document.getElementsByName("user_buta");
 	for (var i=0; i<el.length ; i++) {
 		document .getElementsByName( "user_buta" )[i]. style . display = buta;
-	}
-
-	if ( val2 ){
-		btp ="none";
-		asu ="";
-	}else {
-		btp ="";
-		asu ="none";
-	}
-	var el = document.getElementsByName("battle_suu");
-	for (var i=0; i<el.length ; i++) {
-		document .getElementsByName( "battle_suu" )[i]. style . display = btp;
-	}
-	var el = document.getElementsByName("battle_asu");
-	for (var i=0; i<el.length ; i++) {
-		document .getElementsByName( "battle_asu" )[i]. style . display = asu;
 	}
 
 	prepare_ss("#prtype_tbl");
@@ -177,9 +158,6 @@ function UpdateViewMode() {
 			break;
 		case "id_pr10":
           	idhide(1,0);
-			break;
-		case "id_pr11":
-          	idhide(1,1);
 			break;
 		default:
 			break;
@@ -285,9 +263,28 @@ function countLength(str) {
 	return r; 
 } 
 
+// loading ship inforamtion
 get_shipinfo();
 
-var app = angular.module('wows-stats-plus', []);
+var app = angular.module('wows-stats-plus', ['pascalprecht.translate']);
+
+function getLanguage() {
+	console.log((navigator.languages[0] || navigator.browserLanguage || navigator.language || navigator.userLanguage).substr(0, 2));
+	try {
+		return ( navigator.browserLanguage || navigator.language || navigator.userLanguage).substr(0, 2);
+	} catch (e) {
+		return "ja";
+	}
+}
+
+app.config([ '$translateProvider', function($translateProvider) {
+	$translateProvider.useStaticFilesLoader({
+		prefix : 'js/language/lang_',
+		suffix : '.json'
+	});
+	$translateProvider.preferredLanguage(getLanguage());
+	$translateProvider.useSanitizeValueStrategy(null);	// for avoiding security warning
+}]);
 
 app.factory('api', function($http, $q) {
 	var api = {};
@@ -804,7 +801,7 @@ api.ship = function(player) {
 return api;
 });
 
-app.controller('TeamStatsCtrl', function ($scope, $http, api) {
+app.controller('TeamStatsCtrl', ['$scope', '$translate', '$http', 'api', function ($scope, $translate, $http, api) {
 	$scope.inGame = false;
 	$scope.ready = ready;
 	$scope.dateTime = "";
@@ -814,6 +811,13 @@ app.controller('TeamStatsCtrl', function ($scope, $http, api) {
   	$scope.gameLogicjp  = "";
 	$scope.downloadFile = "";
 	var kariload = [[]];
+
+	$translate(['title', 'game', 'btn_top', 'btn_bottom']).then(function (translations) {
+		$scope.title = $translate("title");
+		$scope.game = $translate("game");
+		$scope.btn_top = $translate("btn_top");
+		$scope.btn_bottom = $translate("btn_bottom");
+	});
 
 	var updateArena = function() {
 		UpdateViewMode();
@@ -902,4 +906,4 @@ try {
 	}, 3000);
 
 	updateArena();
-});
+}]);
