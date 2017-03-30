@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ja">
+<html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<META http-equiv="Content-Script-Type" content="text/javascript">
@@ -11,27 +11,30 @@
 	<script src="http://code.jquery.com/jquery-1.12.3.min.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
 	<script type="text/javascript" src="js/html2canvas.js"></script>
-</head>
+	<script type="text/javascript" src="js/angular-translate.min.js"></script>
+	<script type="text/javascript" src="js/angular-translate-loader-static-files.min.js"></script>
+	<script type="text/javascript" src="js/angular-translate-handler-log.min.js"></script>
+	</head>
 <body ng-app="wows-stats-plus">
 <div class="wrapper">
 	<div class="content" ng-controller="TeamStatsCtrl">
-		<h3 ng-hide="inGame">現在戦闘中ではありません</h3>
-		<h4 ng-hide="inGame">自動更新をお待ちください</h4>
+		<h3 ng-hide="inGame" translate>{{'title.game_status'}}</h3>
+		<h4 ng-hide="inGame" translate>{{'title.game_waiting'}}</h4>
 		<div class="stats" ng-show="players.length>0">
 			<div class="buttonset">
 				<div class="buttonpro1"> 
-					<input type="button" class="buttonitem1_on" Id="sw1" onclick="shiptypr(0,0,0,0,'sw1')"  value="選択解除" >
-					<input type="button" class="buttonitem1_off" Id="sw2" onclick="shiptypr(0,1,1,1,'sw2')" value="空母" >
-					<input type="button" class="buttonitem1_off" Id="sw3" onclick="shiptypr(1,0,1,1,'sw3')" value="戦艦" >
-					<input type="button" class="buttonitem1_off" Id="sw4" onclick="shiptypr(1,1,0,1,'sw4')" value="巡洋艦" >
-					<input type="button" class="buttonitem1_off" Id="sw5" onclick="shiptypr(1,1,1,0,'sw5')" value="駆逐艦" >
-					<a id="download" href="#" download="{{ downloadFile }}"><input type="button" class="ss_button" Id="ss" value="画面保存"></a><br />
+					<input type="button" class="buttonitem1_on" Id="sw1" onclick="shiptypr(0,0,0,0,'sw1')"  value="{{'btn_top.All' | translate}}" />
+					<input type="button" class="buttonitem1_off" Id="sw2" onclick="shiptypr(0,1,1,1,'sw2')" value="{{'btn_top.AirCarrier' | translate}}" />
+					<input type="button" class="buttonitem1_off" Id="sw3" onclick="shiptypr(1,0,1,1,'sw3')" value="{{'btn_top.Battleship' | translate}}" />
+					<input type="button" class="buttonitem1_off" Id="sw4" onclick="shiptypr(1,1,0,1,'sw4')" value="{{'btn_top.Cruiser' | translate}}" />
+					<input type="button" class="buttonitem1_off" Id="sw5" onclick="shiptypr(1,1,1,0,'sw5')" value="{{'btn_top.Destroyer' | translate}}" />
+					<a id="download" href="#" download="{{ downloadFile }}"><input type="button" class="ss_button" Id="ss" value="{{'btn_top.Screenshot' | translate}}"></a><br />
 				</div>
 			</div>
 			<div class="teams">
 				<div id="prtype_tbl" align="center">
 					<div style="width: auto;">
-						<p style="margin: 4px auto; padding: 3px;"><div class="label">{{ battleTime }}〔No. {{ data.mapId }}〕{{ gamemapnamejp }}（{{ gameLogicjp }}）<span class="hint" ng-hide="inGame">: 戦闘終了</span></div></p>
+						<p style="margin: 4px auto; padding: 3px;"><div class="label">{{ battleTime }}〔No. {{ data.mapId }}〕{{ gamemapnamejp }}（{{ gameLogicjp }}）<span class="hint" ng-hide="inGame">: {{'game.end_status' | translate}}</span></div></p>
 					</div>
 					<Table Border style ="margin: 4px auto;border-width: 3px 1px 1px 3px; border-style: solid; border-color: #38c38c; " >
 						<thead> 
@@ -168,20 +171,18 @@
 			</div>
 			<div style="clear:both;">
 				<div class="buttonset buttonpro2" >
-				<span >艦名表示</span>
-					<input type="radio" class="buttonitem2" style="margin-left:10px;" name="knp"  value="nm_sw0" onclick="shipname_ex(0)" >ゲーム内表記
-					<input type="radio" class="buttonitem2" style="margin-left:10px;" name="knp" value="nm_sw1" onclick="shipname_ex(1)">日本語等
-				<span style=" margin-left:30px;">表示制限</span>
-					<input type="radio" class="buttonitem2" style="margin-left:10px;" name="idhi" value="id_pr00" onclick="idhide(0,0)"> 全表示
-					<input type="radio" class="buttonitem2" style="margin-left:10px;" name="idhi" value="id_pr10" onclick="idhide(1,0)"> 名前非表示
-					<input type="radio" class="buttonitem2" style="margin-left:10px;" name="idhi" value="id_pr11" onclick="idhide(1,1)"> 名前・戦闘数 非表示
+				<span translate>{{'btn_bottom.label_notation'}}</span>
+					<input type="radio" class="buttonitem2" style="margin-left:10px;" name="knp"  value="nm_sw0" onclick="shipname_ex(0)" > {{'btn_bottom.original' | translate}}</input>
+					<input type="radio" class="buttonitem2" style="margin-left:10px;" name="knp" value="nm_sw1" onclick="shipname_ex(1)"> {{'btn_bottom.translated' | translate}}</input>
+				<span translate style=" margin-left:30px;">{{'btn_bottom.label_visible'}}</span>
+					<input type="radio" class="buttonitem2" style="margin-left:10px;" name="idhi" value="id_pr00" onclick="idhide(0,0)"> {{'btn_bottom.show' | translate}}</input>
+					<input type="radio" class="buttonitem2" style="margin-left:10px;" name="idhi" value="id_pr10" onclick="idhide(1,0)"> {{'btn_bottom.hide' | translate}}</input>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="footer" name="footname" >
-		Powered by <a href="https://github.com/tianweiliu/wows-stats" id="footerurl">wows-stats</a>（オリジナル）　negi＋改変 v0.4.0 AnMoreNight：20170329
-	<!-- 再改造・再配布なにしてもOK、でも改造したら名前と作成日は書き換えてね（タイトルとここの２箇所）-->
+		wows-stats-plus v0.4.0 Powered by <a href="https://github.com/tianweiliu/wows-stats" id="footerurl">wows-stats</a>（original）　negi +modified by AnMoreNight：2017/03/29
 	</div>
 </div>
 <script type="text/javascript">
