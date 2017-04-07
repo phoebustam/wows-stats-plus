@@ -82,7 +82,7 @@
 	},
 	"list_label2": {
 		"ship": {
-			"combatPower": "Power",
+			"combatPower": "Combat Power",
 			"combatPower_title": "Av. Damage * Kill/Death rate * Av. exp * Coefficient of Tier&ShipType",
 			"damage": "Damage",
 			"damage_title": "Av. Damage",
