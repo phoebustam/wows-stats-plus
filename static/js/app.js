@@ -1013,7 +1013,7 @@ app.controller('TeamStatsCtrl', ['$scope', '$translate', '$filter', '$rootScope'
 				}
 //				console.log(kariload);
 
-				// sort data as ship_type > tier > shipID > playername
+				// sort data as ship_type > tier > shipID > playername with clan tag
 				kariload.sort(function(val1,val2){
 
 					var shipID1 = val1.shipId;
@@ -1044,8 +1044,10 @@ try {
 					// player name
 					var name1 = val1.name.toString();
 					var name2 = val2.name.toString();
-					if( name1 > name2 ) return 1;
-					if( name1 < name2 ) return -1;
+					var clan1 = val1.clan;
+					var clan2 = val2.clan;
+					if( (clan1 + name1) > (clan2 + name2) ) return 1;
+					if( (clan1 + name1) < (clan2 + name2) ) return -1;
 
 					return 0;
 				});
