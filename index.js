@@ -8,6 +8,14 @@ var jsonfile 	= require('jsonfile')
 var app = express();
 var port = process.env.PORT || 8080;
 var api_key = process.env.WOWS_API_KEY || "demo";
+var capture_flag = process.env.NODE_CAPTURE;
+if (capture_flag === 'true') {
+	capture_flag = true;
+} else if (capture_flag === 'false') {
+	capture_flag = false;
+} else {
+	capture_flag = true;
+}
 
 // create application/json parser
 var jsonParser = bodyParser.json();
@@ -50,6 +58,7 @@ router.get('/env', function(req, res) {
 	var env = {};
 	env.API_URL = process.env.WOWS_API_URL;
 	env.API_KEY = api_key;
+	env.CAPTURE_FLAG = capture_flag;
 	env.status = "ok";
 
 	res.json(env);
