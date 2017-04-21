@@ -52,7 +52,7 @@
 					<table border style ="margin: 4px auto;border-width: 3px 1px 1px 3px; border-style: solid; border-color: #38c38c;">
 						<thead>
 						<tr>
-							<th rowspan="2" style="width:250px;">{{'list_label1.name' | translate}}</th>
+							<th rowspan="2" style="width:270px;">{{'list_label1.name' | translate}}</th>
 							<th rowspan="2" style="width:25px;">{{'list_label1.tier' | translate}}</th>
 							<th rowspan="2" style="width:54px;">{{'list_label1.type' | translate}}</th>
 							<th rowspan="2" style="width:130px;">{{'list_label1.ship_name' | translate}}</th>
@@ -79,7 +79,7 @@
 						<tbody>
 						<tr ng-repeat="(key, value) in players" ng-if="value.relation!=2" name="{{value.ship.shipty}}" class="player {{value.ship.highlightClass}} {{value.ship.ownerClass}}">
 							<td class="tdata_l highlight_cancel" style="height:24px;">
-								<a href="{{value.uri}}/" name="user_own" style=" Color:#38c38c;" target="_blank" title="{{value.name}}">{{value.name_s}}</a>
+								<a href="{{value.uri}}/" name="user_own" style=" Color:#38c38c;" target="_blank" title="{{value.clan}}{{value.name}}"><span style="color: #eeeeee">{{value.clan}}</span> {{value.name_s}}</a>
 								<span name="user_buta"style ="color: #38c38c; display:none;">&nbsp;(´・ω・`)&nbsp;</span>
 							</td>
 							<td class="highlight_cancel">{{value.ship.shiptia_s}}</td>
@@ -110,7 +110,7 @@
 					<table border style ="margin: 4px auto;border-width: 3px 1px 1px 3px; border-style: solid; border-color: #DE703C;">
 						<thead>
 						<tr>
-							<th rowspan="2" style="width:250px;">{{'list_label1.name' | translate}}</th>
+							<th rowspan="2" style="width:270px;">{{'list_label1.name' | translate}}</th>
 							<th rowspan="2" style="width:25px;">{{'list_label1.tier' | translate}}</th>
 							<th rowspan="2" style="width:54px;">{{'list_label1.type' | translate}}</th>
 							<th rowspan="2" style="width:130px;">{{'list_label1.ship_name' | translate}}</th>
@@ -137,7 +137,7 @@
 						<tbody>
 						<tr ng-repeat="(key, value) in players" ng-if="value.relation==2" name="{{value.ship.shipty}}" class="player {{value.ship.highlightClass}} {{value.ship.ownerClass}}">
 							<td class="tdata_l highlight_cancel" style="height:24px;">
-								<a href="{{value.uri}}/" name="user_own" style=" Color:#38c38c;" target="_blank" title="{{value.name}}">{{value.name_s}}</a>
+								<a href="{{value.uri}}/" name="user_own" style=" Color:#38c38c;" target="_blank" title="{{value.clan}}{{value.name}}"><span style="color: #eeeeee">{{value.clan}}</span> {{value.name_s}}</a>
 								<span name="user_buta"style ="color: #38c38c; display:none;">&nbsp;(´・ω・`)&nbsp;</span>
 							</td>
 							<td class="highlight_cancel">{{value.ship.shiptia_s}}</td>
