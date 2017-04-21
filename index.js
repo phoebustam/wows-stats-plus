@@ -87,6 +87,7 @@ router.get('/player', jsonParser, function(req, res) {
 							player.id = playerJson.account_id.toString();
 							player.name = playerJson.nickname;
 							player.rank = 0;
+							player.clan = '';
 
 							// get player info
 							request(process.env.WOWS_API_URL + '/wows/account/info/?application_id=' + api_key + '&account_id=' + player.id, function (err, rep, statsBody) {
@@ -109,11 +110,40 @@ router.get('/player', jsonParser, function(req, res) {
 														var seasons = JSON.parse(rankBody);
 														if (seasons.status == "ok") {
 															if (seasons.data[player.id] != null) {
-																stats = seasons.data[player.id];
-																var season = stats.seasons[latest_season_num];
+																var rstat = seasons.data[player.id];
+																var season = rstat.seasons[latest_season_num];
 																player.rank = season.rank_info.max_rank;
 //																console.log(player.rank);
-																res.json(player);
+
+																// get player clan info
+																request(process.env.WOWS_API_URL + '/wows/clans/accountinfo/?application_id=' + api_key + '&account_id=' + player.id + '&extra=clan', function (cl_error, cl_response, clanBody) {
+																	if (!cl_error && cl_response.statusCode == 200) {
+																		var clanInfo = JSON.parse(clanBody);
+																		if (clanInfo.status == "ok") {
+																			if ((clanInfo.data[player.id] != null) && (clanInfo.data[player.id]['clan'] != null)) {
+																				var cstat = clanInfo.data[player.id];
+																				player.clan = '[' + cstat['clan']['tag'] + ']';
+//																				console.log(player.clan);
+																				res.json(player);
+																			}
+																			else
+																			{
+																				player.clan = '';
+//																				console.log('null clan info data');
+																				res.json(player);
+																			}
+																	}
+																	else
+																		{
+//																			console.log('getting clan info failed');
+																			res.status(400).send(json.error);
+																		}
+																	}
+																	else if(cl_response)
+																		res.status(cl_response.statusCode);
+																	else
+																		res.status(500);
+																});
 															}
 															else
 															{
