@@ -64,11 +64,10 @@ function get_shipnameConvertTable() {
 	});
 }
 
+var api_url = '';
+var api_key = '';
 function get_shipinfo() {
 //	console.log('Enter get_shipinfo');
-
-	var api_url = '';
-	var api_key = '';
 
 	var sync_getenv = new Promise (function (resolve, reject) {
 		$.getJSON('http://localhost:8080/api/env', function(data) {
@@ -362,6 +361,74 @@ function getLanguage() {
 	}
 }
 
+function getPlayerInfoURL() {
+	var base_url_part1 = 'http://worldofwarships.';
+	var base_url_part2 = '/community/accounts/';
+	var user_lang = getLanguage();
+	var avarable_lang = 'en';
+	var detect_server = api_url.match(/^http:\/\/api\.worldofwarships\.(\w+)$/)[1];
+
+	if (detect_server === 'com') {
+		switch (user_lang) {
+			case 'es':
+				avarable_lang = 'es-mx';
+				break;
+			case 'pt':
+				avarable_lang = 'pt-br';
+				break;
+			default:
+				avarable_lang = 'en';
+				break;
+		}
+	} else if (detect_server === 'asia') {
+		switch (user_lang) {
+			case 'ja':
+				avarable_lang = 'ja';
+				break;
+			case 'ko':
+				avarable_lang = 'ko';
+				break;
+			case 'th':
+				avarable_lang = 'th';
+				break;
+			case 'zh':
+				avarable_lang = 'zh-tw';
+				break;
+			default:
+				avarable_lang = 'en';
+				break;
+		}
+	} else if (detect_server === 'eu') {
+		switch (user_lang) {
+			case 'cs':
+				avarable_lang = 'cs';
+				break;
+			case 'de':
+				avarable_lang = 'de';
+				break;
+			case 'es':
+				avarable_lang = 'es';
+				break;
+			case 'fr':
+				avarable_lang = 'fr';
+				break;
+			case 'pl':
+				avarable_lang = 'pl';
+				break;
+			case 'tr':
+				avarable_lang = 'tr';
+				break;
+			default:
+				avarable_lang = 'en';
+				break;
+		}
+	} else if (detect_server === 'ru') {
+		avarable_lang = 'ru';
+	}
+
+	return base_url_part1 + detect_server + '/' + avarable_lang + base_url_part2;
+}
+
 app.config(['$translateProvider', function($translateProvider) {
 	$translateProvider.useStaticFilesLoader({
 		prefix : 'js/language/lang_',
@@ -437,7 +504,7 @@ app.factory('api',['$translate','$rootScope','$http','$q', function($translate, 
 				if (player.api.response.hasOwnProperty("id")){
 					// playerId is available
 					angular.extend(player, player.api.response);
-					player.uri = player.id + '-' + encodeURIComponent(player.name);
+					player.uri = getPlayerInfoURL() + player.id + '-' + encodeURIComponent(player.name);
 					api.fetchShip(player);
 				}
 				else {
@@ -639,7 +706,7 @@ api.player = function(player) {
 			url: 'http://localhost:8080/api/player?name=' + encodeURIComponent(player.name)
 		}).success(function(data, status) {
 			angular.extend(player, data);
-			player.uri = player.id + '-' + encodeURIComponent(player.name);
+			player.uri = getPlayerInfoURL() + player.id + '-' + encodeURIComponent(player.name);
 			var winRate = parseFloat(player.winRate.replace('%', ''));
 			player.RankClass = api.rank_beautify("rank", player.rank);
 			player.winRateClass = api.beautify("winRate", winRate);
