@@ -40,8 +40,9 @@ font-weight: normal;
 
 td{
 border: 1px #808080 solid;
-padding: 2px 4px 1px 4px;
+padding: 1px 4px 0px 4px;
 text-align:right;
+white-space: nowrap;
 }
 
 .tdata_l{
@@ -153,6 +154,7 @@ font-weight: bold;
 .highlight_normal {
 background-color: #102010;
 }
+
 .highlight_danger {
 background-color: #503090;
 }
@@ -160,8 +162,20 @@ background-color: #503090;
 .highlight_owner {
 border: 3px #FFFFFF double;
 }
+
 .highlight_others {
 border: 2px #808080 solid;
+}
+
+.highlight_private {
+background-color: rgba(16, 32, 16, 0.3);
+background-image: url('/images/pattern.png');
+background-repeat: repeat;
+}
+
+.highlight_cancel {
+background-color: rgba(16, 32, 16, 1.0);
+background-image: none;
 }
 
 .player .shipclass {
@@ -169,22 +183,28 @@ color: #FBB040;
 font-size: 11pt;
 white-space: nowrap;
 font-weight:normal;
+text-align: left;
 }
 
 .player .ship_font_6 {
-letter-spacing: 0.2em; 
+font-variant-ligatures: none;
+letter-spacing: 3px;
 font-size: 11pt;
 color:#eeeeee;
 font-weight:normal;
 }
 
 .player .ship_font_9 {
+font-variant-ligatures: none;
+letter-spacing: normal;
 font-size: 11pt;
 color:#eeeeee;
 font-weight:normal;
 }
 
 .player .ship_font_14 {
+font-variant-ligatures: none;
+letter-spacing: normal;
 font-size: 10pt;
 color:#eeeeee;
 white-space: nowrap;
@@ -192,6 +212,8 @@ font-weight:normal;
 }
 
 .player .ship_font_20 {
+font-variant-ligatures: none;
+letter-spacing: normal;
 font-size: 8pt;
 color:#eeeeee;
 white-space: nowrap;
@@ -215,17 +237,11 @@ border: 1px;
 padding: 10px;
 margin : 4px 1px;
 }
+
 .buttonpro1{
 margin : 0 10px;
 }
-.buttonitem1_on{
-color:#000000;
-border:inset 3px;
-}
-.buttonitem1_off{
-color:#000000;
-border:outset 3px;
-}
+
 .disp_off{
 display:none;
 }
@@ -250,8 +266,10 @@ margin-left : 20px;
 margin-right : 20px;
 padding : 5px;
 }
+
 .buttonitem2{
 color: #EEEEEE
+margin-left:10px;
 }
 
 .footer {
@@ -259,4 +277,29 @@ clear: both;
 padding: 10px ;
 text-align: center;
 width: 100%;
+}
+
+.icon {
+border: none;
+margin: 0px 3px;
+vertical-align: middle;
+text-align: center;
+}
+
+.language {
+margin-left: 8px;
+color: #000000;
+background: #EEEEEE;
+}
+
+.logo {
+width: 84px;
+height: 84px;
+position: absolute;
+top: 6px;
+left: 50px;
+}
+
+.logo_image {
+border: none;
 }
