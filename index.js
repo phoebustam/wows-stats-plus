@@ -30,7 +30,7 @@ function get_season_num() {
 			if (json.status == "ok") {
 				if (json.meta.count >= 0) {
 					latest_season_num = json.meta.count;
-					console.log('latest season number = ' + latest_season_num);
+					console.log('latest season number of rank battle = ' + latest_season_num);
 				}
 			}
 		}
