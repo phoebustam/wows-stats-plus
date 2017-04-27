@@ -1,11 +1,12 @@
 @charset "UTF-8";
 
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans');
+
 body {
 background-color: #393E46;
 color: #EEEEEE;
-font-family:'Lucida Grande',
- 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3',
- Meiryo, メイリオ, sans-serif;
+font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, Verdana, 'Noto Sans Japanese', 'Hiragino Sans', 'メイリオ', Meiryo, 'Hiragino Kaku Gothic ProN',  'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
 }
 
 a, a:hover, a:visited {
@@ -16,24 +17,116 @@ h1, h2, h3 ,h4 {
 text-align: center;
 }
 
+.buttonset {
+Sclear: both;
+text-align: center;
+width: 100%;
+border: 1px;
+padding: 10px;
+margin : 4px 1px;
+}
+
+.buttonpro1{
+margin : 0 10px;
+}
+
+.disp_off{
+display:none;
+}
+
+.ss_button{
+-moz-box-shadow:inset 0px -3px 7px 0px #29bbff;
+-webkit-box-shadow:inset 0px -3px 7px 0px #29bbff;
+box-shadow:inset 0px -3px 7px 0px #29bbff;
+background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #2dabf9), color-stop(1, #0688fa));
+background:-moz-linear-gradient(top, #2dabf9 5%, #0688fa 100%);
+background:-webkit-linear-gradient(top, #2dabf9 5%, #0688fa 100%);
+background:-o-linear-gradient(top, #2dabf9 5%, #0688fa 100%);
+background:-ms-linear-gradient(top, #2dabf9 5%, #0688fa 100%);
+background:linear-gradient(to bottom, #2dabf9 5%, #0688fa 100%);
+filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#2dabf9', endColorstr='#0688fa',GradientType=0);
+background-color:#2dabf9;
+-moz-border-radius:3px;
+-webkit-border-radius:3px;
+border-radius:3px;
+border:1px solid #0b0e07;
+cursor:pointer;
+color:#ffffff;
+font-family:Verdana;
+font-size:11pt;
+padding:2px 10px;
+text-decoration:none;
+text-shadow:0px 1px 0px #263666;
+margin-left: 8px;
+display:inline-block;
+vertical-align: middle;
+}
+
+.ss_button:hover {
+background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #0688fa), color-stop(1, #2dabf9));
+background:-moz-linear-gradient(top, #0688fa 5%, #2dabf9 100%);
+background:-webkit-linear-gradient(top, #0688fa 5%, #2dabf9 100%);
+background:-o-linear-gradient(top, #0688fa 5%, #2dabf9 100%);
+background:-ms-linear-gradient(top, #0688fa 5%, #2dabf9 100%);
+background:linear-gradient(to bottom, #0688fa 5%, #2dabf9 100%);
+filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#0688fa', endColorstr='#2dabf9',GradientType=0);
+background-color:#0688fa;
+}
+.ss_button:active {
+position:relative;
+top:1px;
+}
+
+.language {
+margin-left: 12px;
+color: #000000;
+background: #F0F0F0;
+font-size: 11pt;
+vertical-align: middle;
+}
+
+prtype_tbl {
+width: auto;
+}
+
+container {
+width: auto;
+height: 85px;
+margin-bottom: 6px;
+text-align:center;
+}
+
+.logo {
+margin-left: -135px;
+margin-right: 50px;
+margin-bottom: 5px;
+display: inline-block;
+vertical-align: middle;
+}
+
+.logo_image {
+border: none;
+}
+
+.label{
+display: inline-block;
+vertical-align: middle;
+text-align: center;
+padding: 6px 5px 4px 10px;
+background-color: #505050;
+border: 2px outset #e0f0f0;
+color: #ffffff;
+font-size: 14pt;
+white-space: nowrap;
+font-weight: normal;
+}
+
 th{
 text-align:center;
 padding: 2px 4px 1px 4px;
 background-color: #222831;
 border: 1px #808080 solid;
 color: #FBB040;
-white-space: nowrap;
-font-weight: normal;
-}
-
-.label{
-text-align:center;
-margin: 2px;
-padding: 4px 5px 1px 5px;
-background-color: #505050;
-border: 2px outset #e0f0f0;
-color: #ffffff;
-font-size: 14pt;
 white-space: nowrap;
 font-weight: normal;
 }
@@ -214,7 +307,7 @@ font-weight:normal;
 .player .ship_font_20 {
 font-variant-ligatures: none;
 letter-spacing: normal;
-font-size: 8pt;
+font-size: 9pt;
 color:#eeeeee;
 white-space: nowrap;
 font-weight:normal;
@@ -227,38 +320,6 @@ white-space: nowrap;
 
 .player .small {
 font-size: 9pt;
-}
-
-.buttonset {
-Sclear: both;
-text-align: center;
-width: 100%;
-border: 1px;
-padding: 10px;
-margin : 4px 1px;
-}
-
-.buttonpro1{
-margin : 0 10px;
-}
-
-.disp_off{
-display:none;
-}
-
-.ss_button{
-	background: -moz-linear-gradient(top,#BFD9E5, #3D95B7 50%,#0080B3 50%,#0099CC);
-	background: -webkit-gradient(linear, left top, left bottom, from(#BFD9E5), color-stop(0.5,#3D95B7), color-stop(0.5,#0080B3), to(#0099CC));
-	color: #FFFFFF;
-	border-radius: 4px;
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
-	border: 1px solid #0099CC;
-	-moz-box-shadow: 1px 1px 1px rgba(000,000,000,0.3),inset 0px 0px 3px rgba(255,255,255,0.5);
-	-webkit-box-shadow: 1px 1px 1px rgba(000,000,000,0.3),inset 0px 0px 3px rgba(255,255,255,0.5);
-	text-shadow: 0px 0px 3px rgba(0,0,0,0.5);
-	margin-left: 8px;
-	padding: 3px 5px;
 }
 
 .buttonpro2{
@@ -286,20 +347,3 @@ vertical-align: middle;
 text-align: center;
 }
 
-.language {
-margin-left: 8px;
-color: #000000;
-background: #EEEEEE;
-}
-
-.logo {
-width: 84px;
-height: 84px;
-position: absolute;
-top: 6px;
-left: 50px;
-}
-
-.logo_image {
-border: none;
-}
