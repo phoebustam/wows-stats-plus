@@ -159,6 +159,9 @@ function getClanList(nameArray) {
 	});
 
 	sync_getAccountId.then ( function () {
+		for (var key in clanTagList) {
+				delete clanTagList[key];
+		}
 		var sync_getClanInfo = new Promise (function (resolve, reject) {
 			var accountIdSrings = accountIdList.join('%2c');
 			var api_call = api_url + '/wows/clans/accountinfo/?application_id=' + api_key + '&account_id=' + accountIdSrings + '&extra=clan';
@@ -665,6 +668,22 @@ var ntname = [
 	return 'other';
 }
 
+api.nation_for_sort = function(str) {
+var ntname = [
+	["japan","japan"] ,["usa","america"] ,["ussr","soviet"],["germany","german"] ,
+	["uk","england"],["france","france"] ,["poland","poland"],["pan_asia","panasia"] ,
+	["italy","italia"],["australia","austoralia"],["commonwealth","commonwealth"],
+	["netherlands","netherlands"],["spain","spain"]
+];
+
+	for (var i=0; i<ntname.length ; i++) {
+		if (str == ntname[i][0]) {
+			return ntname[i][1];
+			break;
+		}
+	}
+}
+
 api.shipnamefont = function(value) {
 	if (value < 8) { 	
 		return 'ship_font_6'; 
@@ -1073,6 +1092,7 @@ app.controller('TeamStatsCtrl', ['$scope', '$translate', '$filter', '$rootScope'
 
 				var promise = getClan();
 				promise.then( function() {
+//					console.log(clanTagList);
 					$scope.inGame = true;
 					$scope.data = data;
 					$scope.players = [];
@@ -1140,13 +1160,13 @@ app.controller('TeamStatsCtrl', ['$scope', '$translate', '$filter', '$rootScope'
 							if( tier1 > tier2 ) return -1;
 
 							// Nation
-							var nation1 = ship_info.data[shipID1].nation;
-							var nation2 = ship_info.data[shipID2].nation;
-							if( tier1 < tier2 ) return 1;
-							if( tier1 > tier2 ) return -1;
+							var nation1 = api.nation_for_sort(ship_info.data[shipID1].nation);
+							var nation2 = api.nation_for_sort(ship_info.data[shipID2].nation);
+							if( nation1 > nation2 ) return 1;
+							if( nation1 < nation2 ) return -1;
 
 						} catch(e) {
-							console.log('ileagal shipID. seems old data-type JSON file');
+							console.log('ileagal ship ID. seems old data-type JSON file');
 						}
 
 						// shipID
@@ -1160,8 +1180,6 @@ app.controller('TeamStatsCtrl', ['$scope', '$translate', '$filter', '$rootScope'
 						// player name with clan tag
 						var name1 = clan1 + val1.name.toString();
 						var name2 = clan2 + val2.name.toString();
-//						var name1 = name.toString();
-//						var name2 = name.toString();
 						if( name1 > name2 ) return 1;
 						if( name1 < name2 ) return -1;
 
