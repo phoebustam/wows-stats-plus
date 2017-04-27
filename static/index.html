@@ -35,7 +35,6 @@
 	<div class="content" ng-controller="TeamStatsCtrl">
 		<h4 ng-hide="inGame">{{'title.game_status'| translate}}<br />{{'title.game_waiting'| translate}}</h4>
 		<div class="stats" ng-show="players.length>0">
-			<div class="logo"><img class="logo_image" src="images/wows_logo.png"></div>
 			<div class="buttonset">
 				<div class="buttonpro1"> 
 					<span ng-if="captureFlag"><input type="button" class="ss_button" id="ss" onclick="prepare_ss('#prtype_tbl')" value="{{'btn_top.Screenshot' | translate}}" /></span>
@@ -46,8 +45,9 @@
 			</div>
 			<div class="teams">
 				<div id="prtype_tbl" align="center">
-					<div style="width: auto;">
-						<p style="margin: 4px auto; padding: 3px;"><div class="label" id="title">{{ battleTime }}〔{{'numero_sign' | translate}} {{ data.mapId }}〕{{ translated_gamemapname }}（{{ translated_gameLogic }}）<span class="hint" ng-hide="inGame">: {{'game.end_status' | translate}}</span></div></p>
+					<div id="container" align="center">
+						<div class="logo"><img class="logo_image" src="images/wows_logo.png"></div>
+						<div class="label" id="title">{{ battleTime }}〔{{'numero_sign' | translate}} {{ data.mapId }}〕{{ translated_gamemapname }}（{{ translated_gameLogic }}）<span class="hint" ng-hide="inGame">: {{'game.end_status' | translate}}</span></div>
 					</div>
 					<table border style ="margin: 4px auto;border-width: 3px 1px 1px 3px; border-style: solid; border-color: #38c38c;">
 						<thead>
