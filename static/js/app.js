@@ -1,4 +1,4 @@
-const wsp_version = '0.5.0';
+const wsp_version = '0.5.1';
 const MAX_RETRY = 5;
 
 var lang_array = [];
@@ -1027,12 +1027,10 @@ app.controller('TeamStatsCtrl', ['$scope', '$translate', '$filter', '$rootScope'
 				$scope.translated_gamemapname = translations[mapstr];
 				$scope.translated_gameLogic = translations[modestr];
 				imgFilename = "wows_" + localeFormatDate($scope.dateTime, 'file', $scope.select) + "_" + $scope.translated_gamemapname + "_" + $scope.translated_gameLogic +"_" + playerVehicle + ".png";
-				$translate.refresh();
 			}, function (translationId) {
 				$scope.translated_gameLogic = translationId[mapstr];
 				$scope.translated_gamemapname = translationId[modestr];
 				imgFilename = "wows_" + localeFormatDate($scope.dateTime, 'file', $scope.select) + "_" + $scope.translated_gamemapname + "_" + $scope.translated_gameLogic +"_" + playerVehicle + ".png";
-				$translate.refresh();
 			});
 
 			$translate(['list_label1', 'list_label2', 'btn_top', 'btn_bottom']).then(function (translations) {
