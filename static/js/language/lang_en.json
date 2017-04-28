@@ -1,6 +1,6 @@
 {
 	"title": {
-		"game_status": "Not in battle.",
+		"game_status": "Now not in battle.",
 		"game_waiting": "Please wait until starting new battle."
 	},
 	"numero_sign": "No.",
@@ -14,7 +14,7 @@
 	},
 	"btn_bottom": {
 		"label_typefillter": "View ships by type",
-		"label_notation": "Notation of Ship name",
+		"label_notation": "Notation of ship name",
 		"original": "Original",
 		"translated": "Translated",
 		"label_visible": "Display player name",
