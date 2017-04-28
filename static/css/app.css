@@ -18,16 +18,13 @@ text-align: center;
 }
 
 .buttonset {
-Sclear: both;
+clear: both;
 text-align: center;
-width: 100%;
+width: auto;
 border: 1px;
 padding: 10px;
-margin : 4px 1px;
-}
-
-.buttonpro1{
-margin : 0 10px;
+margin-top: 12px;
+margin-bottom: -44px;
 }
 
 .disp_off{
@@ -81,7 +78,7 @@ top:1px;
 margin-left: 12px;
 color: #000000;
 background: #F0F0F0;
-font-size: 11pt;
+font-size: 10pt;
 vertical-align: middle;
 }
 
@@ -92,7 +89,7 @@ width: auto;
 container {
 width: auto;
 height: 85px;
-margin-bottom: 6px;
+margin-bottom: 4px;
 text-align:center;
 }
 
@@ -110,9 +107,10 @@ border: none;
 
 .label{
 display: inline-block;
-vertical-align: middle;
+vertical-align: bottom;
 text-align: center;
-padding: 6px 5px 4px 10px;
+margin-bottom: 5px;
+padding: 4px 5px 5px 10px;
 background-color: #505050;
 border: 2px outset #e0f0f0;
 color: #ffffff;
@@ -326,6 +324,10 @@ font-size: 9pt;
 margin-left : 20px;
 margin-right : 20px;
 padding : 5px;
+clear: both;
+text-align: center;
+width: auto;
+border: 1px;
 }
 
 .buttonitem2{
