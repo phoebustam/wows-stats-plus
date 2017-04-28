@@ -36,12 +36,10 @@
 		<h4 ng-hide="inGame">{{'title.game_status'| translate}}<br />{{'title.game_waiting'| translate}}</h4>
 		<div class="stats" ng-show="players.length>0">
 			<div class="buttonset">
-				<div class="buttonpro1"> 
-					<span ng-if="captureFlag"><input type="button" class="ss_button" id="ss" onclick="prepare_ss('#prtype_tbl')" value="{{'btn_top.Screenshot' | translate}}" /></span>
-					<select size="1" name="lang_select" class="language" ng-model="select" ng-change="changeLanguage()">
-						<option value="{{option.value}}" ng-repeat="option in options">{{option.label}}</option>
-					</select><br />
-				</div>
+				<span ng-if="captureFlag"><input type="button" class="ss_button" id="ss" onclick="prepare_ss('#prtype_tbl')" value="{{'btn_top.Screenshot' | translate}}" /></span>
+				<select size="1" name="lang_select" class="language" ng-model="select" ng-change="changeLanguage()">
+					<option value="{{option.value}}" ng-repeat="option in options">{{option.label}}</option>
+				</select><br />
 			</div>
 			<div class="teams">
 				<div id="prtype_tbl" align="center">
@@ -167,7 +165,7 @@
 				</div>
 			</div>
 			<div style="clear:both;">
-				<div class="buttonset buttonpro2" >
+				<div class="buttonpro2" >
 					<p>
 						<span translate>{{'btn_bottom.label_visible'}}</span>&nbsp;
 						<input type="checkbox" class="buttonitem2" name="idhi" value="id_pr10" onclick="idhide(this.checked)"> {{'btn_bottom.hide' | translate}}</input>
