@@ -339,11 +339,11 @@ function  shipname_ex(val) {
 	}
 	var el = document.getElementsByName("shipname_trans");
 	for (var i=0; i<el.length ; i++) {
-		document .getElementsByName( "shipname_trans" )[i]. style . display = disptrans;
+		document .getElementsByName("shipname_trans")[i].style.display = disptrans;
 	}
 	var el = document.getElementsByName("shipname_eng");
 	for (var i=0; i<el.length ; i++) {
-		document .getElementsByName( "shipname_eng" )[i]. style . display = dispeng;
+		document .getElementsByName("shipname_eng")[i].style.display = dispeng;
 	}
 }
 
@@ -910,7 +910,7 @@ api.ship = function(player) {
 					"shipnation_s": images_pre + api.nation_s(data.info.nation) + images_prefix,
 					"shipnation_alt": data.info.nation,
 					"shipkakin": kakin,
-					"name": data.name,
+					"name": data.name.toUpperCase(),
 					"name_trans": api.shipnameTranslated(data.name),
 					"namefont" : api.shipnamefont(countLength(data.name)),
 					"namefont_trans" : api.shipnamefont(countLength(api.shipnameTranslated(data.name))),
@@ -941,7 +941,7 @@ api.ship = function(player) {
 					"shipnation_s": images_pre + api.nation_s(ship_info.data[sid].nation) + images_prefix,
 					"shipnation_alt": ship_info.data[sid].nation,
 					"shipkakin": kakin,
-					"name": ship_info.data[sid].name,
+					"name": ship_info.data[sid].name.toUpperCase(),
 					"name_trans": api.shipnameTranslated(ship_info.data[sid].name),
 					"namefont" : api.shipnamefont(countLength(ship_info.data[sid].name)),
 					"namefont_trans" : api.shipnamefont(countLength(api.shipnameTranslated(ship_info.data[sid].name))),
