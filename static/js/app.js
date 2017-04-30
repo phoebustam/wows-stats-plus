@@ -1,4 +1,4 @@
-const wsp_version = '0.5.1';
+const wsp_version = '0.5.2';
 const MAX_RETRY = 5;
 
 var lang_array = [];
