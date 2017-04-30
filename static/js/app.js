@@ -97,12 +97,17 @@ function get_shipinfo() {
 //					dataType: 'jsonp',
 					jsonpCallback: 'callback',
 					success : function(info) {
-						if (info.meta.count > 0) {
-							ship_info = info;
-//							console.log('Exit get_shipinfo with success');
-							resolve();
+						if (info.status == "ok") {
+							if (info.meta.count > 0) {
+								ship_info = info;
+//								console.log('Exit get_shipinfo with success');
+								resolve();
+						    } else {
+//								console.log('Exit get_shipinfo with meta.count <= 0');
+								reject();
+							}
 					    } else {
-//							console.log('Exit get_shipinfo with meta.count <= 0');
+//							console.log('Exit get_shipinfo with status not ok');
 							reject();
 						}
 					},
@@ -121,9 +126,23 @@ function get_shipinfo() {
 }
 
 function getClanList(nameArray) {
+	if(Object.keys(clanTagList).length != 0)
+		return;
+
+	var nameList = [];
 	var accountIdList = [];
+	var idList = [];
+
+	// except co-op bot
+	for (var i=0; i<nameArray.length; i++) {
+		var reg = new RegExp(/^:\w+:$/);
+		if (reg.test(nameArray[i]) == false)
+			nameList.push(nameArray[i]);
+	}
+//	console.log(nameList);
+
 	var sync_getAccountId = new Promise (function (resolve, reject) {
-		var nameSrings = nameArray.join(',');
+		var nameSrings = nameList.join(',');
 		var api_call = api_url + '/wows/account/list/?application_id=' + api_key + '&search=' + encodeURIComponent(nameSrings) + '&type=exact';
 //		console.log(api_call);
 		jQuery.ajax({
@@ -132,22 +151,31 @@ function getClanList(nameArray) {
 //			dataType: 'jsonp',
 			jsonpCallback: 'callback',
 			success : function(info) {
-				if (info.meta.count > 0) {
-//					console.log(info.data);
-					for (var c=0; c<nameArray.length; c++) {
-						for (var j=0; j<info.meta.count; j++) {
-							var name = info.data[j].nickname;
-							var id = info.data[j].account_id;
-							if (nameArray[c] === name) {
-								accountIdList.push(id);
-								break;
+				if (info.status == "ok") {
+					if (info.meta.count > 0) {
+//						console.log(info.data);
+						for (var c=0; c<nameArray.length; c++) {
+							var found = false;
+							for (var j=0; j<info.meta.count; j++) {
+								var name = info.data[j].nickname;
+								var id = info.data[j].account_id;
+								if (nameArray[c] === name) {
+									accountIdList.push(id);
+									found = true;
+									break;
+								}
 							}
+							if (found != true)
+								accountIdList.push('');
 						}
+//						console.log('Exit get account_id with success');
+						resolve();
+				    } else {
+//						console.log('Exit get account_id with meta.count <= 0');
+						reject();
 					}
-//					console.log('Exit get account_id with success');
-					resolve();
 			    } else {
-//					console.log('Exit get account_id with meta.count <= 0');
+//					console.log('Exit get account_id with status not ok');
 					reject();
 				}
 			},
@@ -159,11 +187,20 @@ function getClanList(nameArray) {
 	});
 
 	sync_getAccountId.then ( function () {
+//		console.log(accountIdList);
+
 		for (var key in clanTagList) {
 				delete clanTagList[key];
 		}
+
+		// except co-op bot
+		for (var i=0; i<accountIdList.length; i++) {
+			if (accountIdList[i] != '')
+				idList.push(accountIdList[i]);
+		}
+
 		var sync_getClanInfo = new Promise (function (resolve, reject) {
-			var accountIdSrings = accountIdList.join('%2c');
+			var accountIdSrings = idList.join('%2c');
 			var api_call = api_url + '/wows/clans/accountinfo/?application_id=' + api_key + '&account_id=' + accountIdSrings + '&extra=clan';
 //			console.log(api_call);
 			jQuery.ajax({
@@ -172,27 +209,32 @@ function getClanList(nameArray) {
 //				dataType: 'jsonp',
 				jsonpCallback: 'callback',
 				success : function(info) {
-					if (info.meta.count > 0) {
-//						console.log(info.data);
-						for (var c=0; c<accountIdList.length; c++) {
-							var id = accountIdList[c].toString();
-							var tagname = '';
-							for (var key in info.data) {
-								if (id === key.toString()) {
-									if (info.data[key] != null) {
-										if (info.data[key].clan != null) {
-											tagname = info.data[key].clan.tag;
-											break;
+					if (info.status == "ok") {
+						if (info.meta.count > 0) {
+//							console.log(info.data);
+							for (var c=0; c<accountIdList.length; c++) {
+								var id = accountIdList[c].toString();
+								var tagname = '';
+								for (var key in info.data) {
+									if (id === key.toString()) {
+										if (info.data[key] != null) {
+											if (info.data[key].clan != null) {
+												tagname = info.data[key].clan.tag;
+												break;
+											}
 										}
 									}
 								}
+								clanTagList[nameArray[c]] = tagname;
 							}
-							clanTagList[nameArray[c]] = tagname;
+//							console.log('Exit get clan info with success');
+							resolve();
+					    } else {
+//							console.log('Exit get clan info with meta.count <= 0');
+							reject();
 						}
-//						console.log('Exit get clan info with success');
-						resolve();
 				    } else {
-//						console.log('Exit get clan info with meta.count <= 0');
+//						console.log('Exit get clan info with status not ok');
 						reject();
 					}
 				},
@@ -646,7 +688,7 @@ api.nation_for_sort = function(str) {
 var ntname = [
 	["japan","japan"] ,["usa","america"] ,["ussr","soviet"],["germany","german"] ,
 	["uk","england"],["france","france"] ,["poland","poland"],["pan_asia","panasia"] ,
-	["italy","italia"],["australia","austoralia"],["commonwealth","commonwealth"],
+	["italy","italia"],["australia","austoralia"],["commonwealth","hms"],
 	["netherlands","netherlands"],["spain","spain"]
 ];
 
@@ -782,25 +824,36 @@ api.owner = function(type, value) {
 
 api.player = function(player) {
 	return $q(function(resolve, reject) {
-		$http({
-			method:'GET',
-			url: 'http://localhost:8080/api/player?name=' + encodeURIComponent(player.name)
-		}).success(function(data, status) {
-			angular.extend(player, data);
-			player.uri = getPlayerInfoURL() + player.id + '-' + encodeURIComponent(player.name);
-			var winRate = parseFloat(player.winRate.replace('%', ''));
-			player.RankClass = api.rank_beautify("rank", player.rank);
-			player.winRateClass = api.beautify("winRate", winRate);
-			player.formatbattle = myFormatNumber(parseInt(player.battles));
-			player.formatdmg = myFormatNumber(parseInt(player.avgDmg));
-			player.formatexp = myFormatNumber(parseInt(player.avgExp));
-			resolve(player);
-		}).error(function(data, status) {
-			player.api.response = data;
-			player.api.status = status;
+		var reg = new RegExp(/^:\w+:$/);
+		if (reg.test(player.name) == false) {
+			$http({
+				method:'GET',
+				url: 'http://localhost:8080/api/player?name=' + encodeURIComponent(player.name)
+			}).success(function(data, status) {
+				angular.extend(player, data);
+				player.uri = getPlayerInfoURL() + player.id + '-' + encodeURIComponent(player.name);
+				player.is_bot = false;
+				var winRate = parseFloat(player.winRate.replace('%', ''));
+				player.RankClass = api.rank_beautify("rank", player.rank);
+				player.winRateClass = api.beautify("winRate", winRate);
+				player.formatbattle = myFormatNumber(parseInt(player.battles));
+				player.formatdmg = myFormatNumber(parseInt(player.avgDmg));
+				player.formatexp = myFormatNumber(parseInt(player.avgExp));
+				resolve(player);
+			}).error(function(data, status) {
+				player.api.response = data;
+				player.api.status = status;
+				reject(player);
+			});
+			player.name_s = short_id(player.name);
+		} else {
+			player.api.response = '';
+			player.api.status = '';
+			player.uri = '';
+			player.is_bot = true;
 			reject(player);
-		});
-		player.name_s = short_id(player.name);
+			player.name_s = short_id(player.name);
+		}
 	});
 }
 
@@ -1051,6 +1104,7 @@ app.controller('TeamStatsCtrl', ['$scope', '$translate', '$filter', '$rootScope'
 				}
 
 				getClanList(nameArray);
+
 				function getClan() {
 					var d = $q.defer();
 					var count = Object.keys(clanTagList).length;
@@ -1163,6 +1217,10 @@ app.controller('TeamStatsCtrl', ['$scope', '$translate', '$filter', '$rootScope'
 						player.api = {};
 						$scope.players.push(player);
 						api.fetchPlayer(player);
+						$scope.link_disabled = function () {
+							if (player.is_bot)
+								return false;
+						}
 					}
 				});
 			}
