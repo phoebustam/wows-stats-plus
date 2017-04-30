@@ -349,3 +349,7 @@ vertical-align: middle;
 text-align: center;
 }
 
+.linkDisabled {
+cursor: not-allowed;
+pointer-events: none;
+}
