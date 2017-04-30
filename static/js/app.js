@@ -980,7 +980,7 @@ api.ship = function(player) {
 					"hitratem" : '',
 					"hitratet" : '',
 					"kdRatio": '',
-					"battles": '',
+					"battles": '0',
 					"avgExp": '',
 					"avgDmg": '',
 					"combatPower": '',
