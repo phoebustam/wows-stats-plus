@@ -77,7 +77,7 @@
 						<tbody>
 						<tr ng-repeat="(key, value) in players" ng-if="value.relation!=2" name="{{value.ship.shipty}}" class="player {{value.ship.highlightClass}} {{value.ship.ownerClass}}">
 							<td class="tdata_l highlight_cancel" style="height:24px;">
-								<a href="{{value.uri}}/" name="user_own" style=" Color:#38c38c;" target="_blank" title="{{value.clan}} {{value.name}}"><span style="color: #eeeeee">{{value.clan}}</span> {{value.name_s}}</a>
+								<a ng-click="link_disabled()" ng-class="{linkDisabled: value.is_bot}" href="{{value.uri}}/" name="user_own" style=" Color:#38c38c;" target="_blank" title="{{value.clan}} {{value.name}}"><span style="color: #eeeeee">{{value.clan}}</span> {{value.name_s}}</a>
 								<span name="user_buta"style ="color: #38c38c; display:none;">&nbsp;(´・ω・`)&nbsp;</span>
 							</td>
 							<td class="highlight_cancel">{{value.ship.shiptia_s}}</td>
@@ -135,7 +135,7 @@
 						<tbody>
 						<tr ng-repeat="(key, value) in players" ng-if="value.relation==2" name="{{value.ship.shipty}}" class="player {{value.ship.highlightClass}} {{value.ship.ownerClass}}">
 							<td class="tdata_l highlight_cancel" style="height:24px;">
-								<a href="{{value.uri}}/" name="user_own" style=" Color:#38c38c;" target="_blank" title="{{value.clan}} {{value.name}}"><span style="color: #eeeeee">{{value.clan}}</span> {{value.name_s}}</a>
+								<a ng-click="link_disabled()" ng-class="{linkDisabled: value.is_bot}" href="{{value.uri}}/" name="user_own" style=" Color:#38c38c;" target="_blank" title="{{value.clan}} {{value.name}}"><span style="color: #eeeeee">{{value.clan}}</span> {{value.name_s}}</a>
 								<span name="user_buta"style ="color: #38c38c; display:none;">&nbsp;(´・ω・`)&nbsp;</span>
 							</td>
 							<td class="highlight_cancel">{{value.ship.shiptia_s}}</td>
