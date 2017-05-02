@@ -122,10 +122,11 @@ router.get('/player', jsonParser, function(req, res) {
 																		if (!cl_error && cl_response.statusCode == 200) {
 																			var clanInfo = JSON.parse(clanBody);
 																			if (clanInfo.status == "ok") {
+//																				console.log(clanInfo.data);
 																				if ((clanInfo.data[player.id] != null) && (clanInfo.data[player.id]['clan'] != null)) {
 																					var cstat = clanInfo.data[player.id];
 																					player.clan = '[' + cstat['clan']['tag'] + ']';
-//																					console.log(player.clan);
+//																					console.log("%s : %s", player.name, player.clan);
 																					res.json(player);
 																				}
 																				else
@@ -134,8 +135,8 @@ router.get('/player', jsonParser, function(req, res) {
 //																					console.log('null clan info data');
 																					res.json(player);
 																				}
-																		}
-																		else
+																			}
+																			else
 																			{
 //																				console.log('getting clan info failed');
 																				res.status(400).send(json.error);
@@ -151,7 +152,36 @@ router.get('/player', jsonParser, function(req, res) {
 																{
 																	player.rank = '**';
 //																	console.log('null rank info data');
-																	res.json(player);
+																	// get player clan info
+																	request(process.env.WOWS_API_URL + '/wows/clans/accountinfo/?application_id=' + api_key + '&account_id=' + player.id + '&extra=clan', function (cl_error, cl_response, clanBody) {
+																		if (!cl_error && cl_response.statusCode == 200) {
+																			var clanInfo = JSON.parse(clanBody);
+																			if (clanInfo.status == "ok") {
+//																				console.log(clanInfo.data);
+																				if ((clanInfo.data[player.id] != null) && (clanInfo.data[player.id]['clan'] != null)) {
+																					var cstat = clanInfo.data[player.id];
+																					player.clan = '[' + cstat['clan']['tag'] + ']';
+//																					console.log("%s : %s", player.name, player.clan);
+																					res.json(player);
+																				}
+																				else
+																				{
+																					player.clan = '';
+//																					console.log('null clan info data');
+																					res.json(player);
+																				}
+																			}
+																			else
+																			{
+//																				console.log('getting clan info failed');
+																				res.status(400).send(json.error);
+																			}
+																		}
+																		else if(cl_response)
+																			res.status(cl_response.statusCode);
+																		else
+																			res.status(500);
+																	});
 																}
 															}
 															else
@@ -271,20 +301,21 @@ router.get('/ship', jsonParser, function(req, res) {
 router.get('/arena', jsonParser, function(req, res) {
 	if (process.platform == 'win32') {
 		arenaJson = process.env.WOWS_PATH + '/replays/tempArenaInfo.json';
-		try {
-			fs.statSync(arenaJson);
-			jsonfile.readFile(arenaJson, function read(error, obj) {
-			    if (!error) {
-			    	res.json(obj);
-			    } else {
-			    	res.sendStatus(404);
-			    }
-			});
-		}
-		catch(err) {
-			if (err.code === 'ENOENT')
+		fs.access(arenaJson, fs.R_OK, function (err) {
+			if (!err) {
+				jsonfile.readFile(arenaJson, function read(error, obj) {
+				    if (!error) {
+				    	res.json(obj);
+				    }
+				    else {
+				    	res.sendStatus(404);
+				    }
+				});
+			}
+			else {
 				res.sendStatus(404);
-		}
+			}
+		});
 	}
 	else
 		res.sendStatus(400);
