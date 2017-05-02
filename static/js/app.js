@@ -1,4 +1,4 @@
-const wsp_version = '0.5.2';
+const wsp_version = '0.5.3';
 const MAX_RETRY = 5;
 
 var lang_array = [];
@@ -125,19 +125,19 @@ function get_shipinfo() {
 	});
 }
 
-function getClanList(nameArray) {
-	if(Object.keys(clanTagList).length != 0)
-		return;
+function getClanList(nArray) {
+//	if(Object.keys(clanTagList).length != 0)
+//		return;
 
 	var nameList = [];
 	var accountIdList = [];
 	var idList = [];
 
 	// except co-op bot
-	for (var i=0; i<nameArray.length; i++) {
+	for (var i=0; i<nArray.length; i++) {
 		var reg = new RegExp(/^:\w+:$/);
-		if (reg.test(nameArray[i]) == false)
-			nameList.push(nameArray[i]);
+		if (reg.test(nArray[i]) == false)
+			nameList.push(nArray[i]);
 	}
 //	console.log(nameList);
 
@@ -154,12 +154,12 @@ function getClanList(nameArray) {
 				if (info.status == "ok") {
 					if (info.meta.count > 0) {
 //						console.log(info.data);
-						for (var c=0; c<nameArray.length; c++) {
+						for (var c=0; c<nArray.length; c++) {
 							var found = false;
 							for (var j=0; j<info.meta.count; j++) {
 								var name = info.data[j].nickname;
 								var id = info.data[j].account_id;
-								if (nameArray[c] === name) {
+								if (nArray[c] === name) {
 									accountIdList.push(id);
 									found = true;
 									break;
@@ -225,7 +225,7 @@ function getClanList(nameArray) {
 										}
 									}
 								}
-								clanTagList[nameArray[c]] = tagname;
+								clanTagList[nArray[c]] = tagname;
 							}
 //							console.log('Exit get clan info with success');
 							resolve();
@@ -1104,11 +1104,9 @@ app.controller('TeamStatsCtrl', ['$scope', '$translate', '$filter', '$rootScope'
 				}
 
 				getClanList(nameArray);
-
 				function getClan() {
 					var d = $q.defer();
-					var count = Object.keys(clanTagList).length;
-					if (count != 0) {
+					if (Object.keys(clanTagList).length != 0) {
 						d.resolve();
 					} else {
 						d.reject();
@@ -1204,8 +1202,8 @@ app.controller('TeamStatsCtrl', ['$scope', '$translate', '$filter', '$rootScope'
 						var clan2 = '[' + clanTagList[val2.name] + ']';
 
 						// player name with clan tag
-						var name1 = clan1 + val1.name.toString();
-						var name2 = clan2 + val2.name.toString();
+						var name1 = clan1 + val1.name;
+						var name2 = clan2 + val2.name;
 						if( name1 > name2 ) return 1;
 						if( name1 < name2 ) return -1;
 
