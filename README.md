@@ -29,6 +29,7 @@ Figure 2 - Settings window.
 - You can select your prefer language by selecting language menu (default is come from your bowser's language setting).
 - Support multi-language viewing by preparing translate json file.
     (I provide JSON files to translate for Japanese, English, Chinese(zh-tw) and Russian now.)
+- Support direct .wowsreplay file loading via view_chrome.bat. To use this functionality you need to drag&drop .wowsreplay file to view_chrome.bat.
 
 # Environment
 OS: Windows 7(32bit/64bit) or later.
