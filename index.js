@@ -1,9 +1,9 @@
 require('dotenv').load();
-var express 	= require('express');
-var bodyParser 	= require('body-parser');
-var request 	= require('request');
-var fs			= require('fs');
-var jsonfile 	= require('jsonfile')
+const express 	= require('express');
+const bodyParser 	= require('body-parser');
+const request 	= require('request');
+const fs			= require('fs');
+const jsonfile 	= require('jsonfile');
 
 var app = express();
 var port = process.env.PORT || 8080;
@@ -322,18 +322,58 @@ router.get('/ship', jsonParser, function(req, res) {
 
 // arena api
 router.get('/arena', jsonParser, function(req, res) {
-	if (process.platform == 'win32') {
+	var fname = process.argv[2];
+	var freg = new RegExp(/^\d{8}_\d{6}_\w{4}\d{3}-.+$/);
+	var arg_mode = false;
+	var arenaJson = '';
+
+	if ((fname != '') && freg.test(fname)) {
+		arenaJson = process.env.WOWS_PATH + '/replays/' + fname + '.wowsreplay';
+		arg_mode = true;
+	} else {
 		arenaJson = process.env.WOWS_PATH + '/replays/tempArenaInfo.json';
+		arg_mode = false;
+	}
+
+//	console.log('argv: ' + fname);
+//	console.log('read file: ' + arenaJson);
+
+	if ((process.platform == 'win32') || (process.platform == 'darwin')) {
 		fs.access(arenaJson, fs.R_OK, function (err) {
 			if (!err) {
-				jsonfile.readFile(arenaJson, function read(error, obj) {
-				    if (!error) {
-				    	res.json(obj);
-				    }
-				    else {
-				    	res.sendStatus(404);
-				    }
-				});
+				if (arg_mode) {
+					fs.readFile(arenaJson, function read(error, obj) {
+					    if (!error) {
+							var buffer = new Buffer(obj, 'binary');
+							var start_pos = 12;
+							var end_pos = buffer[9]*256 + buffer[8] + 12;
+//							console.log("%s%s %d", buffer[9].toString(16), buffer[8].toString(16), end_pos);
+							var data = '';
+							for(var p=start_pos; p < end_pos; p++) {
+								data += String.fromCharCode(buffer[p]);
+							}
+//							console.log('data: %s', data);
+							var jsondata = JSON.parse(data);
+//							console.log('read file: %s', arenaJson);
+//							console.log(jsondata);
+			   				res.json(jsondata);
+			    		}
+					    else {
+					    	res.sendStatus(404);
+					    }
+					});
+				} else {
+					jsonfile.readFile(arenaJson, function read(error, obj) {
+					    if (!error) {
+//							console.log('read file: %s', arenaJson);
+//							console.log('jsondata: ' + obj);
+				    		res.json(obj);
+					    }
+					    else {
+					    	res.sendStatus(404);
+					    }
+					});
+				}
 			}
 			else {
 				res.sendStatus(404);
