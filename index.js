@@ -86,8 +86,10 @@ router.get('/env', function(req, res) {
 // player api
 router.get('/player', jsonParser, function(req, res) {
 	if (req.query.name) {
-		var reg = new RegExp(/^:\w+:$/);
-		if (reg.test(req.query.name) == false) {
+		// except co-op & scenario bot ships
+		var reg1 = new RegExp(/^:\w+:$/);
+		var reg2 = new RegExp(/^IDS_OP_\w+$/);
+		if ((reg1.test(req.query.name) == false) && (reg2.test(req.query.name) == false)) {
 //			console.log(req.query.name);
 
 			// search and get account_id
