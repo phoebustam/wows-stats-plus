@@ -204,13 +204,14 @@ function getClanList(nArray) {
 	var accountIdList = [];
 	var idList = [];
 
-	// except co-op bot
+	// except co-op & scenario bot ships
 	for (var i=0; i<nArray.length; i++) {
-		var reg = new RegExp(/^:\w+:$/);
-		if (reg.test(nArray[i]) == false)
+		var reg1 = new RegExp(/^:\w+:$/);
+		var reg2 = new RegExp(/^IDS_OP_\w+$/);
+		if ((reg1.test(nArray[i]) == false) && (reg2.test(nArray[i]) == false))
 			nameList.push(nArray[i]);
 	}
-//	console.log(nameList);
+	console.log(nameList);
 
 	var sync_getAccountId = new Promise (function (resolve, reject) {
 		var nameSrings = nameList.join(',');
@@ -1008,8 +1009,9 @@ api.owner = function(type, value) {
 
 api.player = function(player) {
 	return $q(function(resolve, reject) {
-		var reg = new RegExp(/^:\w+:$/);
-		if (reg.test(player.name) == false) {
+		var reg1 = new RegExp(/^:\w+:$/);
+		var reg2 = new RegExp(/^IDS_OP_\w+$/);
+		if ((reg1.test(player.name) == false) && (reg2.test(player.name) == false)) {
 			$http({
 				method:'GET',
 				url: '/api/player?name=' + encodeURIComponent(player.name)
