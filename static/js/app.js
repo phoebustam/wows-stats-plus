@@ -1,4 +1,4 @@
-const wsp_version = '1.1.0';
+const wsp_version = '1.1.1';
 const MAX_RETRY = 5;
 
 // include WTR rating calculation
