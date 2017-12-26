@@ -2,6 +2,7 @@
 	{"value": "ja", "label": "日本語"},
 	{"value": "zh-tw", "label": "繁體中文"},
 	{"value": "en", "label": "English"},
+	{"value": "it", "label": "Italiano"},
 	{"value": "ru", "label": "Русский"},
 	{"value": "it", "label": "Italiano"}
 ]
