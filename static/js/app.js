@@ -1617,10 +1617,16 @@ app.controller('TeamStatsCtrl', ['$scope', '$translate', '$filter', '$rootScope'
 						for (var key in kariload) {
 								delete kariload[key];
 						}
+						var player_count = 0;
 						for (var i=0; i<data.vehicles.length; i++) {
-								kariload[i] = data.vehicles[i];
+//							var reg1 = new RegExp(/^:\w+:$/);
+							var reg2 = new RegExp(/^IDS_OP_\w+$/);
+//							if ((reg1.test(data.vehicles[i].name) == false) && (reg2.test(data.vehicles[i].name) == false)) {
+							if (reg2.test(data.vehicles[i].name) == false) {
+								kariload[player_count++] = data.vehicles[i];
+							}
 						}
-//						console.log(kariload);
+						console.log(kariload);
 
 						// sort data as ship_type > tier > nation > shipID > playername with clan tag
 						kariload.sort( function(val1,val2) {
@@ -1671,15 +1677,27 @@ app.controller('TeamStatsCtrl', ['$scope', '$translate', '$filter', '$rootScope'
 
 						for (var i=0; i<kariload.length; i++) {
 							var player = kariload[i];
-							if (player.is_bot != true)
+							try {
+								if ('is_bot' in player) {
+									if (player.is_bot != true) {
+			 							player.api = {};
+		 							}
+		 						} else {
+		 							player.api = {};
+								}
+							} catch(e) {
 	 							player.api = {};
+							}
 
 							$scope.players.push(player);
 							api.fetchPlayer(player);
 
 							$scope.link_disabled = function () {
-								if (player.is_bot)
-									return false;
+								if ('is_bot' in player) {
+									if (player.is_bot) {
+										return false;
+									}
+								}
 							}
 						}
 					});
