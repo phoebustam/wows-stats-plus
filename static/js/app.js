@@ -1,4 +1,4 @@
-const wsp_version = '1.0.0';
+const wsp_version = '1.1.1';
 const MAX_RETRY = 5;
 
 // include WTR rating calculation
@@ -27,6 +27,7 @@ var ready_coefficients = false;
 const images_pre = 'images/';
 const images_prefix = '.png';
 var capture_flag = true;
+var Interval_timer;
 
 var api_url = '';
 var api_key = '';
@@ -203,13 +204,14 @@ function getClanList(nArray) {
 	var accountIdList = [];
 	var idList = [];
 
-	// except co-op bot
+	// except co-op & scenario bot ships
 	for (var i=0; i<nArray.length; i++) {
-		var reg = new RegExp(/^:\w+:$/);
-		if (reg.test(nArray[i]) == false)
+		var reg1 = new RegExp(/^:\w+:$/);
+		var reg2 = new RegExp(/^IDS_OP_\w+$/);
+		if ((reg1.test(nArray[i]) == false) && (reg2.test(nArray[i]) == false))
 			nameList.push(nArray[i]);
 	}
-//	console.log(nameList);
+	console.log(nameList);
 
 	var sync_getAccountId = new Promise (function (resolve, reject) {
 		var nameSrings = nameList.join(',');
@@ -441,7 +443,7 @@ function prepare_ss(target) {
     }
 }
 
-function  shipname_ex(val) {
+function shipname_ex(val) {
 	if (val == 1) {
 		dispeng ="none";
 		disptrans="";
@@ -575,15 +577,18 @@ app.factory('api',['$translate','$rootScope','$http','$q', function($translate, 
 			// nothing needs to be done after fetching ship stats
 		}, function(player) {
 			// retry if rejected
-			if (!player.ship)
+			if (!player.ship) {
 				player.ship = {};
+				player.ship.err = '';
+			}
+
 			if (!player.ship.hasOwnProperty('retry'))
 				player.ship.retry = MAX_RETRY;
-			if (player.ship.retry > 0) {
-				player.ship.retry --; 
+
+			if ((player.ship.retry > 0) && (player.ship.err == '')) {
+				player.ship.retry--;
 				api.fetchShip(player);
-			}
-			else {
+			} else {
 				// report error if max retry reached
 				if (player.api.ship.status == 404)
 					player.ship.err = "no record";
@@ -636,9 +641,8 @@ app.factory('api',['$translate','$rootScope','$http','$q', function($translate, 
 					player.ship.err = player.err;
 					api.fetchShip(player);
 				}
-			}
-			else {
-				player.retry --;
+			} else {
+				player.retry--;
 				api.fetchPlayer(player);
 			}
 		});
@@ -1005,8 +1009,9 @@ api.owner = function(type, value) {
 
 api.player = function(player) {
 	return $q(function(resolve, reject) {
-		var reg = new RegExp(/^:\w+:$/);
-		if (reg.test(player.name) == false) {
+		var reg1 = new RegExp(/^:\w+:$/);
+		var reg2 = new RegExp(/^IDS_OP_\w+$/);
+		if ((reg1.test(player.name) == false) && (reg2.test(player.name) == false)) {
 			$http({
 				method:'GET',
 				url: '/api/player?name=' + encodeURIComponent(player.name)
@@ -1077,8 +1082,8 @@ api.ship = function(player) {
 					kdRatio ="？";
 					combatPower = "？";
 				} else if(death == 0 && kill == 0) {
-					kdRatio = "－";
-					combatPower = "－";
+					kdRatio = "？";
+					combatPower = "？";
 				} else {
 					var kdRatio = (kill / death).toFixed(2);
 					if (kdRatio == 0) {
@@ -1177,19 +1182,19 @@ api.ship = function(player) {
 					"shipkakin": kakin,
 					"name": data.name.toUpperCase(),
 					"name_trans": api.shipnameTranslated(data.name),
-					"namefont" : api.shipnamefont(countLength(data.name)),
-					"namefont_trans" : api.shipnamefont(countLength(api.shipnameTranslated(data.name))),
-					"bgcolor" : data.info.type+"_bg",
+					"namefont": api.shipnamefont(countLength(data.name)),
+					"namefont_trans": api.shipnamefont(countLength(api.shipnameTranslated(data.name))),
+					"bgcolor": data.info.type+"_bg",
 					"winRate": winRate + "%",
 					"winRateClass": api.beautify("winRate", winRate),
 					"WTR": myFormatNumber(parseInt(wtr)),
 					"WTRClass": api.w_beautify("WTR", wtr),
 					"PR": myFormatNumber(parseInt(pr)),
 					"PRClass": api.p_beautify("PR", pr),
-					"shfl" : atkavg,
-					"ftfl" : sdkavg,
-					"hitratem" : hitm ,
-					"hitratet" : hitt ,
+					"shfl": atkavg,
+					"ftfl": sdkavg,
+					"hitratem": hitm ,
+					"hitratet": hitt ,
 					"kdRatio": kdRatio,
 					"battles": myFormatNumber(battles),
 					"avgExp": myFormatNumber(data.avgExp),
@@ -1199,7 +1204,7 @@ api.ship = function(player) {
 					"highlightClass": (player.is_private != true)? api.highlight("combatPower", combatPower):'highlight_private',
 					"ownerClass": api.owner("owner", player.name),
 					"svrate": svrate
-				}
+				};
 			} else {
 				var sid = player.shipId;
 				player.ship = {
@@ -1212,19 +1217,19 @@ api.ship = function(player) {
 					"shipkakin": kakin,
 					"name": ship_info.data[sid].name.toUpperCase(),
 					"name_trans": api.shipnameTranslated(ship_info.data[sid].name),
-					"namefont" : api.shipnamefont(countLength(ship_info.data[sid].name)),
-					"namefont_trans" : api.shipnamefont(countLength(api.shipnameTranslated(ship_info.data[sid].name))),
-					"bgcolor" :ship_info.data[sid].type+"_bg",  
+					"namefont": api.shipnamefont(countLength(ship_info.data[sid].name)),
+					"namefont_trans": api.shipnamefont(countLength(api.shipnameTranslated(ship_info.data[sid].name))),
+					"bgcolor": ship_info.data[sid].type+"_bg",
 					"winRate": ((player.is_private != true) && (player.is_bot != true))? '－':'',
 					"winRateClass": '',
 					"WTR": ((player.is_private != true) && (player.is_bot != true))? '－':'',
 					"WTRClass": '',
 					"PR": ((player.is_private != true) && (player.is_bot != true))? '－':'',
 					"PRClass": '',
-					"shfl" : ((player.is_private != true) && (player.is_bot != true))? '－':'',
-					"ftfl" : ((player.is_private != true) && (player.is_bot != true))? '－':'',
-					"hitratem" : '',
-					"hitratet" : '',
+					"shfl": ((player.is_private != true) && (player.is_bot != true))? '－':'',
+					"ftfl": ((player.is_private != true) && (player.is_bot != true))? '－':'',
+					"hitratem": '',
+					"hitratet": '',
 					"kdRatio": ((player.is_private != true) && (player.is_bot != true))? '－':'',
 					"battles": ((player.is_private != true) && (player.is_bot != true))? '0':'',
 					"avgExp": ((player.is_private != true) && (player.is_bot != true))? '－':'',
@@ -1234,14 +1239,60 @@ api.ship = function(player) {
 					"highlightClass": (player.is_private != true)? 'highlight_normal':'highlight_private',
 					"ownerClass": '',
 					"svrate": ((player.is_private != true) && (player.is_bot != true))? '－':''
-				}
+				};
 //				player.ship.err = "no battle record";
 			}
 			resolve(player);
 
 		}).error(function(data, status) {
+			var battles = "";
+			var victories = "";
+			var winRate = "";
+			var survived = "";
+			var kill = "";
+			var death = "";
+			var kakin = "";
+			var svrate = "";
+			var wtr = "";
+			var pr = "";
+			var combatPower = "";
+			var sid = player.shipId;
+			player.ship = {
+				"shiptia_s": '',
+				"shipty": '',
+				"shiptype_s": '',
+				"shiptype_alt": '',
+				"shipnation_s": '',
+				"shipnation_alt": '',
+				"shipkakin": '',
+				"name": '',
+				"name_trans": '',
+				"namefont" : '',
+				"namefont_trans" : '',
+				"bgcolor" : '',
+				"winRate": ((player.is_private != true) && (player.is_bot != true))? '－':'',
+				"winRateClass": '',
+				"WTR": ((player.is_private != true) && (player.is_bot != true))? '－':'',
+				"WTRClass": '',
+				"PR": ((player.is_private != true) && (player.is_bot != true))? '－':'',
+				"PRClass": '',
+				"shfl" : ((player.is_private != true) && (player.is_bot != true))? '－':'',
+				"ftfl" : ((player.is_private != true) && (player.is_bot != true))? '－':'',
+				"hitratem" : '',
+				"hitratet" : '',
+				"kdRatio": ((player.is_private != true) && (player.is_bot != true))? '－':'',
+				"battles": ((player.is_private != true) && (player.is_bot != true))? '0':'',
+				"avgExp": ((player.is_private != true) && (player.is_bot != true))? '－':'',
+				"avgDmg": ((player.is_private != true) && (player.is_bot != true))? '－':'',
+				"combatPower": ((player.is_private != true) && (player.is_bot != true))? '－':'',
+				"combatPowerClass": '',
+				"highlightClass": (player.is_private != true)? 'highlight_normal':'highlight_private',
+				"ownerClass": '',
+				"svrate": ((player.is_private != true) && (player.is_bot != true))? '－':''
+			};
 			player.api.ship.response = data;
 			player.api.ship.status = status;
+			player.ship.err = "no battle record";
 			reject(player);
 		});
 	});
@@ -1461,10 +1512,6 @@ app.controller('TeamStatsCtrl', ['$scope', '$translate', '$filter', '$rootScope'
 		}
 	};
 
-	// handling site changer menu
-	$scope.changeSite = function () {
-	};
-
 	var updateArena = function() {
 		UpdateViewMode();
 
@@ -1570,10 +1617,16 @@ app.controller('TeamStatsCtrl', ['$scope', '$translate', '$filter', '$rootScope'
 						for (var key in kariload) {
 								delete kariload[key];
 						}
+						var player_count = 0;
 						for (var i=0; i<data.vehicles.length; i++) {
-								kariload[i] = data.vehicles[i];
+//							var reg1 = new RegExp(/^:\w+:$/);
+							var reg2 = new RegExp(/^IDS_OP_\w+$/);
+//							if ((reg1.test(data.vehicles[i].name) == false) && (reg2.test(data.vehicles[i].name) == false)) {
+							if (reg2.test(data.vehicles[i].name) == false) {
+								kariload[player_count++] = data.vehicles[i];
+							}
 						}
-//						console.log(kariload);
+						console.log(kariload);
 
 						// sort data as ship_type > tier > nation > shipID > playername with clan tag
 						kariload.sort( function(val1,val2) {
@@ -1624,15 +1677,27 @@ app.controller('TeamStatsCtrl', ['$scope', '$translate', '$filter', '$rootScope'
 
 						for (var i=0; i<kariload.length; i++) {
 							var player = kariload[i];
-							if (player.is_bot != true)
+							try {
+								if ('is_bot' in player) {
+									if (player.is_bot != true) {
+			 							player.api = {};
+		 							}
+		 						} else {
+		 							player.api = {};
+								}
+							} catch(e) {
 	 							player.api = {};
+							}
 
 							$scope.players.push(player);
 							api.fetchPlayer(player);
 
 							$scope.link_disabled = function () {
-								if (player.is_bot)
-									return false;
+								if ('is_bot' in player) {
+									if (player.is_bot) {
+										return false;
+									}
+								}
 							}
 						}
 					});
@@ -1650,7 +1715,7 @@ app.controller('TeamStatsCtrl', ['$scope', '$translate', '$filter', '$rootScope'
 
 	}
 
-	var timer = setInterval(function() {
+	Interval_timer = setInterval(function() {
 		$scope.$apply(updateArena);
 	}, 2000);
 

@@ -30,6 +30,8 @@
 		"s01_NavalBase": "Operation Killer Whale",
 		"s02_Naval_Defense": "Defense of Naval Station Newport",
 		"s03_Labyrinth": "Saving Carrier Raptor",
+		"s07_Advance": "Narai",
+		"e02_Halloween_2017": "Saving Transylvania",
 		"00_CO_ocean": "Ocean",
 		"01_solomon_islands": "Solomon Islands",
 		"02_Fiords": "Fiords",
@@ -64,7 +66,8 @@
 		"46_Estuary": "Estuary",
 		"47_Sleeping_giant": "Sleeping Giant",
 		"49_Shoreside": "Shoreside",
-		"50_Gold_harbor": "Gold Harbor"
+		"50_Gold_harbor": "Gold Harbor",
+		"50_VanHellsing": "Saving Transylvania"
 	},
 	"mode": {
 		"Default_test": "Tutorial",
@@ -79,7 +82,10 @@
 		"Domination_rhombus": "Random: Domination",
 		"Epicenter": "Random: Epicenter",
 		"Ranked_Domination": "Rank: Domination",
-		"Ranked_Epicenter": "Rank: Epicenter"
+		"Ranked_Epicenter": "Rank: Epicenter",
+		"CvC_Domination": "Clan: Domination",
+		"PVEVanHellsingRight": "Halloween: Pt.áT",
+		"Halloween_2017": "Halloween: Pt.áU"
 	},
 	"list_label1": {
 		"name": "Player name",
@@ -135,6 +141,6 @@
 		"display": "Display",
 		"apply": "Apply",
 		"cancel": "Cancel",
-		"donate": "Donate 1US$ with PayPal."
+		"donate": "Donate 1Å` US$ with PayPal."
 	}
 }
