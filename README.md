@@ -35,14 +35,14 @@ Figure 2 - Settings window.
 - Support direct .wowsreplay file loading via view_chrome.bat. To use this functionality you need to drag&drop .wowsreplay file to view_chrome.bat.
 
 # Environment
-OS: Windows 7(32bit/64bit) or later.
-Web browser: Google Chrome(recommended), Vivaldi, Firefox, Microsoft Edge, and more browser which is incorporated Javascript V8 engine.
-    !! CAUSION - Internet Explorer is not supported at all.
-    !! CAUTION - You need set using web cookie functionality on your browser.
+- OS: Windows 7(32bit/64bit) or later.
+- Web browser: Google Chrome(recommended), Vivaldi, Firefox, Microsoft Edge, and more browser which is incorporated Javascript V8 engine.
+- !! CAUSION - Internet Explorer is not supported at all.
+- !! CAUTION - You need set using web cookie functionality on your browser.
 
 # Requirement
 You agree that statistics of a player does NOT mean how a player will perform in a game, and you will NOT use this tool in any way to create a toxic environment or demonstrate any unethical/immortal behaviour in World of Warships.
-If you do NOT agree, you shall NOT use this app.
+**If you do NOT agree, you shall NOT use this app.
 
 [Node.js](https://nodejs.org/en/)
 
@@ -55,13 +55,13 @@ If you do NOT agree, you shall NOT use this app.
 6. You should see a web page open on `http://localhost:8080`, like this:
 ![Installation](http://i.imgur.com/0Z2byWH.png)
   * **If you leave or refresh this page, installation will be cancelled, and you will need to run install.bat again.**
-  * Change `World of Warships Location` to where you installed [World of Warships](http://worldofwarships.com/), it is usually the default value `C:\Games\World_of_Warships`. Click on `Validate` to make sure the location is correct.
-  * Select your `region`.
-  * Get an `Application ID` from [Wargaming Developer Room](http://na.wargaming.net/developers/) at your region.
+7. Change `World of Warships Location` to where you installed [World of Warships](http://worldofwarships.com/), it is usually the default value `C:\Games\World_of_Warships`. Click on `Validate` to make sure the location is correct.
+8. Select your `region`.
+9. Get an `Application ID` from [Wargaming Developer Room](http://na.wargaming.net/developers/) at your region.
     * Create an application on [My Applications](https://na.wargaming.net/developers/applications/) page in [Wargaming Developer Room](http://na.wargaming.net/developers/) at your region and copy the newly generated `Application ID`.
     * Place `Application ID` you copied into `Application ID` textbox.
     * Click on `Validate` to make sure the `Application ID` you placed works.
-  * Click on `Save`. If everything goes through, the installation page will becomes an blank page.
+10. Click on `Save`. If everything goes through, the installation page will becomes an blank page.
 
 # Usage
 1. Run `run.bat` to start the app on your browser. Or run `run_chrome.bat` for only Google Chrome with independent window mode (without menu bar, status bar and so on). And also run `run_vivaldi.bat` for only Vivaldi. If you need, run `run_nocapture.bat` to start the app without screen capture functionality.
