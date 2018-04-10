@@ -42,7 +42,8 @@ Figure 2 - Settings window.
 
 # Requirement
 You agree that statistics of a player does NOT mean how a player will perform in a game, and you will NOT use this tool in any way to create a toxic environment or demonstrate any unethical/immortal behaviour in World of Warships.
-**If you do NOT agree, you shall NOT use this app.
+
+**If you do NOT agree, you shall NOT use this app.**
 
 [Node.js](https://nodejs.org/en/)
 
@@ -53,8 +54,9 @@ You agree that statistics of a player does NOT mean how a player will perform in
 4. Make sure there is no open web page with address: `http://localhost:8080` 
 5. Run `install.bat`.
 6. You should see a web page open on `http://localhost:8080`, like this:
+
 ![Installation](http://i.imgur.com/0Z2byWH.png)
-  * **If you leave or refresh this page, installation will be cancelled, and you will need to run install.bat again.**
+    * **If you leave or refresh this page, installation will be cancelled, and you will need to run install.bat again.**
 7. Change `World of Warships Location` to where you installed [World of Warships](http://worldofwarships.com/), it is usually the default value `C:\Games\World_of_Warships`. Click on `Validate` to make sure the location is correct.
 8. Select your `region`.
 9. Get an `Application ID` from [Wargaming Developer Room](http://na.wargaming.net/developers/) at your region.
