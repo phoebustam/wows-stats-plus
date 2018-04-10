@@ -1,12 +1,15 @@
 # wows-stats-plus
 A [XVM](http://www.modxvm.com/en/) like statistics engine for [World of Warships](http://worldofwarships.com/)
 
+
 Figure 1 - Main window.
+
 ![Screenshot](https://i.imgur.com/b3CKQSO.png?1)
 
 
 Figure 2 - Settings window.
-![Screenshot](https://i.imgur.com/fiPjqXI.png?1)
+
+![Screenshot2](https://i.imgur.com/fiPjqXI.png?1)
 
 # Functionality
 - Show stats information of all matching players and ships on the random battle(pvp).
@@ -21,11 +24,11 @@ Figure 2 - Settings window.
 - You can see player's information page from link at IGN strings.
 - You can select display items from whole ship and player stats items via settings window (Figure 2).
 - You can switch stats site link from 5 stats site as follows on IGN strings via settings window (Figure 2).
-    "Word of Warships (official)"
-    "WoWs Statinfo"
-    "WoWs Stats & Nmbers"
-    "Warships.Today"
-    "WoWStats.org"
+    * "Word of Warships (official)"
+    * "WoWs Statinfo"
+    * "WoWs Stats & Nmbers"
+    * "Warships.Today"
+    * "WoWStats.org"
 - You can select your prefer language by selecting language menu (default is come from your bowser's language setting).
 - Support multi-language viewing by preparing translate json file.
     (I provide JSON files to translate for Japanese, English, Chinese(zh-tw), Italian and Russian now.)
@@ -70,8 +73,8 @@ Because of my poor linguistic ability, anyone please touch up translate text for
 And also anyone please try to create new JSON files for the other language(Thai(th), and more!) by modifying from lang_ja.json. 
 
 # Acknowledgements
-Original wows-stats [tianweiliu](https://github.com/tianweiliu/wows-stats)
-Zh-tw translation support [AaronChern](https://github.com/AaronChern)
-It translation support [MightyWizard83](https://github.com/MightyWizard83)
-Tips images for CP/WTR/PR provider {space_of_ice]
-Many thanks for whole testings this app to my WoWs clan [SWAN] members!!
+- Original wows-stats [tianweiliu](https://github.com/tianweiliu/wows-stats)
+- Zh-tw translation support [AaronChern](https://github.com/AaronChern)
+- It translation support [MightyWizard83](https://github.com/MightyWizard83)
+- Tips images for CP/WTR/PR provider [space_of_ice](https://worldofwarships.asia/en/community/accounts/2008515040-space_of_ice/)
+- Many thanks for whole testings this app to my WoWs clan [SWAN] members!!
