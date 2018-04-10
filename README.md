@@ -37,8 +37,8 @@ Figure 2 - Settings window.
 # Environment
 - OS: Windows 7(32bit/64bit) or later.
 - Web browser: Google Chrome(recommended), Vivaldi, Firefox, Microsoft Edge, and more browser which is incorporated Javascript V8 engine.
-- !! CAUSION - Internet Explorer is not supported at all.
-- !! CAUTION - You need set using web cookie functionality on your browser.
+- **CAUTION - Internet Explorer is not supported at all.**
+- **CAUTION - You need set using web cookie functionality on your browser.**
 
 # Requirement
 You agree that statistics of a player does NOT mean how a player will perform in a game, and you will NOT use this tool in any way to create a toxic environment or demonstrate any unethical/immortal behaviour in World of Warships.
@@ -56,7 +56,7 @@ You agree that statistics of a player does NOT mean how a player will perform in
 6. You should see a web page open on `http://localhost:8080`, like this:
 
 ![Installation](http://i.imgur.com/0Z2byWH.png)
-    * **If you leave or refresh this page, installation will be cancelled, and you will need to run install.bat again.**
+- **If you leave or refresh this page, installation will be cancelled, and you will need to run install.bat again.**
 7. Change `World of Warships Location` to where you installed [World of Warships](http://worldofwarships.com/), it is usually the default value `C:\Games\World_of_Warships`. Click on `Validate` to make sure the location is correct.
 8. Select your `region`.
 9. Get an `Application ID` from [Wargaming Developer Room](http://na.wargaming.net/developers/) at your region.
