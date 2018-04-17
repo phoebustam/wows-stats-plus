@@ -1,12 +1,15 @@
 # wows-stats-plus
 A [XVM](http://www.modxvm.com/en/) like statistics engine for [World of Warships](http://worldofwarships.com/)
 
+
 Figure 1 - Main window.
+
 ![Screenshot](https://i.imgur.com/b3CKQSO.png?1)
 
 
 Figure 2 - Settings window.
-![Screenshot](https://i.imgur.com/fiPjqXI.png?1)
+
+![Screenshot2](https://i.imgur.com/fiPjqXI.png?1)
 
 # Functionality
 - Show stats information of all matching players and ships on the random battle(pvp).
@@ -21,25 +24,26 @@ Figure 2 - Settings window.
 - You can see player's information page from link at IGN strings.
 - You can select display items from whole ship and player stats items via settings window (Figure 2).
 - You can switch stats site link from 5 stats site as follows on IGN strings via settings window (Figure 2).
-    "Word of Warships (official)"
-    "WoWs Statinfo"
-    "WoWs Stats & Nmbers"
-    "Warships.Today"
-    "WoWStats.org"
+    * "Word of Warships (official)"
+    * "WoWs Statinfo"
+    * "WoWs Stats & Nmbers"
+    * "Warships.Today"
+    * "WoWStats.org"
 - You can select your prefer language by selecting language menu (default is come from your bowser's language setting).
 - Support multi-language viewing by preparing translate json file.
     (I provide JSON files to translate for Japanese, English, Chinese(zh-tw), Italian and Russian now.)
 - Support direct .wowsreplay file loading via view_chrome.bat. To use this functionality you need to drag&drop .wowsreplay file to view_chrome.bat.
 
 # Environment
-OS: Windows 7(32bit/64bit) or later.
-Web browser: Google Chrome(recommended), Vivaldi, Firefox, Microsoft Edge, and more browser which is incorporated Javascript V8 engine.
-    !! CAUSION - Internet Explorer is not supported at all.
-    !! CAUTION - You need set using web cookie functionality on your browser.
+- OS: Windows 7(32bit/64bit) or later.
+- Web browser: Google Chrome(recommended), Vivaldi, Firefox, Microsoft Edge, and more browser which is incorporated Javascript V8 engine.
+- **CAUTION - Internet Explorer is not supported at all.**
+- **CAUTION - You need set using web cookie functionality on your browser.**
 
 # Requirement
 You agree that statistics of a player does NOT mean how a player will perform in a game, and you will NOT use this tool in any way to create a toxic environment or demonstrate any unethical/immortal behaviour in World of Warships.
-If you do NOT agree, you shall NOT use this app.
+
+**If you do NOT agree, you shall NOT use this app.**
 
 [Node.js](https://nodejs.org/en/)
 
@@ -50,15 +54,16 @@ If you do NOT agree, you shall NOT use this app.
 4. Make sure there is no open web page with address: `http://localhost:8080` 
 5. Run `install.bat`.
 6. You should see a web page open on `http://localhost:8080`, like this:
+
 ![Installation](http://i.imgur.com/0Z2byWH.png)
-  * **If you leave or refresh this page, installation will be cancelled, and you will need to run install.bat again.**
-  * Change `World of Warships Location` to where you installed [World of Warships](http://worldofwarships.com/), it is usually the default value `C:\Games\World_of_Warships`. Click on `Validate` to make sure the location is correct.
-  * Select your `region`.
-  * Get an `Application ID` from [Wargaming Developer Room](http://na.wargaming.net/developers/) at your region.
+- **If you leave or refresh this page, installation will be cancelled, and you will need to run install.bat again.**
+7. Change `World of Warships Location` to where you installed [World of Warships](http://worldofwarships.com/), it is usually the default value `C:\Games\World_of_Warships`. Click on `Validate` to make sure the location is correct.
+8. Select your `region`.
+9. Get an `Application ID` from [Wargaming Developer Room](http://na.wargaming.net/developers/) at your region.
     * Create an application on [My Applications](https://na.wargaming.net/developers/applications/) page in [Wargaming Developer Room](http://na.wargaming.net/developers/) at your region and copy the newly generated `Application ID`.
     * Place `Application ID` you copied into `Application ID` textbox.
     * Click on `Validate` to make sure the `Application ID` you placed works.
-  * Click on `Save`. If everything goes through, the installation page will becomes an blank page.
+10. Click on `Save`. If everything goes through, the installation page will becomes an blank page.
 
 # Usage
 1. Run `run.bat` to start the app on your browser. Or run `run_chrome.bat` for only Google Chrome with independent window mode (without menu bar, status bar and so on). And also run `run_vivaldi.bat` for only Vivaldi. If you need, run `run_nocapture.bat` to start the app without screen capture functionality.
@@ -70,8 +75,8 @@ Because of my poor linguistic ability, anyone please touch up translate text for
 And also anyone please try to create new JSON files for the other language(Thai(th), and more!) by modifying from lang_ja.json. 
 
 # Acknowledgements
-Original wows-stats [tianweiliu](https://github.com/tianweiliu/wows-stats)
-Zh-tw translation support [AaronChern](https://github.com/AaronChern)
-It translation support [MightyWizard83](https://github.com/MightyWizard83)
-Tips images for CP/WTR/PR provider {space_of_ice]
-Many thanks for whole testings this app to my WoWs clan [SWAN] members!!
+- Original wows-stats [tianweiliu](https://github.com/tianweiliu/wows-stats)
+- Zh-tw translation support [AaronChern](https://github.com/AaronChern)
+- It translation support [MightyWizard83](https://github.com/MightyWizard83)
+- Tips images for CP/WTR/PR provider [space_of_ice](https://worldofwarships.asia/en/community/accounts/2008515040-space_of_ice/)
+- Many thanks for whole testings this app to my WoWs clan [SWAN] members!!
