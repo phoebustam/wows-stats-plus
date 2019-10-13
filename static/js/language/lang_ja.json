@@ -116,10 +116,22 @@
 			"sinking_title": "平均撃沈数",
 			"shootDown": "撃墜",
 			"shootDown_title": "平均撃墜数",
+			"potentialDmg": "潜在",
+			"potentialDmg_title": "平均潜在的な損傷",
+			"spottingDmg": "スポッティングダメージ",
+			"spottingDmg_title": "平均スポッティングダメージ",
 			"exp": "経験値",
 			"exp_title": "艦別平均経験値",
 			"numBattle": "戦闘数",
-			"numBattle_title": "艦別戦闘数"
+			"numBattle_title": "艦別戦闘数",
+			"hitRatio": "精度",
+			"hitRatio_title": "主砲精度",
+			"torpRatio": "魚雷",
+			"torpRatio_title": "魚雷命中",
+			"capPercentage": "占領 %",
+			"capPercentage_title": "占領の百分率",
+			"decapPercentage": "守る %",
+			"decapPercentage_title": "守るの百分率"
 		},
 		"player": {
 			"rank": "ランク",

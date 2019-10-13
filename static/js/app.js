@@ -121,7 +121,7 @@ function get_WTRcoefficientsShipList() {
 		$.getJSON('js/coefficients.json', function(data) {
 			if (data.status = 'ok') {
 //				console.log(data);
-				coefficientsList = data.expected;
+				coefficientsList = data.data;
 //				console.log(coefficientsList);
 //				console.log('Success get coefficients list');
 				resolve();
@@ -462,10 +462,10 @@ function shipname_ex(val) {
 }
 
 function myFormatNumber(x) {
-	var s = "" + x; 
-	var p = s.indexOf("."); 
-	if (p < 0) { 
-		p = s.length; 
+	var s = "" + x;
+	var p = s.indexOf(".");
+	if (p < 0) {
+		p = s.length;
 	}
 	var r = s.substring(p, s.length);
 	for (var i = 0; i < p; i++) {
@@ -474,8 +474,8 @@ function myFormatNumber(x) {
 			r = s.substring(0, p - i) + r;
 			break;
  		}
-		if (i > 0 && i % 3 == 0) { 
-			r = "," + r; 
+		if (i > 0 && i % 3 == 0) {
+			r = "," + r;
 		}
 		r = c + r;
 	}
@@ -502,7 +502,7 @@ function short_id(str) {
 	return (str.substring(0,18)+"...");
 }
 
-function countLength(str) { 
+function countLength(str) {
 	function isSurrogatePear(upper, lower) {
 		return 0xD800 <= upper && upper <= 0xDBFF && 0xDC00 <= lower && lower <= 0xDFFF;
 	}
@@ -517,7 +517,7 @@ function countLength(str) {
 		}
 	}
 	return ret;
-} 
+}
 
 // loading language list
 get_availableLanguageList();
@@ -805,16 +805,16 @@ var ntname = [
 }
 
 api.shipnamefont = function(value) {
-	if (value < 8) { 	
-		return 'ship_font_6'; 
+	if (value < 8) {
+		return 'ship_font_6';
 	}
 	else if(value < 11) {
-		return 'ship_font_9'; 
+		return 'ship_font_9';
 	}
 	else if(value < 15) {
-		return 'ship_font_14'; 
+		return 'ship_font_14';
 	}
-	else return 'ship_font_20';  
+	else return 'ship_font_20';
 }
 
 api.beautify = function(type, value) {
@@ -1140,14 +1140,11 @@ api.ship = function(player) {
 
 				// WTR(WarshipsToday Rating) and PR(Personal Rating)
 				var expected = {};
+				console.log("player.shipId: "+player.shipId)
 				if (coefficientsList != null) {
-					for (key in coefficientsList) {
-						if (coefficientsList[key].ship_id == player.shipId) {
-							expected = coefficientsList[key];
-//							console.log("player:%s list:%s", player.shipId, coefficientsList[key].ship_id);
-							break;
-						}
-					}
+						console.log("coefficientsList is not null")
+						expected = coefficientsList[player.shipId];
+						console.log("player:%s list:%s", player.shipId, coefficientsList[player.shipId]);
 				}
 				if (expected != null) {
 					var actual = {};
@@ -1157,7 +1154,8 @@ api.ship = function(player) {
 					actual.frags = parseFloat(data.raw.pvp.frags / data.raw.pvp.battles);
 					actual.planes_killed = parseFloat(data.raw.pvp.planes_killed / data.raw.pvp.battles);
 					actual.wins = parseFloat(data.raw.pvp.wins / data.raw.pvp.battles);
-					wtr = calculateWarshipsTodayRating(expected, actual);
+//					wtr = calculateWarshipsTodayRating(expected, actual);
+					wtr = "－";
 					pr = calculatePersonalRating(expected, actual);
 //					console.log(wtr);
 //					console.log(pr);
@@ -1197,13 +1195,19 @@ api.ship = function(player) {
 					"hitratet": hitt ,
 					"kdRatio": kdRatio,
 					"battles": myFormatNumber(battles),
+					"spottingDmg": myFormatNumber((data.raw.pvp.damage_scouting / battles).toFixed()),
+					"potentialDmg": myFormatNumber(((data.raw.pvp.art_agro + data.raw.pvp.torpedo_agro) / battles).toFixed()),
 					"avgExp": myFormatNumber(data.avgExp),
 					"avgDmg": myFormatNumber(data.avgDmg),
 					"combatPower": myFormatNumber(combatPower),
 					"combatPowerClass": api.b_beautify("combatPower", combatPower),
 					"highlightClass": (player.is_private != true)? api.highlight("combatPower", combatPower):'highlight_private',
 					"ownerClass": api.owner("owner", player.name),
-					"svrate": svrate
+					"svrate": svrate,
+					"hitRatio": (data.raw.pvp.main_battery.shots != 0 ? (data.raw.pvp.main_battery.hits / data.raw.pvp.main_battery.shots * 100).toFixed(2) + "%" : '－'),
+					"torpRatio": (data.raw.pvp.torpedoes.shots != 0 ? (data.raw.pvp.torpedoes.hits / data.raw.pvp.torpedoes.shots * 100).toFixed(2) + "%" : '－'),
+					"capPercentage": (data.raw.pvp.team_capture_points != 0 ? (data.raw.pvp.capture_points / data.raw.pvp.team_capture_points * 100).toFixed(2) + "%" : '－'),
+					"decapPercentage": (data.raw.pvp.team_dropped_capture_points != 0 ? (data.raw.pvp.dropped_capture_points / data.raw.pvp.team_dropped_capture_points * 100).toFixed(2) + "%" : '－')
 				};
 			} else {
 				var sid = player.shipId;
@@ -1232,13 +1236,19 @@ api.ship = function(player) {
 					"hitratet": '',
 					"kdRatio": ((player.is_private != true) && (player.is_bot != true))? '－':'',
 					"battles": ((player.is_private != true) && (player.is_bot != true))? '0':'',
+					"spottingDmg": ((player.is_private != true) && (player.is_bot != true))? '－':'',
+					"potentialDmg": ((player.is_private != true) && (player.is_bot != true))? '－':'',
 					"avgExp": ((player.is_private != true) && (player.is_bot != true))? '－':'',
 					"avgDmg": ((player.is_private != true) && (player.is_bot != true))? '－':'',
 					"combatPower": ((player.is_private != true) && (player.is_bot != true))? '－':'',
 					"combatPowerClass": '',
 					"highlightClass": (player.is_private != true)? 'highlight_normal':'highlight_private',
 					"ownerClass": '',
-					"svrate": ((player.is_private != true) && (player.is_bot != true))? '－':''
+					"svrate": ((player.is_private != true) && (player.is_bot != true))? '－':'',
+					"hitRatio": ((player.is_private != true) && (player.is_bot != true))? '－':'',
+					"torpRatio": ((player.is_private != true) && (player.is_bot != true))? '－':'',
+					"capPercentage": ((player.is_private != true) && (player.is_bot != true))? '－':'',
+					"decapPercentage": ((player.is_private != true) && (player.is_bot != true))? '－':''
 				};
 //				player.ship.err = "no battle record";
 			}
@@ -1335,8 +1345,8 @@ app.controller('TeamStatsCtrl', ['$scope', '$translate', '$filter', '$rootScope'
 
 	// switch displaying data column
 	var sc = settingsCookie.shipColumn;
-	$scope.ship_colList = (new Array(16)).fill(0);
-	for(var bit=16; bit>0; bit--) {
+	$scope.ship_colList = (new Array(17)).fill(0);
+	for(var bit=17; bit>0; bit--) {
 		$scope.ship_colList.push((sc & 1));
 		sc >>>= 1;
 	}
@@ -1408,9 +1418,9 @@ app.controller('TeamStatsCtrl', ['$scope', '$translate', '$filter', '$rootScope'
 			$scope.ship_span = $scope.ship_colList.reduce((a,x) => a+=x, 0);
 			$scope.player_span = $scope.player_colList.reduce((a,x) => a+=x, 0);
 
-			// preparetion to store cookie
+			// preparation to store cookie
 			var s_string = '';
-			for (var i=0; i<16 ; i++) {
+			for (var i=0; i<17 ; i++) {
 				s_string += $scope.ship_colList[i];
 			}
 			var p_string = '';

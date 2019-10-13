@@ -63,13 +63,19 @@
 							<th id="s_0_1" ng-style="disp_column('s', 1)" style="width:45px;"><a href="images/WTR_{{lang_select}}.png" tips="{{'list_label2.ship.WTR_title' | translate}}">{{'list_label2.ship.WTR' | translate}}</a></th>
 							<th id="s_0_10" ng-style="disp_column('s', 10)" style="width:45px;"><a href="images/PR_{{lang_select}}.png" tips="{{'list_label2.ship.PR_title' | translate}}">{{'list_label2.ship.PR' | translate}}</a></th>
 							<th id="s_0_2" ng-style="disp_column('s', 2)" title="{{'list_label2.ship.damage_title' | translate}}" style="width:70px;">{{'list_label2.ship.damage' | translate}}</th>
+							<th id="s_0_13" ng-style="disp_column('s', 13)" title="{{'list_label2.ship.hitRatio_title' | translate}}" style="width:70px;">{{'list_label2.ship.hitRatio' | translate}}</th>
+							<th id="s_0_14" ng-style="disp_column('s', 14)" title="{{'list_label2.ship.torpRatio_title' | translate}}" style="width:70px;">{{'list_label2.ship.torpRatio' | translate}}</th>
+							<th id="s_0_15" ng-style="disp_column('s', 15)" title="{{'list_label2.ship.capPercentage_title' | translate}}" style="width:60px;">{{'list_label2.ship.capPercentage' | translate}}</th>
+							<th id="s_0_16" ng-style="disp_column('s', 16)" title="{{'list_label2.ship.decapPercentage_title' | translate}}" style="width:60px;">{{'list_label2.ship.decapPercentage' | translate}}</th>
 							<th id="s_0_3" ng-style="disp_column('s', 3)" title="{{'list_label2.ship.KillDeath_title' | translate}}" style="width:40px;">{{'list_label2.ship.KillDeath' | translate}}</th>
 							<th id="s_0_4" ng-style="disp_column('s', 4)" title="{{'list_label2.ship.winRate_title' | translate}}" style="width:75px;">{{'list_label2.ship.winRate' | translate}}</th>
 							<th id="s_0_5" ng-style="disp_column('s', 5)" title="{{'list_label2.ship.survival_title' | translate}}" style="width:90px;">{{'list_label2.ship.survival' | translate}}</th>
-							<th id="s_0_6" ng-style="disp_column('s', 6)" title="{{'list_label2.ship.sinking_title' | translate}}" style="width:75px;">{{'list_label2.ship.sinking' | translate}}</th>
+							<th id="s_0_6" ng-style="disp_column('s', 6)" title="{{'list_label2.ship.sinking_title' | translate}}" style="width:60px;">{{'list_label2.ship.sinking' | translate}}</th>
 							<th id="s_0_7" ng-style="disp_column('s', 7)" title="{{'list_label2.ship.shootDown_title' | translate}}" style="width:60px;">{{'list_label2.ship.shootDown' | translate}}</th>
-							<th id="s_0_8" ng-style="disp_column('s', 8)" title="{{'list_label2.ship.exp_title' | translate}}" style="width:60px;">{{'list_label2.ship.exp' | translate}}</th>
-							<th id="s_0_9" ng-style="disp_column('s', 9)" title="{{'list_label2.ship.numBattle_title' | translate}}"style="width:60px;">{{'list_label2.ship.numBattle' | translate}}</th>
+							<th id="s_0_8" ng-style="disp_column('s', 8)" title="{{'list_label2.ship.spottingDmg_title' | translate}}" style="width:70px;">{{'list_label2.ship.spottingDmg' | translate}}</th>
+							<th id="s_0_9" ng-style="disp_column('s', 9)" title="{{'list_label2.ship.potentialDmg_title' | translate}}" style="width:70px;">{{'list_label2.ship.potentialDmg' | translate}}</th>
+							<th id="s_0_11" ng-style="disp_column('s', 11)" title="{{'list_label2.ship.exp_title' | translate}}" style="width:50px;">{{'list_label2.ship.exp' | translate}}</th>
+							<th id="s_0_12" ng-style="disp_column('s', 12)" title="{{'list_label2.ship.numBattle_title' | translate}}"style="width:50px;">{{'list_label2.ship.numBattle' | translate}}</th>
 							<th id="p_0_0" ng-style="disp_column('p', 0)" title="{{'list_label2.player.rank_title' | translate}}" style="width:65px;">{{'list_label2.player.rank' | translate}}</th>
 							<th id="p_0_1" ng-style="disp_column('p', 1)" title="{{'list_label2.player.winRate_title' | translate}}" style="width:70px;">{{'list_label2.player.winRate' | translate}}</th>
 							<th id="p_0_2" ng-style="disp_column('p', 2)" title="{{'list_label2.player.damage_title' | translate}}" style="width:70px;">{{'list_label2.player.damage' | translate}}</th>
@@ -95,13 +101,19 @@
 							<td id="s_0_1_{{$parent.$index}}" ng-style="disp_column('s', 1)" class="{{value.ship.WTRClass}}"><span ng-hide="value.ship.err">{{value.ship.WTR}}</span></td>
 							<td id="s_0_10_{{$parent.$index}}" ng-style="disp_column('s', 10)" class="{{value.ship.PRClass}}"><span ng-hide="value.ship.err">{{value.ship.PR}}</span></td>
 							<td id="s_0_2_{{$parent.$index}}" ng-style="disp_column('s', 2)"><span ng-hide="value.ship.err">{{value.ship.avgDmg}}</span></td>
+							<td id="s_0_13_{{$parent.$index}}" ng-style="disp_column('s', 13)"><span ng-hide="value.ship.err">{{value.ship.hitRatio}}</span></td>
+							<td id="s_0_14_{{$parent.$index}}" ng-style="disp_column('s', 14)"><span ng-hide="value.ship.err">{{value.ship.torpRatio}}</span></td>
+							<td id="s_0_15_{{$parent.$index}}" ng-style="disp_column('s', 15)"><span ng-hide="value.ship.err">{{value.ship.capPercentage}}</span></td>
+							<td id="s_0_16_{{$parent.$index}}" ng-style="disp_column('s', 16)"><span ng-hide="value.ship.err">{{value.ship.decapPercentage}}</span></td>
 							<td id="s_0_3_{{$parent.$index}}" ng-style="disp_column('s', 3)"><span ng-hide="value.ship.err">{{value.ship.kdRatio}}</span></td>
 							<td id="s_0_4_{{$parent.$index}}" ng-style="disp_column('s', 4)"><span class="{{value.ship.winRateClass}}" ng-hide="value.ship.err">{{value.ship.winRate}}</span></td>
 							<td id="s_0_5_{{$parent.$index}}" ng-style="disp_column('s', 5)"><span ng-hide="value.ship.err">{{value.ship.svrate}}</span></td>
 							<td id="s_0_6_{{$parent.$index}}" ng-style="disp_column('s', 6)"><span ng-hide="value.ship.err">{{value.ship.shfl}}</span></td>
 							<td id="s_0_7_{{$parent.$index}}" ng-style="disp_column('s', 7)"><span ng-hide="value.ship.err">{{value.ship.ftfl}}</span></td>
-							<td id="s_0_8_{{$parent.$index}}" ng-style="disp_column('s', 8)"><span ng-hide="value.ship.err">{{value.ship.avgExp}}</span></td>
-							<td id="s_0_9_{{$parent.$index}}" ng-style="disp_column('s', 9)">
+							<td id="s_0_8_{{$parent.$index}}" ng-style="disp_column('s', 8)"><span ng-hide="value.ship.err">{{value.ship.spottingDmg}}</span></td>
+							<td id="s_0_9_{{$parent.$index}}" ng-style="disp_column('s', 9)"><span ng-hide="value.ship.err">{{value.ship.potentialDmg}}</span></td>
+							<td id="s_0_11_{{$parent.$index}}" ng-style="disp_column('s', 11)"><span ng-hide="value.ship.err">{{value.ship.avgExp}}</span></td>
+							<td id="s_0_12_{{$parent.$index}}" ng-style="disp_column('s', 12)">
 								<span name="battle_suu" ng-hide="value.ship.err">{{value.ship.battles}}</span>
 								<span name="battle_asu" style ="display:none;"  ng-hide="value.err">***</span>
 							</td>
@@ -138,13 +150,19 @@
 							<th id="s_1_1" ng-style="disp_column('s', 1)" style="width:45px;"><a href="images/WTR_{{lang_select}}.png" tips="{{'list_label2.ship.WTR_title' | translate}}">{{'list_label2.ship.WTR' | translate}}</a></th>
 							<th id="s_1_10" ng-style="disp_column('s', 10)" style="width:45px;"><a href="images/PR_{{lang_select}}.png" tips="{{'list_label2.ship.PR_title' | translate}}">{{'list_label2.ship.PR' | translate}}</a></th>
 							<th id="s_1_2" ng-style="disp_column('s', 2)" title="{{'list_label2.ship.damage_title' | translate}}" style="width:70px;">{{'list_label2.ship.damage' | translate}}</th>
+							<th id="s_1_13" ng-style="disp_column('s', 13)" title="{{'list_label2.ship.hitRatio_title' | translate}}" style="width:70px;">{{'list_label2.ship.hitRatio' | translate}}</th>
+							<th id="s_1_14" ng-style="disp_column('s', 14)" title="{{'list_label2.ship.torpRatio_title' | translate}}" style="width:70px;">{{'list_label2.ship.torpRatio' | translate}}</th>
+							<th id="s_1_15" ng-style="disp_column('s', 15)" title="{{'list_label2.ship.capPercentage_title' | translate}}" style="width:60px;">{{'list_label2.ship.capPercentage' | translate}}</th>
+							<th id="s_1_16" ng-style="disp_column('s', 16)" title="{{'list_label2.ship.decapPercentage_title' | translate}}" style="width:60px;">{{'list_label2.ship.decapPercentage' | translate}}</th>
 							<th id="s_1_3" ng-style="disp_column('s', 3)" title="{{'list_label2.ship.KillDeath_title' | translate}}" style="width:40px;">{{'list_label2.ship.KillDeath' | translate}}</th>
 							<th id="s_1_4" ng-style="disp_column('s', 4)" title="{{'list_label2.ship.winRate_title' | translate}}" style="width:75px;">{{'list_label2.ship.winRate' | translate}}</th>
 							<th id="s_1_5" ng-style="disp_column('s', 5)" title="{{'list_label2.ship.survival_title' | translate}}" style="width:90px;">{{'list_label2.ship.survival' | translate}}</th>
-							<th id="s_1_6" ng-style="disp_column('s', 6)" title="{{'list_label2.ship.sinking_title' | translate}}" style="width:75px;">{{'list_label2.ship.sinking' | translate}}</th>
+							<th id="s_1_6" ng-style="disp_column('s', 6)" title="{{'list_label2.ship.sinking_title' | translate}}" style="width:60px;">{{'list_label2.ship.sinking' | translate}}</th>
 							<th id="s_1_7" ng-style="disp_column('s', 7)" title="{{'list_label2.ship.shootDown_title' | translate}}" style="width:60px;">{{'list_label2.ship.shootDown' | translate}}</th>
-							<th id="s_1_8" ng-style="disp_column('s', 8)" title="{{'list_label2.ship.exp_title' | translate}}" style="width:60px;">{{'list_label2.ship.exp' | translate}}</th>
-							<th id="s_1_9" ng-style="disp_column('s', 9)" title="{{'list_label2.ship.numBattle_title' | translate}}"style="width:60px;">{{'list_label2.ship.numBattle' | translate}}</th>
+							<th id="s_1_8" ng-style="disp_column('s', 8)" title="{{'list_label2.ship.spottingDmg_title' | translate}}" style="width:70px;">{{'list_label2.ship.spottingDmg' | translate}}</th>
+							<th id="s_1_9" ng-style="disp_column('s', 9)" title="{{'list_label2.ship.potentialDmg_title' | translate}}" style="width:70px;">{{'list_label2.ship.potentialDmg' | translate}}</th>
+							<th id="s_1_11" ng-style="disp_column('s', 11)" title="{{'list_label2.ship.exp_title' | translate}}" style="width:50px;">{{'list_label2.ship.exp' | translate}}</th>
+							<th id="s_1_12" ng-style="disp_column('s', 12)" title="{{'list_label2.ship.numBattle_title' | translate}}"style="width:50px;">{{'list_label2.ship.numBattle' | translate}}</th>
 							<th id="p_1_0" ng-style="disp_column('p', 0)" title="{{'list_label2.player.rank_title' | translate}}" style="width:65px;">{{'list_label2.player.rank' | translate}}</th>
 							<th id="p_1_1" ng-style="disp_column('p', 1)" title="{{'list_label2.player.winRate_title' | translate}}" style="width:70px;">{{'list_label2.player.winRate' | translate}}</th>
 							<th id="p_1_2" ng-style="disp_column('p', 2)" title="{{'list_label2.player.damage_title' | translate}}" style="width:70px;">{{'list_label2.player.damage' | translate}}</th>
@@ -168,13 +186,19 @@
 							<td id="s_1_1_{{$parent.$index}}" ng-style="disp_column('s', 1)" class="{{value.ship.WTRClass}}"><span ng-hide="value.ship.err">{{value.ship.WTR}}</span></td>
 							<td id="s_1_10_{{$parent.$index}}" ng-style="disp_column('s', 10)" class="{{value.ship.PRClass}}"><span ng-hide="value.ship.err">{{value.ship.PR}}</span></td>
 							<td id="s_1_2_{{$parent.$index}}" ng-style="disp_column('s', 2)"><span ng-hide="value.ship.err">{{value.ship.avgDmg}}</span></td>
+							<td id="s_1_13_{{$parent.$index}}" ng-style="disp_column('s', 13)"><span ng-hide="value.ship.err">{{value.ship.hitRatio}}</span></td>
+							<td id="s_1_14_{{$parent.$index}}" ng-style="disp_column('s', 14)"><span ng-hide="value.ship.err">{{value.ship.torpRatio}}</span></td>
+							<td id="s_1_15_{{$parent.$index}}" ng-style="disp_column('s', 15)"><span ng-hide="value.ship.err">{{value.ship.capPercentage}}</span></td>
+							<td id="s_1_16_{{$parent.$index}}" ng-style="disp_column('s', 16)"><span ng-hide="value.ship.err">{{value.ship.decapPercentage}}</span></td>
 							<td id="s_1_3_{{$parent.$index}}" ng-style="disp_column('s', 3)"><span ng-hide="value.ship.err">{{value.ship.kdRatio}}</span></td>
 							<td id="s_1_4_{{$parent.$index}}" ng-style="disp_column('s', 4)"><span class="{{value.ship.winRateClass}}" ng-hide="value.ship.err">{{value.ship.winRate}}</span></td>
 							<td id="s_1_5_{{$parent.$index}}" ng-style="disp_column('s', 5)"><span ng-hide="value.ship.err">{{value.ship.svrate}}</span></td>
 							<td id="s_1_6_{{$parent.$index}}" ng-style="disp_column('s', 6)"><span ng-hide="value.ship.err">{{value.ship.shfl}}</span></td>
 							<td id="s_1_7_{{$parent.$index}}" ng-style="disp_column('s', 7)"><span ng-hide="value.ship.err">{{value.ship.ftfl}}</span></td>
-							<td id="s_1_8_{{$parent.$index}}" ng-style="disp_column('s', 8)"><span ng-hide="value.ship.err">{{value.ship.avgExp}}</span></td>
-							<td id="s_1_9_{{$parent.$index}}" ng-style="disp_column('s', 9)">
+							<td id="s_1_8_{{$parent.$index}}" ng-style="disp_column('s', 8)"><span ng-hide="value.ship.err">{{value.ship.spottingDmg}}</span></td>
+							<td id="s_1_9_{{$parent.$index}}" ng-style="disp_column('s', 9)"><span ng-hide="value.ship.err">{{value.ship.potentialDmg}}</span></td>
+							<td id="s_1_11_{{$parent.$index}}" ng-style="disp_column('s', 11)"><span ng-hide="value.ship.err">{{value.ship.avgExp}}</span></td>
+							<td id="s_1_12_{{$parent.$index}}" ng-style="disp_column('s', 12)">
 								<span name="battle_suu" ng-hide="value.ship.err">{{value.ship.battles}}</span>
 								<span name="battle_asu" style ="display:none;"  ng-hide="value.err">***</span>
 							</td>
@@ -278,6 +302,22 @@
 								<td class="label">{{'list_label2.ship.damage' | translate}}</td>
 								<td class="check"><input id="s_2" type="checkbox" name="s_items" value="s_2" /></td>
 							</tr>
+							<tr id="tr_s_13">
+								<td class="label">{{'list_label2.ship.hitRatio' | translate}}</td>
+								<td class="check"><input id="s_13" type="checkbox" name="s_items" value="s_13" /></td>
+							</tr>
+							<tr id="tr_s_14">
+								<td class="label">{{'list_label2.ship.torpRatio' | translate}}</td>
+								<td class="check"><input id="s_14" type="checkbox" name="s_items" value="s_14" /></td>
+							</tr>
+							<tr id="tr_s_15">
+								<td class="label">{{'list_label2.ship.capPercentage' | translate}}</td>
+								<td class="check"><input id="s_15" type="checkbox" name="s_items" value="s_15" /></td>
+							</tr>
+							<tr id="tr_s_16">
+								<td class="label">{{'list_label2.ship.decapPercentage' | translate}}</td>
+								<td class="check"><input id="s_16" type="checkbox" name="s_items" value="s_16" /></td>
+							</tr>
 							<tr id="tr_s_3">
 								<td class="label">{{'list_label2.ship.KillDeath' | translate}}</td>
 								<td class="check"><input id="s_3" type="checkbox" name="s_items" value="s_3" /></td>
@@ -299,12 +339,20 @@
 								<td class="check"><input id="s_7" type="checkbox" name="s_items" value="s_7" /></td>
 							</tr>
 							<tr id="tr_s_8">
-								<td class="label">{{'list_label2.ship.exp' | translate}}</td>
+								<td class="label">{{'list_label2.ship.spottingDmg' | translate}}</td>
 								<td class="check"><input id="s_8" type="checkbox" name="s_items" value="s_8" /></td>
 							</tr>
 							<tr id="tr_s_9">
-								<td class="label">{{'list_label2.ship.numBattle' | translate}}</td>
+								<td class="label">{{'list_label2.ship.potentialDmg' | translate}}</td>
 								<td class="check"><input id="s_9" type="checkbox" name="s_items" value="s_9" /></td>
+							</tr>
+							<tr id="tr_s_11">
+								<td class="label">{{'list_label2.ship.exp' | translate}}</td>
+								<td class="check"><input id="s_11" type="checkbox" name="s_items" value="s_11" /></td>
+							</tr>
+							<tr id="tr_s_12">
+								<td class="label">{{'list_label2.ship.numBattle' | translate}}</td>
+								<td class="check"><input id="s_12" type="checkbox" name="s_items" value="s_12" /></td>
 							</tr>
 						</tbody>
 						<thead>

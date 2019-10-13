@@ -85,8 +85,8 @@
 		"Ranked_Domination": "Rank: Domination",
 		"Ranked_Epicenter": "Rank: Epicenter",
 		"CvC_Domination": "Clan: Domination",
-		"PVEVanHellsingRight": "Halloween: Pt.áT",
-		"Halloween_2017": "Halloween: Pt.áU"
+		"PVEVanHellsingRight": "Halloween: Pt.ÔøΩT",
+		"Halloween_2017": "Halloween: Pt.ÔøΩU"
 	},
 	"list_label1": {
 		"name": "Player name",
@@ -116,10 +116,22 @@
 			"sinking_title": "Av. sinking",
 			"shootDown": "Down",
 			"shootDown_title": "Av. shooting down",
+			"potentialDmg": "Potential",
+			"potentialDmg_title": "Average Potential Damage",
+			"spottingDmg": "Spotting",
+			"spottingDmg_title": "Average Spotting Damage",
 			"exp": "Exp",
 			"exp_title": "Av. exp",
 			"numBattle": "Battle",
-			"numBattle_title": "Number of battle"
+			"numBattle_title": "Number of battle",
+			"hitRatio": "Accuracy",
+			"hitRatio_title": "Main Battery Hit Ratio",
+			"torpRatio": "Torp Hit",
+			"torpRatio_title": "Torp Hit Ratio",
+			"capPercentage": "Cap %",
+			"capPercentage_title": "% of cap points contributed",
+			"decapPercentage": "Defend %",
+			"decapPercentage_title": "% of defend points contributed"
 		},
 		"player": {
 			"rank": "Rank",
@@ -142,6 +154,6 @@
 		"display": "Display",
 		"apply": "Apply",
 		"cancel": "Cancel",
-		"donate": "Donate 1Å` US$ with PayPal."
+		"donate": "Donate 1ÔøΩ` US$ with PayPal."
 	}
 }

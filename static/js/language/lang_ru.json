@@ -116,10 +116,22 @@
 			"sinking_title": "Уничтожено кораблей",
 			"shootDown": "Застрелить",
 			"shootDown_title": "Сбитые самолёты",
+			"potentialDmg": "Потенциал",
+			"potentialDmg_title": "Средний потенциальный урон",
+			"spottingDmg": "Зрительные",
+			"spottingDmg_title": "Средний урон при обнаружении",
 			"exp": "Опыт",
 			"exp_title": "Средний опыт",
 			"numBattle": "Бои",
-			"numBattle_title": "Количество боевых кораблей"
+			"numBattle_title": "Количество боевых кораблей",
+			"hitRatio": "Точность",
+			"hitRatio_title": "Коэффициент попадания в основной аккумулятор",
+			"torpRatio": "Торпеда Хит",
+			"torpRatio_title": "Коэффициент попадания торпеды",
+			"capPercentage": "Захватить %",
+			"capPercentage_title": "% от начисленных очков",
+			"decapPercentage": "Защищать %",
+			"decapPercentage_title": "Внесено% очков защиты"
 		},
 		"player": {
 			"rank": "Ранг",

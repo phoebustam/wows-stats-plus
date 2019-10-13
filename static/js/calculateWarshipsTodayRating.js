@@ -1,7 +1,7 @@
 var calculateWarshipsTodayRating = function(expected, actual) {
-	var wins = actual.wins / expected.wins;
-	var damage_dealt = actual.damage_dealt / expected.damage_dealt;
-	var ship_frags = actual.frags / expected.frags;
+	var wins = actual.wins / expected.win_rate;
+	var damage_dealt = actual.damage_dealt / expected.average_damage_dealt;
+	var ship_frags = actual.frags / expected.average_frags;
 	var capture_points = actual.capture_points / expected.capture_points;
 	var dropped_capture_points = actual.dropped_capture_points / expected.dropped_capture_points;
 	var planes_killed = actual.planes_killed / expected.planes_killed;

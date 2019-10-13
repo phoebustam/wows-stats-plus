@@ -1,0 +1,4 @@
+static/js/coefficients.json
+package-lock.json
+.env
+node_modules/

@@ -322,8 +322,40 @@ background-color: rgba(64, 16, 112, 1.0);
 color: rgb(255, 255, 255);
 }
 
-
 .player .pr_bad_bg {
+background-color: rgba(254, 14, 0, 1.0);
+color: rgb(255, 255, 255);
+}
+.player .pr_belowaverage_bg {
+background-color: rgba(254, 121, 3, 1.0);
+color: rgb(255, 255, 255);
+}
+.player .pr_average_bg {
+background-color: rgba(255, 199, 31, 1.0);
+color: rgb(255, 255, 255);
+}
+.player .pr_good_bg {
+background-color: rgba(69, 140, 25, 1.0);
+color: rgb(255, 255, 255);
+}
+.player .pr_verygood_bg {
+background-color: rgba(39, 102, 0, 1.0);
+color: rgb(255, 255, 255);
+}
+.player .pr_great_bg {
+background-color: rgba(57, 114, 198, 1.0);
+color: rgb(255, 255, 255);
+}
+.player .pr_unicum_bg {
+background-color: rgba(121, 61, 182, 1.0);
+color: rgb(255, 255, 255);
+}
+.player .pr_superunicum_bg {
+background-color: rgba(64, 16, 112, 1.0);
+color: rgb(255, 255, 255);
+}
+
+/* .player .pr_bad_bg {
 background-color: rgba(254, 14, 0, 1.0);
 color: rgb(255, 255, 255);
 }
@@ -354,7 +386,7 @@ color: rgb(255, 255, 255);
 .player .pr_superunicum_bg {
 background-color: rgba(160, 13, 197, 1.0);
 color: rgb(255, 255, 255);
-}
+}  */
 
 
 .player .rank {

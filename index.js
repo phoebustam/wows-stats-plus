@@ -31,6 +31,13 @@ function get_season_num() {
 			if (json.status == "ok") {
 				if (json.meta.count >= 0) {
 					latest_season_num = json.meta.count;
+					var sprint_season_num = 0;
+					for (var key in json.data) {
+							if (key > 100) {
+									sprint_season_num++;
+							}
+					}
+					latest_season_num -= sprint_season_num;
 					console.log('latest season number of rank battle = ' + latest_season_num);
 				}
 			}
@@ -40,7 +47,8 @@ function get_season_num() {
 get_season_num();
 
 function update_WTRcoefficientsJSON() {
-	request('https://api.asia.warships.today/json/wows/ratings/warships-today-rating/coefficients', function (error, response, body) {
+	//request('https://api.asia.warships.today/json/wows/ratings/warships-today-rating/coefficients', function (error, response, body) {
+	request('	https://api.wows-numbers.com/personal/rating/expected/json/', function (error, response, body) {
 		if ((!error && response.statusCode == 200) || (!error && response.statusCode == 304)) {
 //			console.log('Got coefficients json file for WTR.');
 

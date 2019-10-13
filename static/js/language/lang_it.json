@@ -116,10 +116,22 @@
 			"sinking_title": "Media navi affondate",
 			"shootDown": "Abbatt.",
 			"shootDown_title": "Media aerei abbattuti",
+			"potentialDmg": "Potential",
+			"potentialDmg_title": "Average Potential Damage",
+			"spottingDmg": "Spotting",
+			"spottingDmg_title": "Average Spotting Damage",
 			"exp": "Exp",
 			"exp_title": "Exp Media",
 			"numBattle": "Battaglie",
-			"numBattle_title": "Numero di battaglie"
+			"numBattle_title": "Numero di battaglie",
+			"hitRatio": "Accuracy",
+			"hitRatio_title": "Main Battery Hit Ratio",
+			"torpRatio": "Torp Hit",
+			"torpRatio_title": "Torp Hit Ratio",
+			"capPercentage": "Cap %",
+			"capPercentage_title": "% of cap points contributed",
+			"decapPercentage": "Defend %",
+			"decapPercentage_title": "% of defend points contributed"
 		},
 		"player": {
 			"rank": "Rango",
