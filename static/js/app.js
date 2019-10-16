@@ -793,7 +793,7 @@ var ntname = [
 	["japan","japan"] ,["usa","america"] ,["ussr","soviet"],["germany","german"] ,
 	["uk","england"],["france","france"] ,["poland","poland"],["pan_asia","panasia"] ,
 	["italy","italia"],["australia","australia"],["commonwealth","hms"],
-	["netherlands","netherlands"],["spain","spain"],["europe", "europe"]["pan_america","panamerica"]
+	["netherlands","netherlands"],["spain","spain"],["europe", "europe"],["pan_america","panamerica"]
 ];
 
 	for (var i=0; i<ntname.length ; i++) {
