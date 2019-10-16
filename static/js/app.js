@@ -776,7 +776,7 @@ var ntname = [
 	["japan","JP"] ,["usa","US"] ,["ussr","SU"],["germany","DE"] ,
 	["uk","UK"],["france","FR"] ,["poland","PL"],["pan_asia","PA"] ,
 	["italy","IT"],["australia","AU"],["commonwealth","CW"],
-	["netherlands","NL"],["spain","ES"]
+	["netherlands","NL"],["spain","ES"],["europe", "EU"],["pan_america", "PAM"]
 ];
 
 	for (var i=0; i<ntname.length ; i++) {
@@ -792,8 +792,8 @@ api.nation_for_sort = function(str) {
 var ntname = [
 	["japan","japan"] ,["usa","america"] ,["ussr","soviet"],["germany","german"] ,
 	["uk","england"],["france","france"] ,["poland","poland"],["pan_asia","panasia"] ,
-	["italy","italia"],["australia","austoralia"],["commonwealth","hms"],
-	["netherlands","netherlands"],["spain","spain"]
+	["italy","italia"],["australia","australia"],["commonwealth","hms"],
+	["netherlands","netherlands"],["spain","spain"],["europe", "europe"]["pan_america","panamerica"]
 ];
 
 	for (var i=0; i<ntname.length ; i++) {
