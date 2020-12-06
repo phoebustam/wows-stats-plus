@@ -155,6 +155,10 @@ router.get('/player', jsonParser, function(req, res) {
 																}
 
 																// get player rank battle info
+																player.rank = '**';
+																player.pre_rank = '**';
+																res.json(player);
+																/*
 																request(process.env.WOWS_API_URL + '/wows/seasons/accountinfo/?application_id=' + api_key + '&account_id=' + player.id + '&season_id=' + (latest_season_num -1) + '%2C' + latest_season_num, function (rk_error, rk_response, rankBody) {
 																	if ((!rk_error && rk_response.statusCode == 200) || (!rk_error && rk_response.statusCode == 304)) {
 																		var seasons = JSON.parse(rankBody);
@@ -218,6 +222,7 @@ router.get('/player', jsonParser, function(req, res) {
 																	else
 																		res.status(500);
 																});
+																*/
 															} else {
 //																console.log('getting clan info failed');
 																res.status(400).send(json.error);
